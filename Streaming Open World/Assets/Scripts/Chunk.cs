@@ -8,15 +8,32 @@ public class Chunk : MonoBehaviour
     [SerializeField] private List<TerrainData> terrainDataList = new List<TerrainData>();
     private List<GameObject> chunksList = new List<GameObject>();
     private GameObject chunk;
-    private bool loaded;
+    private bool[] isLoaded;
+
+    private void Start()
+    {
+        isLoaded = new bool[terrainDataList.Count];
+    }
 
     public void LoadChunk()
     {
-        foreach (TerrainData data in terrainDataList)
+        if (chunksList.Count < terrainDataList.Count)
         {
-            var terrainData = Resources.Load<TerrainData>("Terrain/" + data.name);
-            chunk = Terrain.CreateTerrainGameObject(terrainData);
-            chunksList.Add(chunk);
+            /*foreach (TerrainData data in terrainDataList)
+            {
+                var terrainData = Resources.Load<TerrainData>("Terrain/" + data.name);
+                chunk = Terrain.CreateTerrainGameObject(terrainData);
+                chunksList.Add(chunk);
+                isLoaded[] = true;
+            }*/
+
+            for (var i = 0; i < terrainDataList.Count; i++)
+            {
+                var terrainData = Resources.Load<TerrainData>("Terrain/" + terrainDataList[i].name);
+                chunk = Terrain.CreateTerrainGameObject(terrainData);
+                chunksList.Add(chunk);
+                isLoaded[i] = true;
+            }
         }
     }
 
@@ -24,6 +41,7 @@ public class Chunk : MonoBehaviour
     {
         foreach (var chunk in chunksList)
         {
+            chunksList.Remove(chunk);
             Destroy(chunk);
         }
         Resources.UnloadUnusedAssets();
