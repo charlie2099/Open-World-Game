@@ -1,63 +1,59 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveToJson : MonoBehaviour
 {
-    [SerializeField] private TerrainData _tData;
-    [SerializeField] private Material material;
-    private ChunkData chunkData;
-    //private string saveFile;
-    //private string jsonFile;
-    //[SerializeField] private Shader _shader;
-    //[SerializeField] private TerrainLayer[] _terrainLayer;
-    
     [System.Serializable]
     public class ChunkData
     {
-        //public Terrain Terrain;
-        public TerrainData TerrainData;
-        public Material Material;
-        public Vector3 Position;
+        public TerrainData[] terrainData;
+        public Material material;
+        public Vector3 position;
     }
+    [SerializeField] private ChunkData chunkData;
+    //private string saveFile;
+    //private string jsonFile;
 
     private void Start()
     {
         //string saveFile = Application.persistentDataPath + "/gamedata.json";
-        
-        chunkData = new ChunkData
-        {
-            Position = new Vector3(1, 2, 3),
-            TerrainData = _tData,
-            Material = material
-        };
-        
         string jsonFile = JsonUtility.ToJson(chunkData);
-
+        
         //Write to file
         File.WriteAllText(Application.dataPath + "chunkDataFile.json", jsonFile);
-        
+    
         // Read from file
         ChunkData loadedChunkData = JsonUtility.FromJson<ChunkData>(jsonFile);
-        Debug.Log("Loaded Position: " + loadedChunkData.Position);
-        Debug.Log("Loaded TerrainData: " + loadedChunkData.TerrainData);
-
-        // Instantiate a chunk
-        GameObject gameObject = new GameObject("anything");
+        Debug.Log("Loaded Position: " + loadedChunkData.position);
+        Debug.Log("Loaded TerrainData: " + loadedChunkData.terrainData);
         
-        gameObject.AddComponent<Terrain>();
-        gameObject.AddComponent<TerrainCollider>();
-        
-        // Passing the data 
-        gameObject.GetComponent<Terrain>().materialTemplate = loadedChunkData.Material;
-        gameObject.GetComponent<Terrain>().terrainData = loadedChunkData.TerrainData;
-        gameObject.GetComponent<TerrainCollider>().terrainData = loadedChunkData.TerrainData;
-        //gameObject.GetComponent<Terrain>().materialTemplate.shader = _shader;
-        //gameObject.GetComponent<Terrain>().terrainData.terrainLayers = _terrainLayer;
+        float x = 0;
+        float z = 0;
+        float rowLength = 16;
+        const float spacing = 112.5f;
 
+        for (int i = 0; i < chunkData.terrainData.Length; i++)
+        {
+            // Instantiate a chunk
+            GameObject gObject = new GameObject("chunk " + i);
+        
+            gObject.AddComponent<Terrain>();
+            gObject.AddComponent<TerrainCollider>();
+        
+            gObject.GetComponent<Terrain>().materialTemplate = loadedChunkData.material;
+            gObject.GetComponent<Terrain>().terrainData = loadedChunkData.terrainData[i];
+            gObject.GetComponent<TerrainCollider>().terrainData = loadedChunkData.terrainData[i];
+
+            gObject.transform.position = new Vector3(loadedChunkData.position.x + (x * spacing), loadedChunkData.position.y, loadedChunkData.position.z + (z * spacing));
+            z++;
+            if (z >= rowLength)
+            {
+                z = 0;
+                x++;
+            }
+            
+            gObject.transform.parent = transform;
+        }
     }
 
     /*private void ReadFromFile()
