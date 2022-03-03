@@ -11,12 +11,9 @@ public class SaveToJson : MonoBehaviour
         public Vector3 position;
     }
     [SerializeField] private ChunkData chunkData;
-    //private string saveFile;
-    //private string jsonFile;
 
     private void Start()
     {
-        //string saveFile = Application.persistentDataPath + "/gamedata.json";
         string jsonFile = JsonUtility.ToJson(chunkData);
         
         //Write to file
@@ -55,27 +52,4 @@ public class SaveToJson : MonoBehaviour
             gObject.transform.parent = transform;
         }
     }
-
-    /*private void ReadFromFile()
-    {
-        if (File.Exists(saveFile))
-        {
-            Debug.Log("Reading from file");
-            string fileContents = File.ReadAllText(saveFile);
-            
-            // Deserialize the JSON data
-            chunkData = JsonUtility.FromJson<ChunkData>(saveFile);
-        }
-    }*/
-
-    /*private void WriteToFile()
-    {
-        Debug.Log("Writing to file");
-        
-        // Serialize the object into JSON an save string 
-        string jsonString = JsonUtility.ToJson(chunkData);
-        
-        // Writes contents of the JSON file to the save file
-        File.WriteAllText(saveFile, jsonFile);
-    }*/
 }
