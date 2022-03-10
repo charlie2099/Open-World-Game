@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class ChunkLoader : MonoBehaviour
 {
-    //[SerializeField] private Transform player;
-    //[SerializeField] private GameObject playerPrefab;
-    //private GameObject player;
-    
+    [SerializeField] private Transform player;
+
     [System.Serializable]
     public class ChunkData
     {
@@ -26,19 +24,11 @@ public class ChunkLoader : MonoBehaviour
         // Converts 'chunkData' to JSON form.
         jsonFile = JsonUtility.ToJson(chunkData);
         WriteToFile();
+        LoadChunk();
     }
 
     private void Update()
     {
-        /*foreach (var chunk in chunkList.ToArray())
-        {
-            if (Vector3.Distance(player.position, chunk.transform.position) > 500)
-            {
-                chunkList.Remove(chunk);
-                Destroy(chunk);
-            }
-        }*/
-
         if(Input.GetKeyDown(KeyCode.L))
         {
             LoadChunk();
@@ -49,6 +39,19 @@ public class ChunkLoader : MonoBehaviour
         {
             UnloadChunk();
             //Destroy(player);
+        }
+        
+        foreach (var chunk in chunkList.ToArray())
+        {
+            if (Vector3.Distance(player.position, chunk.transform.position) > 400)
+            {
+                chunkList.Remove(chunk);
+                Destroy(chunk);
+            }
+            else
+            {
+                //LoadChunk(chunk);
+            }
         }
     }
 
@@ -81,6 +84,7 @@ public class ChunkLoader : MonoBehaviour
     {
         // Read contents of json file
         ChunkData loadedChunkData = JsonUtility.FromJson<ChunkData>(jsonFile);
+        
         float x = 0;
         float z = 0;
         const float spacing = 112.5f;
@@ -113,8 +117,4 @@ public class ChunkLoader : MonoBehaviour
             }
         }
     }
-
-    //private void CreateChunk(ChunkData loadedData) { }
-    //Debug.Log("Loaded Position: " + loadedChunkData.position);
-    //Debug.Log("Loaded TerrainData: " + loadedChunkData.terrainData);
 }
