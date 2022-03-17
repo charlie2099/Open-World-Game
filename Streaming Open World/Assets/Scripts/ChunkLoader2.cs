@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class ChunkLoader2 : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> activeChunks = new List<GameObject>();
+    //[SerializeField] private List<GameObject> activeChunks = new List<GameObject>();
     //[SerializeField] private List<GameObject> activeOceanChunks = new List<GameObject>();
+    [SerializeField] private Transform activeChunks;
+    [SerializeField] private Transform activeOceanChunks;
     [SerializeField] private int maxChunkLoadDistance = 400;
     [SerializeField] private int checkRate;
     private Transform player;
@@ -25,7 +27,39 @@ public class ChunkLoader2 : MonoBehaviour
 
     private void Update()
     {
-        foreach (var chunk in activeChunks.ToArray())
+
+        for (int i = 0; i < activeChunks.childCount; i++)
+        {
+            if (Vector3.Distance(player.position, activeChunks.GetChild(i).position) > maxChunkLoadDistance)
+            {
+                activeChunks.GetChild(i).gameObject.SetActive(false);
+                //activeChunks.Remove(chunk);
+                //Destroy(chunk);
+            }
+            else
+            {
+                activeChunks.GetChild(i).gameObject.SetActive(true);
+                //LoadChunk(chunk);
+            }
+        }
+        
+        for (int i = 0; i < activeOceanChunks.childCount; i++)
+        {
+            if (Vector3.Distance(player.position, activeOceanChunks.GetChild(i).position) > maxChunkLoadDistance)
+            {
+                activeOceanChunks.GetChild(i).gameObject.SetActive(false);
+                //activeChunks.Remove(chunk);
+                //Destroy(chunk);
+            }
+            else
+            {
+                activeOceanChunks.GetChild(i).gameObject.SetActive(true);
+                //LoadChunk(chunk);
+            }
+        }
+
+
+        /*foreach (var chunk in activeChunks.ToArray())
         {
             if (Vector3.Distance(player.position, chunk.transform.position) > maxChunkLoadDistance)
             {
@@ -38,7 +72,7 @@ public class ChunkLoader2 : MonoBehaviour
                 chunk.SetActive(true);
                 //LoadChunk(chunk);
             }
-        }
+        }*/
 
         /*foreach (var oceanChunk in activeOceanChunks.ToArray())
         {
