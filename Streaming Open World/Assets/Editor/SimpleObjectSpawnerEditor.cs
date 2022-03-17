@@ -1,63 +1,85 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 public class SimpleObjectSpawnerEditor : EditorWindow
 {
-    static bool _active;
+    private static bool _activeAssigner;
+    private static bool _activeDeassigner;
     private GameObject objectToPaint; 
-
-    // Open this from Window menu
+    
     [MenuItem("My Tools/SimpleObjectSpawner")]
-    static void Init()
+    private static void Init()
     {
         var window = GetWindow(typeof(SimpleObjectSpawnerEditor));
         window.Show();
     }
 
-    // Listen to scene event
-    void OnEnable() => SceneView.duringSceneGui += OnSceneGUI;
-    void OnDisable() => SceneView.duringSceneGui -= OnSceneGUI;
+    private void OnEnable() => SceneView.duringSceneGui += OnSceneGUI;
+    private void OnDisable() => SceneView.duringSceneGui -= OnSceneGUI;
 
-    // Receives scene events
-    // Use event mouse click for raycasting
-    void OnSceneGUI(SceneView view)
+    private void OnSceneGUI(SceneView view)
     {
-        if (!_active)
+        /*if (!_activeAssigner)
         {
             return;
-        }
+        }*/
 
+        // if activeAssigner is true, perform the following code
+
+        
         if (Event.current.type == EventType.MouseDown)
         {
             Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
             RaycastHit hit;
-
-            // Spawn cube on hit location
+        
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("Hit: " + hit.collider.gameObject.name);
+                //Debug.Log("Hit: " + hit.collider.gameObject.name);
 
-                Instantiate(objectToPaint, hit.point, Quaternion.identity);
-                // Assign the instantiated object to the chunk that the raycast has hit
+                if (_activeAssigner)
+                {
+                    GameObject spawnedObj = Instantiate(objectToPaint, hit.point, Quaternion.identity);
+                    hit.collider.gameObject.GetComponent<Chunk>().chunkObjects.Add(spawnedObj);
+                    spawnedObj.transform.parent = hit.transform;
+                }
+
+                if (_activeDeassigner)
+                {
+                    var chunkObj = hit.collider.gameObject.GetComponent<Chunk>().chunkObjects;
+                    if (chunkObj != null)
+                    {
+                        foreach (var obj in chunkObj.ToArray())
+                        {
+                            DestroyImmediate(obj, true);
+                            chunkObj.Clear();
+                        }
+                    }
+                }
             }
+            Event.current.Use();
         }
-
-        Event.current.Use();
     }
 
-    // Creates a editor window with button 
-    // to toggle raycasting on/off
-    void OnGUI()
+    private void OnGUI()
     {
+        GUILayout.Space(10);
         objectToPaint = EditorGUILayout.ObjectField("Object To Spawn", objectToPaint, typeof(GameObject), false) as GameObject;
         
-        if (GUILayout.Button("Enable Raycasting"))
+        GUILayout.Space(10);
+        if (GUILayout.Button("Enable Spawner"))
         {
-            _active = !_active;
+            _activeAssigner = !_activeAssigner;
         }
-
-        GUILayout.Label("Active:" + _active);
+        GUILayout.Label("Spawner Mode:" + _activeAssigner);
+        
+        GUILayout.Space(10);
+        if (GUILayout.Button("Enable De-assigner"))
+        {
+            _activeDeassigner = !_activeDeassigner;
+        }
+        GUILayout.Label("DeAssigner Mode:" + _activeDeassigner);
     }
 }

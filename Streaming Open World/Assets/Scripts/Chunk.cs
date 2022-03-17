@@ -5,23 +5,29 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
-    [SerializeField] private GameObject chunkObjects;
+    public List<GameObject> chunkObjects = new List<GameObject>();
 
     private void OnEnable()
     {
-        // Enable all objects found in this chunk
-        if (chunkObjects != null)
+        foreach (var chunkObj in chunkObjects)
         {
-            chunkObjects.SetActive(true);
+            // Enable all objects found in this chunk
+            if (chunkObj != null)
+            {
+                chunkObj.SetActive(true);
+            }
         }
     }
 
     private void OnDisable()
     {
-        // Disable all objects found in this chunk
-        if (chunkObjects != null)
+        foreach (var chunkObj in chunkObjects)
         {
-            chunkObjects.SetActive(false);
+            // Disable all objects found in this chunk
+            if (chunkObj != null)
+            {
+                chunkObj.SetActive(false);
+            }
         }
     }
 }
