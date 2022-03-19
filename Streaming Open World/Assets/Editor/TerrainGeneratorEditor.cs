@@ -19,8 +19,6 @@ public class TerrainGeneratorEditor : EditorWindow
     private int terrainHeight    = 100; 
     private string containerName = "Terrain";
 
-    private GameObject objectToPaint; 
-    
     [MenuItem("My Tools/TerrainGenerator")]
     public static void ShowWindow()
     {
@@ -41,22 +39,18 @@ public class TerrainGeneratorEditor : EditorWindow
         if (GUILayout.Button("Generate Terrain"))
         {
             GenerateTerrain();
+            Debug.Log("Chunks list size: " + TerrainGenerator.GetChunks().Count);
         }
         
         if (GUILayout.Button("Save to file"))
         {
-            ChunkLoader.SaveToFile(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+            //ChunkLoader.SaveToFile(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+            SaveToJson2.SaveToFile();
+            
+            // NOTE:
+            // - If there are multiple calls to the TerrainGenerator.GenerateMap() method, how will the activeChunks
+            // list be affected?? Also what about when saving them to file?
         }
-        
-        //GUILayout.FlexibleSpace();
-        //GUILayout.Label("Paint Objects On Terrain", EditorStyles.boldLabel);
-        
-        //objectToPaint = EditorGUILayout.ObjectField("Object To Paint", objectToPaint, typeof(GameObject), false) as GameObject;
-        
-        /*if (GUILayout.Button("Paint"))
-        {
-            ActivatePainter();
-        }*/
     }
 
     private void GenerateTerrain()
@@ -89,15 +83,5 @@ public class TerrainGeneratorEditor : EditorWindow
         }
         
         Debug.Log("<color=lime> A new terrain has been generated! </color>");
-    }
-
-    private void ActivatePainter()
-    {
-        // Activate selection gizmo circle
-        // On mouse click, get max height of clicked terrain?
-        // if yPos is > water height AND angle < 30
-        //     Instantiate object to be painted at that position 
-
-        Instantiate(objectToPaint);
     }
 }

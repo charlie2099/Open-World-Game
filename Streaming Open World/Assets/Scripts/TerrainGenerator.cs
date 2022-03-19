@@ -25,6 +25,11 @@ public class TerrainGenerator : MonoBehaviour
 
     public static void GenerateMap(Texture2D heightMap, Material terrainMaterial, int chunkSize, int terrainWidth, int multiplier)
     {
+        foreach (var chunk in generatedChunks)
+        {
+            generatedChunks.Remove(chunk);
+        }
+        
         _numberOfChunks = terrainWidth / chunkSize;
         print("Num of chunks: " + _numberOfChunks);
 

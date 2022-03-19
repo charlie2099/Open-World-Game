@@ -15,7 +15,7 @@ public class SaveToJson2 : MonoBehaviour
         public Vector3 position;
     }
     
-    private string jsonFile;
+    private static string jsonFile;
 
     private void Update()
     {
@@ -87,6 +87,17 @@ public class SaveToJson2 : MonoBehaviour
 
     private void UnloadChunk()
     {
+        SaveToFile();
+
+        foreach (var chunk in TerrainGenerator.GetChunks().ToArray())
+        {
+            TerrainGenerator.GetChunks().Remove(chunk);
+            Destroy(chunk);
+        }
+    }
+
+    public static void SaveToFile()
+    {
         // Update chunk data when unloaded
         foreach (var chunk in TerrainGenerator.GetChunks())
         {
@@ -103,17 +114,8 @@ public class SaveToJson2 : MonoBehaviour
             string path = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
             File.WriteAllText(path, jsonFile);
         }
-
         print("<color=orange> Chunks unloaded </color>");
         print("<color=orange> Chunk data written to file </color>");
-
-        foreach (var chunk in TerrainGenerator.GetChunks().ToArray())
-        {
-            TerrainGenerator.GetChunks().Remove(chunk);
-            Destroy(chunk);
-        }
-        
-        print("Terrain List: " + TerrainGenerator.GetChunks().Count);
     }
 }
 
