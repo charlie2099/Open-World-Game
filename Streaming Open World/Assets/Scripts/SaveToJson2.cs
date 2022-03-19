@@ -14,8 +14,10 @@ public class SaveToJson2 : MonoBehaviour
         public Material material;
         public Vector3 position;
     }
-    
-    private static string jsonFile;
+
+    [SerializeField] private string _chunkDataDir;
+    [SerializeField] private string npcDataDir;
+    private static string _jsonFile;
 
     private void Update()
     {
@@ -33,12 +35,11 @@ public class SaveToJson2 : MonoBehaviour
     private void LoadChunk()
     {
         // Read contents of json file
-
-        for (int x = 0; x < 23; x++)
+        for (int x = 0; x < TerrainGenerator._numberOfChunks; x++)
         {
-            for (int z = 0; z < 23; z++)
+            for (int z = 0; z < TerrainGenerator._numberOfChunks; z++)
             {
-                ChunkData loadedData = JsonUtility.FromJson<ChunkData>(File.ReadAllText(Application.dataPath + "/SaveData/ChunkData/" + "chunk " + x + " , " + z + ".json"));
+                ChunkData loadedData = JsonUtility.FromJson<ChunkData>(File.ReadAllText(Application.dataPath + _chunkDataDir + "/chunk " + x + " , " + z + ".json"));
                 
                 GameObject chunk = new GameObject(loadedData.name);
                 Mesh mesh = new Mesh();
@@ -55,37 +56,15 @@ public class SaveToJson2 : MonoBehaviour
                 mesh.triangles = loadedData.mesh.triangles;
                 mesh.RecalculateNormals();
                 mesh.RecalculateBounds();
-    
+
+                chunk.transform.parent = TerrainGenerator.container.transform;
                 TerrainGenerator.GetChunks().Add(chunk);
             }
         }
         print("Terrain List: " + TerrainGenerator.GetChunks().Count);
-
-
-        /*ChunkData loadedData = JsonUtility.FromJson<ChunkData>(File.ReadAllText(Application.dataPath + "/SaveData/ChunkData/" + _chunk.name + ".json"));
-
-        GameObject chunk = new GameObject(loadedData.name);
-        Mesh mesh = new Mesh();
-
-        chunk.AddComponent<MeshFilter>().sharedMesh = loadedData.mesh;
-        chunk.AddComponent<MeshRenderer>().material = loadedData.material;
-        chunk.AddComponent<MeshCollider>().sharedMesh = loadedData.mesh;
-        chunk.AddComponent<Chunk>();
-
-        chunk.transform.position = loadedData.position;
-
-        mesh.Clear();
-        mesh.vertices = loadedData.mesh.vertices;
-        mesh.triangles = loadedData.mesh.triangles;
-        mesh.RecalculateNormals();
-        mesh.RecalculateBounds();
-    
-        activeChunk.Add(chunk);*/
-        
-        //print("<color=lime> Chunk 1 data loaded from file </color>");
     }
 
-    private void UnloadChunk()
+    private static void UnloadChunk()
     {
         SaveToFile();
 
@@ -108,11 +87,11 @@ public class SaveToJson2 : MonoBehaviour
             newChunkData.name         = chunk.name;
             
             // Converts new chunk data to JSON form.
-            jsonFile = JsonUtility.ToJson(newChunkData, true);
+            _jsonFile = JsonUtility.ToJson(newChunkData, true);
 
             // Writes chunkData to json file
             string path = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
-            File.WriteAllText(path, jsonFile);
+            File.WriteAllText(path, _jsonFile);
         }
         print("<color=orange> Chunks unloaded </color>");
         print("<color=orange> Chunk data written to file </color>");

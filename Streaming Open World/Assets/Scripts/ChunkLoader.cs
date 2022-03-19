@@ -24,47 +24,67 @@ public class ChunkLoader : MonoBehaviour
 
     private void Update()
     {
-        foreach (var chunk in TerrainGenerator.GetChunks().ToArray())
+        foreach (var chunk in TerrainGenerator.GetChunks())
+        {
+            if (chunk != null)
+            {
+                if (Vector3.Distance(player.position, chunk.transform.position ) > maxChunkLoadDistance)
+                {
+                    //chunk.Unload();
+                }
+                else
+                {
+                    //chunk.Load();
+                }
+            }
+        }
+        
+        
+        /*for (int x = 0; x < TerrainGenerator._numberOfChunks; x++)
+        {
+            for (int z = 0; z < TerrainGenerator._numberOfChunks; z++)
+            {
+                if (Vector3.Distance(player.position, ) > maxChunkLoadDistance)
+                {
+                    //chunk.Unload();
+                }
+                else
+                {
+                    //chunk.Load();
+                }
+                "/chunk " + x + " , " + z + ".json";
+            }
+        }*/
+
+
+
+
+
+        // Grass Terrain
+        /*foreach (var chunk in TerrainGenerator.GetChunks().ToArray())
         {
             if (Vector3.Distance(player.position, chunk.transform.position) > maxChunkLoadDistance)
             {
                 //chunk.Unload();
-                //SaveToJson2.UnloadChunk();
-                //chunk.gameObject.SetActive(false);
-                //activeChunks.Remove(chunk);
-                //Destroy(chunk);
             }
             else
             {
                 //chunk.Load();
-                //chunk.gameObject.SetActive(true);
-                //LoadChunk(chunk);
             }
-        }
+        }*/
 
+        // Ocean Terrain
         for (int i = 0; i < activeOceanChunks.childCount; i++)
         {
             if (Vector3.Distance(player.position, activeOceanChunks.GetChild(i).position) > maxChunkLoadDistance)
             {
                 activeOceanChunks.GetChild(i).gameObject.SetActive(false);
-                //activeChunks.Remove(chunk);
-                //Destroy(chunk);
             }
             else
             {
                 activeOceanChunks.GetChild(i).gameObject.SetActive(true);
-                //LoadChunk(chunk);
             }
         }
-    }
-
-    public static void SaveToFile(Texture2D hMap, Material tMat, int chunkSize, int tWidth, int tHeight)
-    {
-        print("Heightmap: " + hMap.name);
-        print("Material: " + tMat.name);
-        print("Chunk Size: " + chunkSize);
-        print("Terrain Width: " + tWidth);
-        print("Terrain Height: " + tHeight);
     }
 }
 

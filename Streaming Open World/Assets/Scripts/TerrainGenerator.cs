@@ -1,16 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
-    private static List<GameObject> generatedChunks = new List<GameObject>();
+    private static List<GameObject> _generatedChunks = new List<GameObject>();
     private static Mesh _mesh;
     private static Vector3[] _vertices;
     private static int[] _triangles;
-    private static int _numberOfChunks;
+    public static int _numberOfChunks;
+    public static GameObject container;
 
     [SerializeField] private Texture2D _heightmap;
     [SerializeField] private Material _terrainMaterial;
@@ -20,14 +22,16 @@ public class TerrainGenerator : MonoBehaviour
     
     private void Awake()
     {
+        container = new GameObject("MainTerrain");
         GenerateMap(_heightmap, _terrainMaterial, _chunkSize, _terrainWidth, _terrainHeight);
+        print("Chunk list size: " + GetChunks().Count);
     }
 
     public static void GenerateMap(Texture2D heightMap, Material terrainMaterial, int chunkSize, int terrainWidth, int multiplier)
     {
-        foreach (var chunk in generatedChunks)
+        foreach (var chunk in _generatedChunks.ToArray())
         {
-            generatedChunks.Remove(chunk);
+            _generatedChunks.Remove(chunk);
         }
         
         _numberOfChunks = terrainWidth / chunkSize;
@@ -56,8 +60,9 @@ public class TerrainGenerator : MonoBehaviour
                 chunk.transform.position = new Vector3(x * chunkSize, 0, z * chunkSize);
 
                 UpdateMesh();
-                
-                generatedChunks.Add(chunk);
+
+                chunk.transform.parent = container.transform;
+                _generatedChunks.Add(chunk);
             }
         }
     }
@@ -110,7 +115,7 @@ public class TerrainGenerator : MonoBehaviour
 
     public static List<GameObject> GetChunks()
     {
-        return generatedChunks;
+        return _generatedChunks;
     }
 }
 
