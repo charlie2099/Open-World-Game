@@ -1,120 +1,168 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class ChunkLoader : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-
-    [System.Serializable]
-    public class ChunkData
-    {
-        public TerrainData[] terrainData;
-        public Material material;
-        public Vector3 position;
-    }
-    
-    [SerializeField] private ChunkData chunkData;
-    private List<GameObject> chunkList = new List<GameObject>(); 
-    private string jsonFile;
+    [SerializeField] private Transform activeOceanChunks;
+    [SerializeField] private int maxChunkLoadDistance = 400;
+   //[SerializeField] private int checkRate;
+    private Transform player;
 
     private void Start()
     {
-        // Converts 'chunkData' to JSON form.
-        jsonFile = JsonUtility.ToJson(chunkData);
-        WriteToFile();
-        LoadChunk();
+        player = transform;
+    }
+    
+    private void CheckChunks()
+    {
+        // No matter how high up player is, it is always the same distance it is calculating
+        // So playerPos.y needs to be set to 0
+        // check centre of chunks
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.L))
+        foreach (var chunk in TerrainGenerator.GetChunks().ToArray())
         {
-            LoadChunk();
-            //player = Instantiate(playerPrefab, new Vector3(1038.2f,-142.32f,861.56f), Quaternion.identity);
-        }
-        
-        if(Input.GetKeyDown(KeyCode.U))
-        {
-            UnloadChunk();
-            //Destroy(player);
-        }
-        
-        foreach (var chunk in chunkList.ToArray())
-        {
-            if (Vector3.Distance(player.position, chunk.transform.position) > 400)
+            if (Vector3.Distance(player.position, chunk.transform.position) > maxChunkLoadDistance)
             {
-                chunkList.Remove(chunk);
-                Destroy(chunk);
+                //chunk.Unload();
+                //SaveToJson2.UnloadChunk();
+                //chunk.gameObject.SetActive(false);
+                //activeChunks.Remove(chunk);
+                //Destroy(chunk);
             }
             else
             {
+                //chunk.Load();
+                //chunk.gameObject.SetActive(true);
+                //LoadChunk(chunk);
+            }
+        }
+
+        for (int i = 0; i < activeOceanChunks.childCount; i++)
+        {
+            if (Vector3.Distance(player.position, activeOceanChunks.GetChild(i).position) > maxChunkLoadDistance)
+            {
+                activeOceanChunks.GetChild(i).gameObject.SetActive(false);
+                //activeChunks.Remove(chunk);
+                //Destroy(chunk);
+            }
+            else
+            {
+                activeOceanChunks.GetChild(i).gameObject.SetActive(true);
                 //LoadChunk(chunk);
             }
         }
     }
 
-    private void LoadChunk()
+    public static void SaveToFile(Texture2D hMap, Material tMat, int chunkSize, int tWidth, int tHeight)
     {
-        ReadFromFile();
+        print("Heightmap: " + hMap.name);
+        print("Material: " + tMat.name);
+        print("Chunk Size: " + chunkSize);
+        print("Terrain Width: " + tWidth);
+        print("Terrain Height: " + tHeight);
     }
+}
 
-    private void UnloadChunk()
+
+
+
+
+
+
+
+/*using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ChunkLoader : MonoBehaviour
+{
+    [Serializable]
+    public class ChunkData
     {
-        WriteToFile();
+        public Texture2D heightmap;
+        public Material material;
+        public Vector3 position;
         
-        foreach (var chunk in chunkList.ToArray())
-        {
-            chunkList.Remove(chunk);
-            Destroy(chunk);
-        }
+        public Mesh mesh;
+        public Vector3[] vertices;
+        public int[] triangles;
+        public int numberOfChunks;
+        public int chunkSize;
+        public int terrainWidth;
+        private int multiplier;
     }
 
-    private void WriteToFile()
+    //[SerializeField] private ChunkData chunkData;
+    
+    [SerializeField] private Transform activeChunks;
+    [SerializeField] private Transform activeOceanChunks;
+    [SerializeField] private int maxChunkLoadDistance = 400;
+   //[SerializeField] private int checkRate;
+    private Transform player;
+    //private string jsonFile;
+
+    private void Start()
     {
+        player = transform;
+
         // Converts 'chunkData' to JSON form.
-        jsonFile = JsonUtility.ToJson(chunkData); // needed here?
+        //jsonFile = JsonUtility.ToJson(chunkData);
         
-        // Writes chunkData to json file
-        File.WriteAllText(Application.dataPath + "chunkDataFile.json", jsonFile);
+        //InvokeRepeating(CheckChunks(), 0.0f, checkRate);
+    }
+    
+    private void CheckChunks()
+    {
+        // No matter how high up player is, it is always the same distance it is calculating
+        // So playerPos.y needs to be set to 0
+        // check centre of chunks
     }
 
-    private void ReadFromFile()
+    private void Update()
     {
-        // Read contents of json file
-        ChunkData loadedChunkData = JsonUtility.FromJson<ChunkData>(jsonFile);
-        
-        float x = 0;
-        float z = 0;
-        const float spacing = 112.5f;
-        const int rowLength = 16;
-
-        for (int i = 0; i < chunkData.terrainData.Length; i++)
+        for (int i = 0; i < activeChunks.childCount; i++)
         {
-            GameObject chunk = new GameObject("chunk " + i);
-            chunk.AddComponent<Terrain>();
-            chunk.AddComponent<TerrainCollider>();
-
-            chunk.GetComponent<Terrain>().materialTemplate = loadedChunkData.material;
-            chunk.GetComponent<Terrain>().terrainData = loadedChunkData.terrainData[i];
-            chunk.GetComponent<TerrainCollider>().terrainData = loadedChunkData.terrainData[i];
-
-            var chunkPos = loadedChunkData.position;
-            var xPos = chunkPos.x + (x * spacing);
-            var zPos = chunkPos.z + (z * spacing);
-            chunk.transform.position = new Vector3(xPos, chunkPos.y, zPos);
-            chunk.transform.parent = transform;
-
-            //chunkData.position = chunk.transform.position;
-            chunkList.Add(chunk);
-            
-            z++;
-            if (z >= rowLength)
+            if (Vector3.Distance(player.position, activeChunks.GetChild(i).position) > maxChunkLoadDistance)
             {
-                z = 0;
-                x++;
+                activeChunks.GetChild(i).gameObject.SetActive(false);
+                //activeChunks.Remove(chunk);
+                //Destroy(chunk);
+            }
+            else
+            {
+                activeChunks.GetChild(i).gameObject.SetActive(true);
+                //LoadChunk(chunk);
+            }
+        }
+        
+        for (int i = 0; i < activeOceanChunks.childCount; i++)
+        {
+            if (Vector3.Distance(player.position, activeOceanChunks.GetChild(i).position) > maxChunkLoadDistance)
+            {
+                activeOceanChunks.GetChild(i).gameObject.SetActive(false);
+                //activeChunks.Remove(chunk);
+                //Destroy(chunk);
+            }
+            else
+            {
+                activeOceanChunks.GetChild(i).gameObject.SetActive(true);
+                //LoadChunk(chunk);
             }
         }
     }
-}
+
+    public static void SaveToFile(Texture2D hMap, Material tMat, int chunkSize, int tWidth, int tHeight)
+    {
+        print("Heightmap: " + hMap.name);
+        print("Material: " + tMat.name);
+        print("Chunk Size: " + chunkSize);
+        print("Terrain Width: " + tWidth);
+        print("Terrain Height: " + tHeight);
+    }
+}*/

@@ -4,17 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class TerrainGenerator : MonoBehaviour
+public class TerrainGenerator : MonoBehaviour
 {
-    private static List<GameObject> activeChunks = new List<GameObject>();
+    private static List<GameObject> generatedChunks = new List<GameObject>();
     private static Mesh _mesh;
     private static Vector3[] _vertices;
     private static int[] _triangles;
     private static int _numberOfChunks;
 
+    [SerializeField] private Texture2D _heightmap;
+    [SerializeField] private Material _terrainMaterial;
+    [SerializeField] private int _chunkSize;
+    [SerializeField] private int _terrainWidth;
+    [SerializeField] private int _terrainHeight;
+    
+    private void Awake()
+    {
+        GenerateMap(_heightmap, _terrainMaterial, _chunkSize, _terrainWidth, _terrainHeight);
+    }
+
     public static void GenerateMap(Texture2D heightMap, Material terrainMaterial, int chunkSize, int terrainWidth, int multiplier)
     {
         _numberOfChunks = terrainWidth / chunkSize;
+        print("Num of chunks: " + _numberOfChunks);
 
         for (int x = 0; x < _numberOfChunks; x++)
         {
@@ -40,13 +52,14 @@ public abstract class TerrainGenerator : MonoBehaviour
 
                 UpdateMesh();
                 
-                activeChunks.Add(chunk);
+                generatedChunks.Add(chunk);
             }
         }
     }
 
 
-    private static void CreateMesh(Texture2D heightMap, int chunkSize, int multiplier, int offsetX, int offsetZ)
+    // Creates mesh for a single chunk
+    public static void CreateMesh(Texture2D heightMap, int chunkSize, int multiplier, int offsetX, int offsetZ)
     {
         _vertices = new Vector3[(chunkSize + 1) * (chunkSize + 1)];
 
@@ -88,6 +101,11 @@ public abstract class TerrainGenerator : MonoBehaviour
         _mesh.triangles = _triangles.ToArray();
         _mesh.RecalculateNormals();
         _mesh.RecalculateBounds();
+    }
+
+    public static List<GameObject> GetChunks()
+    {
+        return generatedChunks;
     }
 }
 

@@ -1,0 +1,14 @@
+{
+    "name": "chunk 16 , 3",
+    "mesh": {
+        "instanceID": -8000
+    },
+    "material": {
+        "instanceID": -11074
+    },
+    "position": {
+        "x": 512.0,
+        "y": 0.0,
+        "z": 96.0
+    }
+}

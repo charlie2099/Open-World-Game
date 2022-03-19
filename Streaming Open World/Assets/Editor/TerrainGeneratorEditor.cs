@@ -14,9 +14,9 @@ public class TerrainGeneratorEditor : EditorWindow
 {
     private Texture2D heightMap;
     private Material material;
-    private int multiplier       = 100; // terrainHeight?
     private int chunkSize        = 32;
     private int terrainWidth     = 1024;
+    private int terrainHeight    = 100; 
     private string containerName = "Terrain";
 
     private GameObject objectToPaint; 
@@ -33,7 +33,7 @@ public class TerrainGeneratorEditor : EditorWindow
         
         heightMap  = EditorGUILayout.ObjectField("Heightmap", heightMap, typeof(Texture2D), false) as Texture2D;
         material   = EditorGUILayout.ObjectField("Material", material, typeof(Material), false) as Material;
-        multiplier = EditorGUILayout.IntField("Multiplier", multiplier);
+        terrainHeight = EditorGUILayout.IntField("Multiplier", terrainHeight);
         chunkSize  = EditorGUILayout.IntField("Chunk Size", chunkSize);
         terrainWidth  = EditorGUILayout.IntField("Terrain Width", terrainWidth);
         containerName = EditorGUILayout.TextField("Container name", containerName);
@@ -43,15 +43,20 @@ public class TerrainGeneratorEditor : EditorWindow
             GenerateTerrain();
         }
         
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("Paint Objects On Terrain", EditorStyles.boldLabel);
+        if (GUILayout.Button("Save to file"))
+        {
+            ChunkLoader.SaveToFile(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+        }
         
-        objectToPaint = EditorGUILayout.ObjectField("Object To Paint", objectToPaint, typeof(GameObject), false) as GameObject;
+        //GUILayout.FlexibleSpace();
+        //GUILayout.Label("Paint Objects On Terrain", EditorStyles.boldLabel);
         
-        if (GUILayout.Button("Paint"))
+        //objectToPaint = EditorGUILayout.ObjectField("Object To Paint", objectToPaint, typeof(GameObject), false) as GameObject;
+        
+        /*if (GUILayout.Button("Paint"))
         {
             ActivatePainter();
-        }
+        }*/
     }
 
     private void GenerateTerrain()
@@ -69,7 +74,7 @@ public class TerrainGeneratorEditor : EditorWindow
         }
 
         // Generates the terrain 
-        TerrainGenerator.GenerateMap(heightMap, material, chunkSize, terrainWidth, multiplier);
+        TerrainGenerator.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
         
         // Creates the container for the chunks to parent to
         GameObject container = new GameObject { name = containerName };
