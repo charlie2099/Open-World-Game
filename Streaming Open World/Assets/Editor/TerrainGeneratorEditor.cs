@@ -103,7 +103,11 @@ public class TerrainGeneratorEditor : EditorWindow
             }
 
             // if a terrain exists destroy all chunks and then it's container and remove from active chunks list
-            DestroyImmediate(TerrainGenerator.GetChunks()[0].transform.parent.gameObject);
+            if (TerrainGenerator.GetChunks()[0].transform.parent.gameObject != null)
+            {
+                DestroyImmediate(TerrainGenerator.GetChunks()[0].transform.parent.gameObject);
+            }
+
             TerrainGenerator.GetChunks().Clear();
 
             TerrainGenerator.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
