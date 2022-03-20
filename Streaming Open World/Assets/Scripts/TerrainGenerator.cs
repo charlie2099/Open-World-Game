@@ -56,16 +56,10 @@ public class TerrainGenerator : MonoBehaviour
 
                 CreateMesh(heightMap, chunkSize, multiplier,x * chunkSize, z * chunkSize);
                 
-                chunk.AddComponent<MeshFilter>();
-                chunk.AddComponent<MeshRenderer>();
-                chunk.AddComponent<MeshCollider>();
+                chunk.AddComponent<MeshFilter>().sharedMesh = _mesh;
+                chunk.AddComponent<MeshRenderer>().sharedMaterial = terrainMaterial;
+                chunk.AddComponent<MeshCollider>().sharedMesh = _mesh;
                 chunk.AddComponent<Chunk>();
-                
-                chunk.GetComponent<MeshFilter>().sharedMesh = _mesh;
-                chunk.GetComponent<MeshRenderer>().sharedMaterial = terrainMaterial;
-                chunk.GetComponent<MeshCollider>().sharedMesh = _mesh;
-                
-                
                 
                 string path = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
                 SaveManager.ChunkData loadedData = JsonUtility.FromJson<SaveManager.ChunkData>(File.ReadAllText(path));
@@ -75,8 +69,23 @@ public class TerrainGenerator : MonoBehaviour
                 //chunk.AddComponent<MeshCollider>().sharedMesh = loadedData.mesh;
                 //chunk.AddComponent<Chunk>();
 
+                /*Mesh objectMesh = new Mesh();
+                chunk.GetComponent<Chunk>().chunkObjects.Add(new GameObject());
+                chunk.GetComponent<Chunk>().chunkObjects[0].AddComponent<MeshFilter>().sharedMesh = loadedData.objectMeshes[0];
+                chunk.GetComponent<Chunk>().chunkObjects[0].AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[0];*/
+                
                 chunk.transform.position = loadedData.position;
-                chunk.GetComponent<Chunk>().chunkObjects = loadedData.objects;
+                
+                
+                // build object meshes then add to chunk list
+                
+                //chunk.GetComponent<Chunk>().chunkObjects = loadedData.objects;
+                
+                /*objectMesh.Clear();
+                objectMesh.vertices = loadedData.objectMeshes[0].vertices;
+                objectMesh.triangles = loadedData.objectMeshes[0].triangles;
+                objectMesh.RecalculateNormals();
+                objectMesh.RecalculateBounds();*/
 
                 /*mesh.Clear();
                 mesh.vertices = loadedData.mesh.vertices;
