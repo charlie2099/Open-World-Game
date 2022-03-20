@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 
 /// <summary>
-/// Generate a chunked terrain
+/// Generates a chunked terrain
 /// 
 /// WARNING:
 /// Must sit inside the Editor folder.
@@ -44,12 +44,7 @@ public class TerrainGeneratorEditor : EditorWindow
         
         if (GUILayout.Button("Save to file"))
         {
-            //ChunkLoader.SaveToFile(heightMap, material, chunkSize, terrainWidth, terrainHeight);
-            SaveToJson2.SaveToFile();
-            
-            // NOTE:
-            // - If there are multiple calls to the TerrainGenerator.GenerateMap() method, how will the activeChunks
-            // list be affected?? Also what about when saving them to file?
+            SaveManager.SaveToFile();
         }
     }
 
@@ -73,14 +68,19 @@ public class TerrainGeneratorEditor : EditorWindow
         // Creates the container for the chunks to parent to
         GameObject container = new GameObject { name = containerName };
 
-        foreach (var chunk in FindObjectsOfType<GameObject>())
+        foreach (var chunk in TerrainGenerator.GetChunks())
+        {
+            chunk.transform.parent = container.transform;
+        }
+
+        /*foreach (var chunk in FindObjectsOfType<GameObject>())
         {
             // Parents object to the container if it contains the tag AND doesn't already have a parent
             if (chunk.CompareTag("TerrainChunk") && chunk.transform.parent == null)
             {
                 chunk.transform.parent = container.transform;
             }
-        }
+        }*/
         
         Debug.Log("<color=lime> A new terrain has been generated! </color>");
     }

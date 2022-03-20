@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -11,8 +12,9 @@ public class TerrainGenerator : MonoBehaviour
     private static Mesh _mesh;
     private static Vector3[] _vertices;
     private static int[] _triangles;
-    public static int _numberOfChunks;
-    public static GameObject container;
+    public static int numberOfChunks;
+    public static int totalChunks;
+    //public static GameObject container;
 
     [SerializeField] private Texture2D _heightmap;
     [SerializeField] private Material _terrainMaterial;
@@ -22,9 +24,14 @@ public class TerrainGenerator : MonoBehaviour
     
     private void Awake()
     {
-        container = new GameObject("MainTerrain");
+        //container = new GameObject("MainTerrain");
+        /*if (FindObjectOfType<Transform>().name == "name")
+        {
+            print("goodbye");
+            return;
+        }*/
+        
         GenerateMap(_heightmap, _terrainMaterial, _chunkSize, _terrainWidth, _terrainHeight);
-        print("Chunk list size: " + GetChunks().Count);
     }
 
     public static void GenerateMap(Texture2D heightMap, Material terrainMaterial, int chunkSize, int terrainWidth, int multiplier)
@@ -34,12 +41,13 @@ public class TerrainGenerator : MonoBehaviour
             _generatedChunks.Remove(chunk);
         }
         
-        _numberOfChunks = terrainWidth / chunkSize;
-        print("Num of chunks: " + _numberOfChunks);
+        numberOfChunks = terrainWidth / chunkSize;
+        totalChunks = numberOfChunks * numberOfChunks;
+        print("Num of chunks: " + numberOfChunks);
 
-        for (int x = 0; x < _numberOfChunks; x++)
+        for (int x = 0; x < numberOfChunks; x++)
         {
-            for (int z = 0; z < _numberOfChunks; z++)
+            for (int z = 0; z < numberOfChunks; z++)
             {
                 GameObject chunk = new GameObject("chunk " + x + " , " + z);
                 chunk.tag = "TerrainChunk";
@@ -54,17 +62,41 @@ public class TerrainGenerator : MonoBehaviour
                 chunk.AddComponent<Chunk>();
                 
                 chunk.GetComponent<MeshFilter>().sharedMesh = _mesh;
-                chunk.GetComponent<MeshRenderer>().material = terrainMaterial;
+                chunk.GetComponent<MeshRenderer>().sharedMaterial = terrainMaterial;
                 chunk.GetComponent<MeshCollider>().sharedMesh = _mesh;
                 
-                chunk.transform.position = new Vector3(x * chunkSize, 0, z * chunkSize);
+                
+                
+                string path = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
+                SaveManager.ChunkData loadedData = JsonUtility.FromJson<SaveManager.ChunkData>(File.ReadAllText(path));
+                
+                //chunk.AddComponent<MeshFilter>().sharedMesh = loadedData.mesh;
+                //chunk.AddComponent<MeshRenderer>().sharedMaterial = loadedData.material;
+                //chunk.AddComponent<MeshCollider>().sharedMesh = loadedData.mesh;
+                //chunk.AddComponent<Chunk>();
+
+                chunk.transform.position = loadedData.position;
+                chunk.GetComponent<Chunk>().chunkObjects = loadedData.objects;
+
+                /*mesh.Clear();
+                mesh.vertices = loadedData.mesh.vertices;
+                mesh.triangles = loadedData.mesh.triangles;
+                mesh.RecalculateNormals();
+                mesh.RecalculateBounds();*/
+
+                //newChunk.transform.parent = TerrainGenerator.container.transform;
+                //TerrainGenerator.GetChunks().Add(newChunk);
+                //ChunkLoader.loadedChunks.Add(newChunk);
+                
+                //chunk.transform.position = new Vector3(x * chunkSize, 0, z * chunkSize);
 
                 UpdateMesh();
 
-                chunk.transform.parent = container.transform;
+                //chunk.transform.parent = container.transform;
                 _generatedChunks.Add(chunk);
             }
         }
+        SaveManager.SaveToFile();
     }
 
 
