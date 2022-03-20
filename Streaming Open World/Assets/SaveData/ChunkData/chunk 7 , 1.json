@@ -1,0 +1,17 @@
+{
+    "name": "chunk 7 , 1",
+    "chunkMesh": {
+        "instanceID": -100030
+    },
+    "material": {
+        "instanceID": 37448
+    },
+    "position": {
+        "x": 448.0,
+        "y": 0.0,
+        "z": 64.0
+    },
+    "objects": [],
+    "objectMeshes": [],
+    "objectPositions": []
+}
