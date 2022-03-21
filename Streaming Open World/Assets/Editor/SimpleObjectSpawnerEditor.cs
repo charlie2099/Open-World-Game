@@ -29,7 +29,6 @@ public class SimpleObjectSpawnerEditor : EditorWindow
 
         // if activeAssigner is true, perform the following code
 
-        
         if (Event.current.type == EventType.MouseDown)
         {
             Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
