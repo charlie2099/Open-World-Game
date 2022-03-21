@@ -7,6 +7,10 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Generates a chunked terrain and reads chunk data from file should it exist.
+/// </summary>
+
 public class TerrainGenerator : MonoBehaviour
 {
     // Terrain
@@ -80,7 +84,7 @@ public class TerrainGenerator : MonoBehaviour
                 chunk.AddComponent<MeshFilter>().sharedMesh = _mesh;
                 chunk.AddComponent<MeshRenderer>().sharedMaterial = terrainMaterial;
                 chunk.AddComponent<MeshCollider>().sharedMesh = _mesh;
-                chunk.AddComponent<Chunk>();
+                chunk.AddComponent<Chunk>().isLoaded = true;
                 
                 string chunkPath = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
                 if (File.Exists(chunkPath))
@@ -111,6 +115,7 @@ public class TerrainGenerator : MonoBehaviour
                 UpdateMesh();
 
                 chunk.transform.parent = container.transform;
+                container.tag = "MainTerrain";
                 _generatedChunks.Add(chunk);
             }
         }

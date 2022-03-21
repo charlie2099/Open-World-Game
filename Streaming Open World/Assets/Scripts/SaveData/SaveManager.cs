@@ -5,6 +5,10 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Saves chunk data, terrain data, and npc data to json files.
+/// </summary>
+
 public class SaveManager : MonoBehaviour
 {
     public class ChunkData

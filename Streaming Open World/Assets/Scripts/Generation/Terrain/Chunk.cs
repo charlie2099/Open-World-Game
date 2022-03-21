@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Chunk component attached to each chunk. Maintains a list of all objects
+/// assigned to that chunk. 
+/// </summary>
 
 public class Chunk : MonoBehaviour
 {

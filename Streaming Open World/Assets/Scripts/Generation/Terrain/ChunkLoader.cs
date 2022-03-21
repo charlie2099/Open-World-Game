@@ -3,30 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles loading and unloading of chunks based on the distance between the player and
+/// the central position of each chunk
+/// </summary>
+
 public class ChunkLoader : MonoBehaviour
 {
     [SerializeField] private Transform activeOceanChunks;
     [SerializeField] private int maxChunkLoadDistance = 400;
+    [SerializeField] private float checkRate = 1.0f;
     private Transform player;
-    public static List<GameObject> loadedChunks = new List<GameObject>();
 
     private void Start()
     {
         player = transform;
-
-        foreach (var chunk in TerrainGenerator.GetChunks())
-        {
-            loadedChunks.Add(chunk);
-            chunk.GetComponent<Chunk>().isLoaded = true;
-        }
+        InvokeRepeating(nameof(CheckChunkDistance), 5.0f, checkRate);
     }
 
-    private void Update()
+    private void CheckChunkDistance()
     {
+        // Player yPos is set to zero so that no matter high/low the player is in the world, it's always the same distance
+        // it's calculating i.e. more chunks won't unload if the player is really high up
+        var playerPos = player.position;
+        playerPos.y = 0;
+
         foreach (var chunk in TerrainGenerator.GetChunks().ToArray())
         {
-            // If distance between player and chunk is more maxViewDistance AND chunk is loaded, unload it
-            if (Vector3.Distance(player.position, chunk.transform.position) > maxChunkLoadDistance)
+            // Center pos of chunk
+            Vector3 chunkCenterPos = chunk.transform.position + new Vector3(TerrainGenerator.GetChunkSize() / 2.0f, 0, TerrainGenerator.GetChunkSize() / 2.0f);
+            
+            // If distance between player and center of chunk is more than maxViewDistance AND chunk is loaded, unload it
+            if (Vector3.Distance(playerPos, chunkCenterPos) > maxChunkLoadDistance) 
             {
                 if (chunk.GetComponent<Chunk>().IsLoaded())
                 {
@@ -34,8 +42,8 @@ public class ChunkLoader : MonoBehaviour
                 }
             }
             
-            // If distance between player and chunk is less than maxViewDistance AND chunk is unloaded, load it
-            if (Vector3.Distance(player.position, chunk.transform.position) < maxChunkLoadDistance)
+            // If distance between player and center of chunk is less than maxViewDistance AND chunk is unloaded, load it
+            if (Vector3.Distance(playerPos, chunkCenterPos) < maxChunkLoadDistance)
             {
                 if (!chunk.GetComponent<Chunk>().IsLoaded())
                 {
@@ -44,22 +52,10 @@ public class ChunkLoader : MonoBehaviour
             }
         }
         
-
-        /*foreach (var chunk in loadedChunks)
-        {
-            // do this
-        }*/
-        
-        /*if(chunk.!IsLoaded())
-        {
-            SaveManager.LoadSelectedChunk(chunk);
-        }*/
-        
-
         // Ocean Terrain
         for (int i = 0; i < activeOceanChunks.childCount; i++)
         {
-            if (Vector3.Distance(player.position, activeOceanChunks.GetChild(i).position) > maxChunkLoadDistance)
+            if (Vector3.Distance(playerPos, activeOceanChunks.GetChild(i).position) > maxChunkLoadDistance)
             {
                 activeOceanChunks.GetChild(i).gameObject.SetActive(false);
             }
