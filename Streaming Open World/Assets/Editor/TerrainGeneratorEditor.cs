@@ -56,6 +56,7 @@ public class TerrainGeneratorEditor : EditorWindow
         if (GUILayout.Button("Save to file"))
         {
             SaveManager.SaveToFile();
+            Debug.Log("Saving!");
         }
     }
 
@@ -85,7 +86,7 @@ public class TerrainGeneratorEditor : EditorWindow
             TerrainGenerator.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
             Debug.Log("<color=lime> A new terrain has been generated! </color>");
         }
-        else
+        /*else
         {
             // Delete existing terrain data
             string terrainPath = Application.dataPath + "/SaveData/TerrainData/terrain.json";
@@ -112,6 +113,8 @@ public class TerrainGeneratorEditor : EditorWindow
 
             TerrainGenerator.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
             Debug.Log("<color=lime> Existing terrain has been regenerated! </color>");
-        }
+
+            Debug.Log("Size: " + TerrainGenerator.GetChunks().Count);
+        }*/
     }
 }

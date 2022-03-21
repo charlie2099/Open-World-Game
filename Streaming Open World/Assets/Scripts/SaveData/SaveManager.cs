@@ -13,10 +13,12 @@ public class SaveManager : MonoBehaviour
         public Mesh chunkMesh;
         public Material material;
         public Vector3 position;
-        
+
+        public string[] objectNames;
         public List<GameObject> objects; // don't write gameobjects to file?
         public Mesh[] objectMeshes;
-        public List<Vector3> objectPositions;
+        public Material[] objectMaterials;
+        public Vector3[] objectPos;
     }
 
     public class TerrainData
@@ -111,6 +113,8 @@ public class SaveManager : MonoBehaviour
 
     public static void SaveToFile() // Saves terrain, chunk, and other data to file
     {
+        print("Size when saving to file: " + TerrainGenerator.GetChunks().Count);
+
         TerrainData newTerrainData = new TerrainData();
         newTerrainData.chunkSize     = TerrainGenerator.GetChunkSize();
         newTerrainData.terrainWidth  = TerrainGenerator.GetTerrainWidth();
@@ -120,21 +124,36 @@ public class SaveManager : MonoBehaviour
         _jsonFile = JsonUtility.ToJson(newTerrainData, true);
 
         // Writes terrainData to json file
-        string terrainPath = Application.dataPath + "/SaveData/TerrainData/terrain.json";  
+        string terrainPath = Application.dataPath + "/SaveData/TerrainData/terrain.json";
         File.WriteAllText(terrainPath, _jsonFile);
-        
-        
 
-        print("Size: " + TerrainGenerator.GetChunks().Count);
         // Update chunk data when unloaded
         foreach (var chunk in TerrainGenerator.GetChunks())
         {
             ChunkData newChunkData = new ChunkData();
-            newChunkData.material     = chunk.GetComponent<MeshRenderer>().sharedMaterial;
-            newChunkData.chunkMesh    = chunk.GetComponent<MeshFilter>().sharedMesh;
-            newChunkData.position     = chunk.transform.position;
-            newChunkData.name         = chunk.name;
-            newChunkData.objects      = chunk.GetComponent<Chunk>().chunkObjects;
+            newChunkData.material           = chunk.GetComponent<MeshRenderer>().sharedMaterial;
+            newChunkData.chunkMesh          = chunk.GetComponent<MeshFilter>().sharedMesh;
+            newChunkData.position           = chunk.transform.position;
+            newChunkData.name               = chunk.name;
+            
+            newChunkData.objects            = chunk.GetComponent<Chunk>().chunkObjects;
+            newChunkData.objectNames        = new string[newChunkData.objects.Count];
+            newChunkData.objectPos          = new Vector3[newChunkData.objects.Count];
+            newChunkData.objectMeshes       = new Mesh[newChunkData.objects.Count];
+            newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
+            
+            print("Object Size: " + newChunkData.objects.Count);
+
+            for (int i = 0; i < newChunkData.objects.Count; i++)
+            {
+                if (newChunkData.objectPos != null)
+                {
+                    newChunkData.objectNames[i] = chunk.GetComponent<Chunk>().chunkObjects[i].name;
+                    newChunkData.objectMeshes[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshFilter>().sharedMesh;
+                    newChunkData.objectMaterials[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshRenderer>().sharedMaterial;
+                    newChunkData.objectPos[i] = chunk.GetComponent<Chunk>().chunkObjects[i].transform.position;
+                }
+            }
 
             // Converts new chunk data to JSON form.
             _jsonFile = JsonUtility.ToJson(newChunkData, true);
@@ -143,7 +162,7 @@ public class SaveManager : MonoBehaviour
             string path = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
             File.WriteAllText(path, _jsonFile);
         }
-        print("<color=orange> Chunks unloaded </color>");
-        print("<color=orange> Chunk data written to file </color>");
+        //print("<color=orange> Chunks unloaded </color>");
+        //print("<color=orange> Chunk data written to file </color>");
     }
 }

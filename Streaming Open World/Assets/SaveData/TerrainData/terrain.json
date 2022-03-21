@@ -1,5 +1,5 @@
 {
     "chunkSize": 64,
-    "terrainWidth": 750,
+    "terrainWidth": 500,
     "terrainHeight": 100
 }

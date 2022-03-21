@@ -22,7 +22,7 @@ public class ObjectGenerator : MonoBehaviour
 
     private void Start()
     {
-        foreach (var obj in objectData)
+        /*foreach (var obj in objectData)
         {
             GameObject newObj = new GameObject(obj.name);
             newObj.AddComponent<MeshFilter>().sharedMesh = obj.mesh;
@@ -32,14 +32,16 @@ public class ObjectGenerator : MonoBehaviour
             }
             newObj.AddComponent<MeshCollider>().sharedMesh = obj.collisionMesh;
             newObj.transform.position = new Vector3(0, 0, 0);
-        }
+        }*/
+        
+        //CreateMesh("Tree");
     }
 
-    public void CreateMesh(string name)
+    public void CreateMesh(string meshName)
     {
-        GameObject newObj = new GameObject(name);
+        GameObject newObj = new GameObject(meshName);
 
-        foreach (var obj in objectData)
+        /*foreach (var obj in objectData)
         {
             if (obj.name == name)
             {
@@ -49,10 +51,8 @@ public class ObjectGenerator : MonoBehaviour
                     newObj.AddComponent<MeshRenderer>().material = obj.material[i];
                 }
                 newObj.AddComponent<MeshCollider>().sharedMesh = obj.collisionMesh;
-                
-                
             }
-        }
+        }*/
 
         createdObj = newObj;
     }

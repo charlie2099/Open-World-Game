@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
@@ -29,7 +30,7 @@ public class TerrainGenerator : MonoBehaviour
     private static int[] _triangles;
     
     // Terrain Objects
-    //private static ObjectGenerator _objectGenerator;
+    private static ObjectGenerator _objectGenerator;
 
     private void Awake()
     {
@@ -87,36 +88,25 @@ public class TerrainGenerator : MonoBehaviour
                     SaveManager.ChunkData loadedData = JsonUtility.FromJson<SaveManager.ChunkData>(File.ReadAllText(chunkPath));
                     chunk.GetComponent<MeshRenderer>().sharedMaterial = loadedData.material;
                     chunk.transform.position = loadedData.position;
+                    
+                    print("loaded chunk (" + x + " , " + z + ") obj count: " + loadedData.objects.Count);
+                    
+                    // Load terrain objects in each chunk 
+                    for (int i = 0; i < loadedData.objects.Count; i++)
+                    {
+                        GameObject newObj = new GameObject(loadedData.objectNames[i] + i);
+                        newObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
+                        newObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
+                        newObj.AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[i];
+                        newObj.transform.position = loadedData.objectPos[i];
+                        newObj.transform.parent = chunk.transform;
+                        chunk.GetComponent<Chunk>().chunkObjects.Add(newObj);
+                    }
                 }
                 else
                 {
                     chunk.transform.position = new Vector3(x * chunkSize, 0, z * chunkSize);
                 }
-
-
-                // Terrain Objects
-                //_objectGenerator.CreateMesh("Tree");
-                //_objectGenerator.GetMesh().transform.position = loadedData.objectPositions[0];
-                
-                /*Mesh objectMesh = new Mesh();
-                chunk.GetComponent<Chunk>().chunkObjects.Add(new GameObject());
-                chunk.GetComponent<Chunk>().chunkObjects[0].AddComponent<MeshFilter>().sharedMesh = loadedData.objectMeshes[0];
-                chunk.GetComponent<Chunk>().chunkObjects[0].AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[0];*/
-                
-                // build object meshes then add to chunk list
-                //chunk.GetComponent<Chunk>().chunkObjects = loadedData.objects;
-                
-                /*objectMesh.Clear();
-                objectMesh.vertices = loadedData.objectMeshes[0].vertices;
-                objectMesh.triangles = loadedData.objectMeshes[0].triangles;
-                objectMesh.RecalculateNormals();
-                objectMesh.RecalculateBounds();*/
-
-                /*mesh.Clear();
-                mesh.vertices = loadedData.mesh.vertices;
-                mesh.triangles = loadedData.mesh.triangles;
-                mesh.RecalculateNormals();
-                mesh.RecalculateBounds();*/
 
                 UpdateMesh();
 

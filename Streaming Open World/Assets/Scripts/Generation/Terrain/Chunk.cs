@@ -12,27 +12,27 @@ public class Chunk : MonoBehaviour
     private void OnEnable()
     {
         // Objects on Chunk
-        foreach (var chunkObj in chunkObjects)
+        /*foreach (var chunkObj in chunkObjects)
         {
             // Enable all objects found in this chunk
             if (chunkObj != null)
             {
                 chunkObj.SetActive(true);
             }
-        }
+        }*/
     }
 
     private void OnDisable()
     {
         // Objects on Chunk
-        foreach (var chunkObj in chunkObjects)
+        /*foreach (var chunkObj in chunkObjects)
         {
             // Disable all objects found in this chunk
             if (chunkObj != null)
             {
                 chunkObj.SetActive(false);
             }
-        }
+        }*/
     }
 
     public bool IsLoaded()
