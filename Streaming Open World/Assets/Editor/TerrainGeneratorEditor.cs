@@ -19,7 +19,6 @@ public class TerrainGeneratorEditor : EditorWindow
     private int chunkSize        = 32;
     private int terrainWidth     = 500;
     private int terrainHeight    = 100;
-    private string regenButtonName;
 
     [MenuItem("My Tools/TerrainGenerator")]
     public static void ShowWindow()
@@ -37,29 +36,29 @@ public class TerrainGeneratorEditor : EditorWindow
         terrainHeight = EditorGUILayout.IntSlider("Terrain Height", terrainHeight, 0, 1024);
         chunkSize     = EditorGUILayout.IntField("Chunk Size", chunkSize);
 
-        string terrainPath = Application.dataPath + "/SaveData/TerrainData/terrain.json";
-        if (TerrainGenerator.GetChunks().Count <= 0 || !File.Exists(terrainPath)) // if a terrain doesn't already exist
+        if (GUILayout.Button("Load existing terrain"))
         {
-            regenButtonName = "Generate Terrain";
+            LoadExistingTerrain();
         }
-        else // if a terrain already exists
+
+        else if (GUILayout.Button("Generate a new terrain"))
         {
-            regenButtonName = "Regenerate Terrain";
-        }
-        if (GUILayout.Button(regenButtonName))
-        {
-            GenerateTerrain();
+            GenerateNewTerrain();
             Debug.Log("Chunks list size: " + TerrainGenerator.GetChunks().Count);
         }
 
-        if (GUILayout.Button("Save to file"))
+        else if (GUILayout.Button("Save to file"))
         {
             SaveManager.SaveToFile();
-            Debug.Log("Saving!");
         }
     }
 
-    private void GenerateTerrain()
+    private void LoadExistingTerrain()
+    {
+        TerrainGenerator.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+    }
+
+    private void GenerateNewTerrain()
     {
         if (heightMap == null)
         {

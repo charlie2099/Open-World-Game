@@ -1,19 +1,99 @@
 {
     "name": "chunk 3 , 4",
     "chunkMesh": {
-        "instanceID": -108974
+        "instanceID": -65348
     },
     "material": {
-        "instanceID": 24556
+        "instanceID": 25476
     },
     "position": {
         "x": 192.0,
         "y": 0.0,
         "z": 256.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
-    "objectMaterials": [],
-    "objectPos": []
+    "objectNames": [
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -65358
+        },
+        {
+            "instanceID": -65368
+        },
+        {
+            "instanceID": -65378
+        },
+        {
+            "instanceID": -65388
+        },
+        {
+            "instanceID": -65398
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 25482
+        },
+        {
+            "instanceID": 25482
+        },
+        {
+            "instanceID": 25482
+        },
+        {
+            "instanceID": 25482
+        },
+        {
+            "instanceID": 25482
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": 25480
+        },
+        {
+            "instanceID": 25480
+        },
+        {
+            "instanceID": 25480
+        },
+        {
+            "instanceID": 25480
+        },
+        {
+            "instanceID": 25480
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 239.23196411132813,
+            "y": 50.31532287597656,
+            "z": 277.0826416015625
+        },
+        {
+            "x": 236.54776000976563,
+            "y": 44.038639068603519,
+            "z": 292.9004821777344
+        },
+        {
+            "x": 209.51736450195313,
+            "y": 46.641292572021487,
+            "z": 303.8375549316406
+        },
+        {
+            "x": 206.36849975585938,
+            "y": 52.88836669921875,
+            "z": 291.34307861328127
+        },
+        {
+            "x": 223.05252075195313,
+            "y": 41.1619758605957,
+            "z": 315.4659729003906
+        }
+    ]
 }

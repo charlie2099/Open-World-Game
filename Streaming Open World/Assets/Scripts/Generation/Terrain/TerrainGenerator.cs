@@ -98,7 +98,7 @@ public class TerrainGenerator : MonoBehaviour
                     // Load terrain objects in each chunk 
                     for (int i = 0; i < loadedData.objects.Count; i++)
                     {
-                        GameObject newObj = new GameObject(loadedData.objectNames[i] + i);
+                        GameObject newObj = new GameObject(loadedData.objectNames[i]);
                         newObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
                         newObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
                         newObj.AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[i];

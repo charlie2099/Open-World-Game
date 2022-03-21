@@ -168,5 +168,6 @@ public class SaveManager : MonoBehaviour
         }
         //print("<color=orange> Chunks unloaded </color>");
         //print("<color=orange> Chunk data written to file </color>");
+        Debug.Log("Saving!");
     }
 }
