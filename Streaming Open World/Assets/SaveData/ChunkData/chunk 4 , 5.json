@@ -1,69 +1,19 @@
 {
     "name": "chunk 4 , 5",
     "chunkMesh": {
-        "instanceID": -65660
+        "instanceID": -70480
     },
     "material": {
-        "instanceID": 25476
+        "instanceID": 25378
     },
     "position": {
-        "x": 256.0,
+        "x": 128.0,
         "y": 0.0,
-        "z": 320.0
+        "z": 160.0
     },
-    "objectNames": [
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)"
-    ],
-    "objects": [
-        {
-            "instanceID": -65670
-        },
-        {
-            "instanceID": -65680
-        },
-        {
-            "instanceID": -65690
-        }
-    ],
-    "objectMeshes": [
-        {
-            "instanceID": 25482
-        },
-        {
-            "instanceID": 25482
-        },
-        {
-            "instanceID": 25482
-        }
-    ],
-    "objectMaterials": [
-        {
-            "instanceID": 25480
-        },
-        {
-            "instanceID": 25480
-        },
-        {
-            "instanceID": 25480
-        }
-    ],
-    "objectPos": [
-        {
-            "x": 303.4415588378906,
-            "y": 38.085060119628909,
-            "z": 321.7024230957031
-        },
-        {
-            "x": 299.5157470703125,
-            "y": 37.799564361572269,
-            "z": 327.289794921875
-        },
-        {
-            "x": 279.1395263671875,
-            "y": 37.25490188598633,
-            "z": 330.3406677246094
-        }
-    ]
+    "objectNames": [],
+    "objects": [],
+    "objectMeshes": [],
+    "objectMaterials": [],
+    "objectPos": []
 }
