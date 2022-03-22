@@ -1,19 +1,114 @@
 {
     "name": "chunk 4 , 4",
     "chunkMesh": {
-        "instanceID": -59714
+        "instanceID": -140244
     },
     "material": {
-        "instanceID": 25828
+        "instanceID": 29018
     },
     "position": {
-        "x": 128.0,
+        "x": 256.0,
         "y": 0.0,
-        "z": 128.0
+        "z": 256.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
-    "objectMaterials": [],
-    "objectPos": []
+    "objectNames": [
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -140254
+        },
+        {
+            "instanceID": -140264
+        },
+        {
+            "instanceID": -140274
+        },
+        {
+            "instanceID": -140284
+        },
+        {
+            "instanceID": -140294
+        },
+        {
+            "instanceID": -140304
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 316.125244140625,
+            "y": 37.9366569519043,
+            "z": 283.6307678222656
+        },
+        {
+            "x": 296.599365234375,
+            "y": 40.07918930053711,
+            "z": 268.9395446777344
+        },
+        {
+            "x": 291.4019775390625,
+            "y": 42.4298095703125,
+            "z": 293.0718688964844
+        },
+        {
+            "x": 308.33892822265627,
+            "y": 37.64706039428711,
+            "z": 300.60400390625
+        },
+        {
+            "x": 308.9534606933594,
+            "y": 37.64706039428711,
+            "z": 316.8757629394531
+        },
+        {
+            "x": 277.1084289550781,
+            "y": 50.460662841796878,
+            "z": 257.7796630859375
+        }
+    ]
 }

@@ -1,19 +1,129 @@
 {
     "name": "chunk 4 , 5",
     "chunkMesh": {
-        "instanceID": -59728
+        "instanceID": -140318
     },
     "material": {
-        "instanceID": 25828
+        "instanceID": 29018
     },
     "position": {
-        "x": 128.0,
+        "x": 256.0,
         "y": 0.0,
-        "z": 160.0
+        "z": 320.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
-    "objectMaterials": [],
-    "objectPos": []
+    "objectNames": [
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -140328
+        },
+        {
+            "instanceID": -140338
+        },
+        {
+            "instanceID": -140348
+        },
+        {
+            "instanceID": -140358
+        },
+        {
+            "instanceID": -140368
+        },
+        {
+            "instanceID": -140378
+        },
+        {
+            "instanceID": -140388
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 290.8525390625,
+            "y": 38.82352828979492,
+            "z": 322.9505615234375
+        },
+        {
+            "x": 308.5605163574219,
+            "y": 35.29411697387695,
+            "z": 332.8212890625
+        },
+        {
+            "x": 277.0254211425781,
+            "y": 35.29411697387695,
+            "z": 343.86993408203127
+        },
+        {
+            "x": 282.9757995605469,
+            "y": 38.431373596191409,
+            "z": 364.6014709472656
+        },
+        {
+            "x": 307.20538330078127,
+            "y": 36.47058868408203,
+            "z": 360.2257385253906
+        },
+        {
+            "x": 298.5743408203125,
+            "y": 41.960784912109378,
+            "z": 376.82269287109377
+        },
+        {
+            "x": 313.6860046386719,
+            "y": 41.960784912109378,
+            "z": 380.2542724609375
+        }
+    ]
 }

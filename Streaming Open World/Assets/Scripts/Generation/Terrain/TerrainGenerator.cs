@@ -19,15 +19,13 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private int serialisedChunkSize;
     [SerializeField] private int serialisedTerrainWidth;
     [SerializeField] private int serialisedTerrainHeight;
-
-    // Not serialised
-    public static int numberOfChunks;
-    public static int totalChunks;
-    public static int _chunkSize;
-    public static int _terrainWidth;
-    public static int _terrainHeight;
-    public static GameObject container;
-
+    
+    private static int _numberOfChunks;
+    private static int _totalChunks;
+    private static int _chunkSize;
+    private static int _terrainWidth;
+    private static int _terrainHeight;
+    private static GameObject _container;
     private static List<GameObject> _generatedChunks = new List<GameObject>();
     private static Mesh _mesh;
     private static Vector3[] _vertices;
@@ -44,7 +42,7 @@ public class TerrainGenerator : MonoBehaviour
     public static void GenerateMap(Texture2D heightMap, Material terrainMaterial, int chunkSize, int terrainWidth, int terrainHeight)
     {
         // Create chunk container 
-        container = new GameObject("Terrain");
+        _container = new GameObject("Terrain");
         
         // Remove previously existing terrain from list
         foreach (var chunk in _generatedChunks.ToArray())
@@ -63,16 +61,16 @@ public class TerrainGenerator : MonoBehaviour
         }
         
         // getter data
-        _chunkSize = chunkSize;
-        _terrainWidth = terrainWidth;
-        _terrainHeight = terrainHeight;
+        TerrainGenerator._chunkSize = chunkSize;
+        TerrainGenerator._terrainWidth = terrainWidth;
+        TerrainGenerator._terrainHeight = terrainHeight;
 
-        numberOfChunks = terrainWidth / chunkSize;
-        totalChunks = numberOfChunks * numberOfChunks;
+        _numberOfChunks = terrainWidth / chunkSize;
+        _totalChunks = _numberOfChunks * _numberOfChunks;
 
-        for (int x = 0; x < numberOfChunks; x++)
+        for (int x = 0; x < _numberOfChunks; x++)
         {
-            for (int z = 0; z < numberOfChunks; z++)
+            for (int z = 0; z < _numberOfChunks; z++)
             {
                 GameObject chunk = new GameObject("chunk " + x + " , " + z);
                 chunk.tag = "TerrainChunk";
@@ -104,6 +102,27 @@ public class TerrainGenerator : MonoBehaviour
                         newObj.AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[i];
                         newObj.transform.position = loadedData.objectPos[i];
                         newObj.transform.parent = chunk.transform;
+
+                        /*if (newObj.name == "Tree2(Clone)")
+                        {
+                            newObj.AddComponent<LOD>();
+                            //newObj.GetComponent<LOD>().lodMesh = new Mesh[3];
+                            //print("TreeLODMesh count: " + LODManager.instance.treeLODMeshes.Length);
+                            //for (int j = 0; j < LODManager.instance.treeLODMeshes.Length; j++)
+                            //{
+                                //newObj.GetComponent<LOD>().lodMesh[j] = loadedData.treeLODMeshes[j];
+                                //newObj.GetComponent<LOD>().lodMesh[j] = LODManager.instance.treeLODMeshes[j];
+                            //}
+                            newObj.GetComponent<LOD>().lodMesh = new Mesh[3];
+                            //print("TreeLODMesh count: " + LODManager.instance.treeLODMeshes.Length);
+                            //newObj.GetComponent<LOD>().lodMesh[0] = LODManager.instance.treeLODMeshes[0];
+                            //newObj.GetComponent<LOD>().lodMesh[1] = LODManager.instance.treeLODMeshes[1];
+                            //newObj.GetComponent<LOD>().lodMesh[2] = LODManager.instance.treeLODMeshes[2];
+                            newObj.GetComponent<LOD>().distanceLOD1   = 20;
+                            newObj.GetComponent<LOD>().distanceLOD2   = 40;
+                            //newObj.GetComponent<LOD>().updateInterval = 2;
+                        }*/
+                        
                         chunk.GetComponent<Chunk>().chunkObjects.Add(newObj);
                     }
                 }
@@ -114,8 +133,8 @@ public class TerrainGenerator : MonoBehaviour
 
                 UpdateMesh();
 
-                chunk.transform.parent = container.transform;
-                container.tag = "MainTerrain";
+                chunk.transform.parent = _container.transform;
+                _container.tag = "MainTerrain";
                 _generatedChunks.Add(chunk);
             }
         }

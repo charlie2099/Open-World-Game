@@ -1,19 +1,99 @@
 {
     "name": "chunk 3 , 5",
     "chunkMesh": {
-        "instanceID": -59518
+        "instanceID": -139994
     },
     "material": {
-        "instanceID": 25828
+        "instanceID": 29018
     },
     "position": {
-        "x": 96.0,
+        "x": 192.0,
         "y": 0.0,
-        "z": 160.0
+        "z": 320.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
-    "objectMaterials": [],
-    "objectPos": []
+    "objectNames": [
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Church(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -140004
+        },
+        {
+            "instanceID": -140014
+        },
+        {
+            "instanceID": -140024
+        },
+        {
+            "instanceID": -140034
+        },
+        {
+            "instanceID": -140044
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29024
+        },
+        {
+            "instanceID": 29028
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        },
+        {
+            "instanceID": 29022
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 232.22598266601563,
+            "y": 36.86274719238281,
+            "z": 352.3295593261719
+        },
+        {
+            "x": 231.23541259765626,
+            "y": 38.431373596191409,
+            "z": 327.62359619140627
+        },
+        {
+            "x": 206.92604064941407,
+            "y": 42.74509811401367,
+            "z": 381.0581970214844
+        },
+        {
+            "x": 248.30340576171876,
+            "y": 39.607845306396487,
+            "z": 374.074951171875
+        },
+        {
+            "x": 254.36851501464845,
+            "y": 36.47058868408203,
+            "z": 337.4013977050781
+        }
+    ]
 }

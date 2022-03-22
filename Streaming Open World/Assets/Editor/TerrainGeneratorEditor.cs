@@ -14,6 +14,7 @@ public class TerrainGeneratorEditor : EditorWindow
     /// Must sit inside the Editor folder.
     /// Anything inside the Editor folder will not be included in the build of the game.
     
+    // Terrain
     private Texture2D heightMap;
     private Material material;
     private int chunkSize        = 32;
@@ -28,7 +29,7 @@ public class TerrainGeneratorEditor : EditorWindow
 
     private void OnGUI()
     {
-        GUILayout.Label("Spawn Terrain Chunks", EditorStyles.boldLabel);
+        GUILayout.Label("Terrain Customisation", EditorStyles.boldLabel);
         
         heightMap     = EditorGUILayout.ObjectField("Heightmap", heightMap, typeof(Texture2D), false) as Texture2D;
         material      = EditorGUILayout.ObjectField("Material", material, typeof(Material), false) as Material;

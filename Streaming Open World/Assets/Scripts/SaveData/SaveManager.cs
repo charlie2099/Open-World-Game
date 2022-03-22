@@ -23,6 +23,9 @@ public class SaveManager : MonoBehaviour
         public Mesh[] objectMeshes;
         public Material[] objectMaterials;
         public Vector3[] objectPos;
+        
+        // LOD
+        //public Mesh[] treeLODMeshes;
     }
 
     public class TerrainData
@@ -31,7 +34,7 @@ public class SaveManager : MonoBehaviour
         public int terrainWidth;
         public int terrainHeight;
     }
-    
+
     private static string _jsonFile;
 
     public static void LoadChunk(GameObject chunk)
