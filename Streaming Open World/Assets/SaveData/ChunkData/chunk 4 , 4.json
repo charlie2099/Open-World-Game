@@ -1,10 +1,10 @@
 {
     "name": "chunk 4 , 4",
     "chunkMesh": {
-        "instanceID": -149960
+        "instanceID": -6714
     },
     "material": {
-        "instanceID": -149962
+        "instanceID": -6716
     },
     "position": {
         "x": 256.0,
@@ -13,98 +13,53 @@
     },
     "objectNames": [
         "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
         "Tree2(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -149972
+            "instanceID": -6726
         },
         {
-            "instanceID": -149984
-        },
-        {
-            "instanceID": -149996
-        },
-        {
-            "instanceID": -150008
-        },
-        {
-            "instanceID": -150020
+            "instanceID": -6738
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 23904
+            "instanceID": 25494
         },
         {
-            "instanceID": 23904
-        },
-        {
-            "instanceID": 23904
-        },
-        {
-            "instanceID": 23904
-        },
-        {
-            "instanceID": 23904
+            "instanceID": 25494
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": 23908
+            "instanceID": 25486
         },
         {
-            "instanceID": 23908
-        },
-        {
-            "instanceID": 23908
-        },
-        {
-            "instanceID": 23908
-        },
-        {
-            "instanceID": 23908
+            "instanceID": 25486
         }
     ],
     "objectPos": [
         {
-            "x": 313.79827880859377,
-            "y": 36.7078971862793,
-            "z": 300.73077392578127
+            "x": 314.7252197265625,
+            "y": 36.47058868408203,
+            "z": 310.3154296875
         },
         {
-            "x": 298.0314025878906,
-            "y": 39.66838073730469,
-            "z": 264.9171447753906
-        },
-        {
-            "x": 295.3692932128906,
-            "y": 41.52632522583008,
-            "z": 296.7729187011719
-        },
-        {
-            "x": 304.6160888671875,
-            "y": 38.431373596191409,
-            "z": 290.6979675292969
-        },
-        {
-            "x": 311.90069580078127,
-            "y": 37.64706039428711,
-            "z": 310.6913146972656
+            "x": 309.0224914550781,
+            "y": 37.647056579589847,
+            "z": 286.0214538574219
         }
     ],
     "treeLODMeshes": [
         {
-            "instanceID": 25916
+            "instanceID": 25506
         },
         {
-            "instanceID": 25948
+            "instanceID": 25508
         },
         {
-            "instanceID": 25964
+            "instanceID": 25510
         }
     ]
 }

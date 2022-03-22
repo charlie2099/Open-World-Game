@@ -1,10 +1,10 @@
 {
     "name": "chunk 5 , 4",
     "chunkMesh": {
-        "instanceID": -150244
+        "instanceID": -6914
     },
     "material": {
-        "instanceID": -150246
+        "instanceID": -6916
     },
     "position": {
         "x": 320.0,
@@ -12,69 +12,39 @@
         "z": 256.0
     },
     "objectNames": [
-        "Tree2(Clone)",
-        "Tree2(Clone)",
         "Tree2(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -150256
-        },
-        {
-            "instanceID": -150268
-        },
-        {
-            "instanceID": -150280
+            "instanceID": -6926
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 23904
-        },
-        {
-            "instanceID": 23904
-        },
-        {
-            "instanceID": 23904
+            "instanceID": 25494
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": 23908
-        },
-        {
-            "instanceID": 23908
-        },
-        {
-            "instanceID": 23908
+            "instanceID": 25486
         }
     ],
     "objectPos": [
         {
-            "x": 338.78271484375,
-            "y": 41.705162048339847,
-            "z": 284.5021057128906
-        },
-        {
-            "x": 330.8976135253906,
-            "y": 35.29411697387695,
-            "z": 310.37103271484377
-        },
-        {
-            "x": 327.064453125,
-            "y": 45.195308685302737,
-            "z": 256.9602966308594
+            "x": 320.8591003417969,
+            "y": 36.47058868408203,
+            "z": 298.82379150390627
         }
     ],
     "treeLODMeshes": [
         {
-            "instanceID": 25916
+            "instanceID": 25506
         },
         {
-            "instanceID": 25948
+            "instanceID": 25508
         },
         {
-            "instanceID": 25964
+            "instanceID": 25510
         }
     ]
 }

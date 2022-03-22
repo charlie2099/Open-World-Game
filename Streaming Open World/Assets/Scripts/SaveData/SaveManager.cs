@@ -41,7 +41,6 @@ public class SaveManager : MonoBehaviour
     { 
         string path = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
         ChunkData loadedData = JsonUtility.FromJson<ChunkData>(File.ReadAllText(path));
-        //Mesh chunkMesh = new Mesh();
 
         chunk.AddComponent<MeshFilter>().sharedMesh = loadedData.chunkMesh;
         chunk.AddComponent<MeshRenderer>().sharedMaterial = loadedData.material;
@@ -54,19 +53,33 @@ public class SaveManager : MonoBehaviour
             GameObject newObj = new GameObject(loadedData.objectNames[i]);
             newObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
             newObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
-            newObj.AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[i];
+            
+            if (loadedData.objectNames[i] == "Tree2(Clone)")
+            {
+                newObj.AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[i];
+                newObj.transform.localScale = new Vector3(2, 2, 2);
+            }
+            
             newObj.transform.position = loadedData.objectPos[i];
             newObj.transform.parent = chunk.transform;
+            
+            if (loadedData.objectNames[i] == "Tree2(Clone)")
+            {
+                newObj.AddComponent<LOD>();
+                newObj.GetComponent<LOD>().lodMesh = new Mesh[3];
+                for (int j = 0; j < newObj.GetComponent<LOD>().lodMesh.Length; j++)
+                {
+                    newObj.GetComponent<LOD>().lodMesh[j] = loadedData.treeLODMeshes[j];
+                }
+                newObj.GetComponent<LOD>().distanceLOD1   = 30;
+                newObj.GetComponent<LOD>().distanceLOD2   = 50;
+                newObj.GetComponent<LOD>().updateInterval = 2;
+            }
+            
             chunk.GetComponent<Chunk>().chunkObjects.Add(newObj);
         }
         
         chunk.transform.position = loadedData.position;
-
-        /*chunkMesh.Clear();
-        chunkMesh.vertices = loadedData.chunkMesh.vertices;
-        chunkMesh.triangles = loadedData.chunkMesh.triangles;
-        chunkMesh.RecalculateNormals();
-        chunkMesh.RecalculateBounds();*/
 
         chunk.GetComponent<Chunk>().isLoaded = true;
         chunk.tag = "TerrainChunk";
@@ -89,6 +102,8 @@ public class SaveManager : MonoBehaviour
         newChunkData.objectPos          = new Vector3[newChunkData.objects.Count];
         newChunkData.objectMeshes       = new Mesh[newChunkData.objects.Count];
         newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
+        newChunkData.treeLODMeshes      = new Mesh[3];
+        
         for (int i = 0; i < newChunkData.objects.Count; i++)
         {
             if (newChunkData.objectPos != null)
@@ -97,6 +112,15 @@ public class SaveManager : MonoBehaviour
                 newChunkData.objectMeshes[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshFilter>().sharedMesh;
                 newChunkData.objectMaterials[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshRenderer>().sharedMaterial;
                 newChunkData.objectPos[i] = chunk.GetComponent<Chunk>().chunkObjects[i].transform.position;
+                
+                // Objects with LOD components
+                if (chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>() != null)
+                {
+                    for (int j = 0; j < chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>().lodMesh.Length; j++)
+                    {
+                        newChunkData.treeLODMeshes[j] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>().lodMesh[j];
+                    }
+                }
             }
         }
         
@@ -162,6 +186,7 @@ public class SaveManager : MonoBehaviour
                     newChunkData.objectMaterials[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshRenderer>().sharedMaterial;
                     newChunkData.objectPos[i]       = chunk.GetComponent<Chunk>().chunkObjects[i].transform.position;
 
+                    // Objects with LOD components
                     if (chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>() != null)
                     {
                         for (int j = 0; j < chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>().lodMesh.Length; j++)

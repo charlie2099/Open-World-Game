@@ -100,45 +100,28 @@ public class TerrainGenerator : MonoBehaviour
                         GameObject chunkObj = new GameObject(loadedData.objectNames[i]);
                         chunkObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
                         chunkObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
-                        chunkObj.AddComponent<MeshCollider>().sharedMesh     = loadedData.objectMeshes[i];
+
+                        if (loadedData.objectNames[i] == "Tree2(Clone)")
+                        {
+                            chunkObj.AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[i];
+                            chunkObj.transform.localScale = new Vector3(2, 2, 2);
+                        }
+                        
                         chunkObj.transform.position = loadedData.objectPos[i];
                         chunkObj.transform.parent = chunk.transform;
-
-                        // DOES THIS FOR ALL OBJECTS INCLUDING HOUSES
-                        chunkObj.AddComponent<LOD>();
-                        chunkObj.GetComponent<LOD>().lodMesh = new Mesh[3];
-                        for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)
+                        
+                        if (loadedData.objectNames[i] == "Tree2(Clone)")
                         {
-                            chunkObj.GetComponent<LOD>().lodMesh[j] = loadedData.treeLODMeshes[j];
+                            chunkObj.AddComponent<LOD>();
+                            chunkObj.GetComponent<LOD>().lodMesh = new Mesh[3];
+                            for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)
+                            {
+                                chunkObj.GetComponent<LOD>().lodMesh[j] = loadedData.treeLODMeshes[j];
+                            }
+                            chunkObj.GetComponent<LOD>().distanceLOD1   = 30;
+                            chunkObj.GetComponent<LOD>().distanceLOD2   = 50;
+                            chunkObj.GetComponent<LOD>().updateInterval = 2;
                         }
-                        chunkObj.GetComponent<LOD>().distanceLOD1   = 30;
-                        chunkObj.GetComponent<LOD>().distanceLOD2   = 50;
-                        chunkObj.GetComponent<LOD>().updateInterval = 2;
-                        
-                        
-
-                        //Debug.Log($"Test: {i}");
-
-                        /*if (newObj.name == "Tree2(Clone)")
-                        {
-                            newObj.AddComponent<LOD>();
-                            //newObj.GetComponent<LOD>().lodMesh = new Mesh[3];
-                            //print("TreeLODMesh count: " + LODManager.instance.treeLODMeshes.Length);
-                            //for (int j = 0; j < LODManager.instance.treeLODMeshes.Length; j++)
-                            //{
-                                //newObj.GetComponent<LOD>().lodMesh[j] = loadedData.treeLODMeshes[j];
-                                //newObj.GetComponent<LOD>().lodMesh[j] = LODManager.instance.treeLODMeshes[j];
-                            //}
-                            newObj.GetComponent<LOD>().lodMesh = new Mesh[3];
-                            //print("TreeLODMesh count: " + LODManager.instance.treeLODMeshes.Length);
-                            //newObj.GetComponent<LOD>().lodMesh[0] = LODManager.instance.treeLODMeshes[0];
-                            //newObj.GetComponent<LOD>().lodMesh[1] = LODManager.instance.treeLODMeshes[1];
-                            //newObj.GetComponent<LOD>().lodMesh[2] = LODManager.instance.treeLODMeshes[2];
-                            newObj.GetComponent<LOD>().distanceLOD1   = 20;
-                            newObj.GetComponent<LOD>().distanceLOD2   = 40;
-                            //newObj.GetComponent<LOD>().updateInterval = 2;
-                        }*/
-                        
                         chunk.GetComponent<Chunk>().chunkObjects.Add(chunkObj);
                     }
                 }

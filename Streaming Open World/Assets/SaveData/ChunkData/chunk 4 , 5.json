@@ -1,95 +1,30 @@
 {
     "name": "chunk 4 , 5",
     "chunkMesh": {
-        "instanceID": -150036
+        "instanceID": -6754
     },
     "material": {
-        "instanceID": -150038
+        "instanceID": -6756
     },
     "position": {
         "x": 256.0,
         "y": 0.0,
         "z": 320.0
     },
-    "objectNames": [
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)"
-    ],
-    "objects": [
-        {
-            "instanceID": -150048
-        },
-        {
-            "instanceID": -150060
-        },
-        {
-            "instanceID": -150072
-        },
-        {
-            "instanceID": -150084
-        }
-    ],
-    "objectMeshes": [
-        {
-            "instanceID": 23904
-        },
-        {
-            "instanceID": 23904
-        },
-        {
-            "instanceID": 23904
-        },
-        {
-            "instanceID": 23904
-        }
-    ],
-    "objectMaterials": [
-        {
-            "instanceID": 23908
-        },
-        {
-            "instanceID": 23908
-        },
-        {
-            "instanceID": 23908
-        },
-        {
-            "instanceID": 23908
-        }
-    ],
-    "objectPos": [
-        {
-            "x": 283.98614501953127,
-            "y": 38.431373596191409,
-            "z": 323.357666015625
-        },
-        {
-            "x": 283.8107604980469,
-            "y": 40.2462043762207,
-            "z": 375.6278076171875
-        },
-        {
-            "x": 299.2682800292969,
-            "y": 35.083709716796878,
-            "z": 352.3861999511719
-        },
-        {
-            "x": 316.4088134765625,
-            "y": 38.82352828979492,
-            "z": 372.5648193359375
-        }
-    ],
+    "objectNames": [],
+    "objects": [],
+    "objectMeshes": [],
+    "objectMaterials": [],
+    "objectPos": [],
     "treeLODMeshes": [
         {
-            "instanceID": 25916
+            "instanceID": 0
         },
         {
-            "instanceID": 25948
+            "instanceID": 0
         },
         {
-            "instanceID": 25964
+            "instanceID": 0
         }
     ]
 }
