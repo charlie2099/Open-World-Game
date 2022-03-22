@@ -25,7 +25,7 @@ public class SaveManager : MonoBehaviour
         public Vector3[] objectPos;
         
         // LOD
-        //public Mesh[] treeLODMeshes;
+        public Mesh[] treeLODMeshes;
     }
 
     public class TerrainData
@@ -150,17 +150,25 @@ public class SaveManager : MonoBehaviour
             newChunkData.objectPos          = new Vector3[newChunkData.objects.Count];
             newChunkData.objectMeshes       = new Mesh[newChunkData.objects.Count];
             newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
-            
-            print("Object Size: " + newChunkData.objects.Count);
+            newChunkData.treeLODMeshes      = new Mesh[3];
 
+            // All objects (trees, houses)
             for (int i = 0; i < newChunkData.objects.Count; i++)
             {
                 if (newChunkData.objectPos != null)
                 {
-                    newChunkData.objectNames[i] = chunk.GetComponent<Chunk>().chunkObjects[i].name;
-                    newChunkData.objectMeshes[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshFilter>().sharedMesh;
+                    newChunkData.objectNames[i]     = chunk.GetComponent<Chunk>().chunkObjects[i].name;
+                    newChunkData.objectMeshes[i]    = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshFilter>().sharedMesh;
                     newChunkData.objectMaterials[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshRenderer>().sharedMaterial;
-                    newChunkData.objectPos[i] = chunk.GetComponent<Chunk>().chunkObjects[i].transform.position;
+                    newChunkData.objectPos[i]       = chunk.GetComponent<Chunk>().chunkObjects[i].transform.position;
+
+                    if (chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>() != null)
+                    {
+                        for (int j = 0; j < chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>().lodMesh.Length; j++)
+                        {
+                            newChunkData.treeLODMeshes[j] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>().lodMesh[j];
+                        }
+                    }
                 }
             }
 

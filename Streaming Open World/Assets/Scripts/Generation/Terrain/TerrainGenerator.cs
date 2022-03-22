@@ -61,9 +61,9 @@ public class TerrainGenerator : MonoBehaviour
         }
         
         // getter data
-        TerrainGenerator._chunkSize = chunkSize;
-        TerrainGenerator._terrainWidth = terrainWidth;
-        TerrainGenerator._terrainHeight = terrainHeight;
+        _chunkSize = chunkSize;
+        _terrainWidth = terrainWidth;
+        _terrainHeight = terrainHeight;
 
         _numberOfChunks = terrainWidth / chunkSize;
         _totalChunks = _numberOfChunks * _numberOfChunks;
@@ -76,11 +76,12 @@ public class TerrainGenerator : MonoBehaviour
                 chunk.tag = "TerrainChunk";
                 
                 _mesh = new Mesh();
+                Material testMaterial = new Material(terrainMaterial);
 
                 CreateMesh(heightMap, chunkSize, terrainHeight,x * chunkSize, z * chunkSize);
                 
                 chunk.AddComponent<MeshFilter>().sharedMesh = _mesh;
-                chunk.AddComponent<MeshRenderer>().sharedMaterial = terrainMaterial;
+                chunk.AddComponent<MeshRenderer>().sharedMaterial = testMaterial;
                 chunk.AddComponent<MeshCollider>().sharedMesh = _mesh;
                 chunk.AddComponent<Chunk>().isLoaded = true;
                 
@@ -88,20 +89,35 @@ public class TerrainGenerator : MonoBehaviour
                 if (File.Exists(chunkPath))
                 {
                     SaveManager.ChunkData loadedData = JsonUtility.FromJson<SaveManager.ChunkData>(File.ReadAllText(chunkPath));
-                    chunk.GetComponent<MeshRenderer>().sharedMaterial = loadedData.material;
+                    chunk.GetComponent<MeshRenderer>().sharedMaterial = testMaterial;
                     chunk.transform.position = loadedData.position;
                     
-                    print("loaded chunk (" + x + " , " + z + ") obj count: " + loadedData.objects.Count);
+                    //print("loaded chunk (" + x + " , " + z + ") obj count: " + loadedData.objects.Count);
                     
                     // Load terrain objects in each chunk 
                     for (int i = 0; i < loadedData.objects.Count; i++)
                     {
-                        GameObject newObj = new GameObject(loadedData.objectNames[i]);
-                        newObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
-                        newObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
-                        newObj.AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[i];
-                        newObj.transform.position = loadedData.objectPos[i];
-                        newObj.transform.parent = chunk.transform;
+                        GameObject chunkObj = new GameObject(loadedData.objectNames[i]);
+                        chunkObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
+                        chunkObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
+                        chunkObj.AddComponent<MeshCollider>().sharedMesh     = loadedData.objectMeshes[i];
+                        chunkObj.transform.position = loadedData.objectPos[i];
+                        chunkObj.transform.parent = chunk.transform;
+
+                        // DOES THIS FOR ALL OBJECTS INCLUDING HOUSES
+                        chunkObj.AddComponent<LOD>();
+                        chunkObj.GetComponent<LOD>().lodMesh = new Mesh[3];
+                        for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)
+                        {
+                            chunkObj.GetComponent<LOD>().lodMesh[j] = loadedData.treeLODMeshes[j];
+                        }
+                        chunkObj.GetComponent<LOD>().distanceLOD1   = 30;
+                        chunkObj.GetComponent<LOD>().distanceLOD2   = 50;
+                        chunkObj.GetComponent<LOD>().updateInterval = 2;
+                        
+                        
+
+                        //Debug.Log($"Test: {i}");
 
                         /*if (newObj.name == "Tree2(Clone)")
                         {
@@ -123,7 +139,7 @@ public class TerrainGenerator : MonoBehaviour
                             //newObj.GetComponent<LOD>().updateInterval = 2;
                         }*/
                         
-                        chunk.GetComponent<Chunk>().chunkObjects.Add(newObj);
+                        chunk.GetComponent<Chunk>().chunkObjects.Add(chunkObj);
                     }
                 }
                 else

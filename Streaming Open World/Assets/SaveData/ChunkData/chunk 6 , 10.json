@@ -1,10 +1,10 @@
 {
     "name": "chunk 6 , 10",
     "chunkMesh": {
-        "instanceID": -140956
+        "instanceID": -150576
     },
     "material": {
-        "instanceID": 29018
+        "instanceID": -150578
     },
     "position": {
         "x": 384.0,
@@ -15,5 +15,16 @@
     "objects": [],
     "objectMeshes": [],
     "objectMaterials": [],
-    "objectPos": []
+    "objectPos": [],
+    "treeLODMeshes": [
+        {
+            "instanceID": 0
+        },
+        {
+            "instanceID": 0
+        },
+        {
+            "instanceID": 0
+        }
+    ]
 }

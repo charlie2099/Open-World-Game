@@ -1,10 +1,10 @@
 {
     "name": "chunk 4 , 3",
     "chunkMesh": {
-        "instanceID": -140190
+        "instanceID": -149920
     },
     "material": {
-        "instanceID": 29018
+        "instanceID": -149922
     },
     "position": {
         "x": 256.0,
@@ -13,72 +13,53 @@
     },
     "objectNames": [
         "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
         "Tree2(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -140200
+            "instanceID": -149932
         },
         {
-            "instanceID": -140210
-        },
-        {
-            "instanceID": -140220
-        },
-        {
-            "instanceID": -140230
+            "instanceID": -149944
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 29024
+            "instanceID": 23904
         },
         {
-            "instanceID": 29024
-        },
-        {
-            "instanceID": 29024
-        },
-        {
-            "instanceID": 29024
+            "instanceID": 23904
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": 29022
+            "instanceID": 23908
         },
         {
-            "instanceID": 29022
-        },
-        {
-            "instanceID": 29022
-        },
-        {
-            "instanceID": 29022
+            "instanceID": 23908
         }
     ],
     "objectPos": [
         {
-            "x": 297.3544006347656,
-            "y": 44.681095123291019,
-            "z": 247.93817138671876
+            "x": 299.3405456542969,
+            "y": 50.08291244506836,
+            "z": 224.31600952148438
         },
         {
-            "x": 315.3378601074219,
-            "y": 45.882354736328128,
-            "z": 253.79429626464845
+            "x": 278.4913330078125,
+            "y": 50.58823776245117,
+            "z": 238.35372924804688
+        }
+    ],
+    "treeLODMeshes": [
+        {
+            "instanceID": 25916
         },
         {
-            "x": 285.77593994140627,
-            "y": 49.411766052246097,
-            "z": 225.63844299316407
+            "instanceID": 25948
         },
         {
-            "x": 307.7279968261719,
-            "y": 52.427303314208987,
-            "z": 219.922119140625
+            "instanceID": 25964
         }
     ]
 }

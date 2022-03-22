@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4667548548789791484}
   - component: {fileID: 4675306905837152404}
   - component: {fileID: 4635393011481536508}
+  - component: {fileID: 1685567246950957755}
   m_Layer: 0
   m_Name: Tree2
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4662983704977375704}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 610.0149, y: 27.23, z: 487.28217}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
@@ -97,3 +98,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43243102622818808, guid: 6fad61d5188818841bc2b086726ea05a, type: 2}
+--- !u!114 &1685567246950957755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662983704977375704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd7505ea3c6f1bc4f87959f5062d7180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lodMesh:
+  - {fileID: 7381432648153889556, guid: 4ecbaa2f83caf7b4b9c0c0d42cc05b27, type: 3}
+  - {fileID: 7381432648153889556, guid: 72ceba2cf48f09f46b2f124bf7913942, type: 3}
+  - {fileID: 7381432648153889556, guid: fc562c1135686444082eca928f39ac54, type: 3}
+  distanceLOD1: 30
+  distanceLOD2: 50
+  updateInterval: 2
+  currentLOD: 0
