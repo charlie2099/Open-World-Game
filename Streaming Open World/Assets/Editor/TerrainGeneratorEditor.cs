@@ -1,7 +1,8 @@
 using System;
 using System.IO;
 using Codice.Client.BaseCommands;
-using Generation.Terrain;
+using Chilli.Terrain;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
 
@@ -18,7 +19,7 @@ public class TerrainGeneratorEditor : EditorWindow
     private int chunkSize        = 32;
     private int terrainWidth     = 500;
     private int terrainHeight    = 100;
-    
+
     // Terrain Objects
     private static bool _activeAssigner;
     private static bool _activeDeassigner;

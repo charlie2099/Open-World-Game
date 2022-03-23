@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-namespace Generation.Terrain
+namespace Chilli.Terrain
 {
     /// <summary>
     /// Generates a chunked terrain and reads chunk data from file should it exist.

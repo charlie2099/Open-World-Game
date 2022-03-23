@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Generation.Terrain
+namespace Chilli.Terrain
 {
     /// <summary>
     /// Handles loading and unloading of chunks based on the distance between the player and
