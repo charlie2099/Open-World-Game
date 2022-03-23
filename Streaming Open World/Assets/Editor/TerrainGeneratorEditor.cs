@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Codice.Client.BaseCommands;
+using Generation.Terrain;
 using UnityEngine;
 using UnityEditor;
 
@@ -62,7 +63,7 @@ public class TerrainGeneratorEditor : EditorWindow
         else if (GUILayout.Button("Destroy active terrain", buttonStyle))
         {
             DestroyActiveTerrain();
-            Debug.Log("<color=red> Active terrain has been destroyed! </color>");
+            Debug.Log("<color=orange> Active terrain has been destroyed! </color>");
         }
         
         GUILayout.Space(25);

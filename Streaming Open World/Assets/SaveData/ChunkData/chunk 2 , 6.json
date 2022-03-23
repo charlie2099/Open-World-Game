@@ -1,10 +1,10 @@
 {
     "name": "chunk 2 , 6",
     "chunkMesh": {
-        "instanceID": -27248
+        "instanceID": -39342
     },
     "material": {
-        "instanceID": -27250
+        "instanceID": -39344
     },
     "position": {
         "x": 128.0,
@@ -16,6 +16,9 @@
     "objectMeshes": [],
     "objectMaterials": [],
     "objectPos": [],
+    "spawnerPrefab": {
+        "instanceID": 0
+    },
     "treeLODMeshes": [
         {
             "instanceID": 0

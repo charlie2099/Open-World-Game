@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Generation.Terrain;
 using Unity.VisualScripting;
 using UnityEngine;
+using Object = System.Object;
 
 /// <summary>
 /// Saves chunk data, terrain data, and npc data to json files.
@@ -13,16 +15,21 @@ public class SaveManager : MonoBehaviour
 {
     public class ChunkData
     {
+        // Chunk
         public string name;
         public Mesh chunkMesh;
         public Material material;
         public Vector3 position;
 
+        // Chunk objects
         public string[] objectNames;
         public List<GameObject> objects; // don't write gameobjects to file?
         public Mesh[] objectMeshes;
         public Material[] objectMaterials;
         public Vector3[] objectPos;
+        
+        // Spawners
+        public GameObject spawnerPrefab;
         
         // LOD
         public Mesh[] treeLODMeshes;
@@ -41,30 +48,30 @@ public class SaveManager : MonoBehaviour
     { 
         string path = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
         ChunkData loadedData = JsonUtility.FromJson<ChunkData>(File.ReadAllText(path));
-
         chunk.AddComponent<MeshFilter>().sharedMesh = loadedData.chunkMesh;
         chunk.AddComponent<MeshRenderer>().sharedMaterial = loadedData.material;
         chunk.AddComponent<MeshCollider>().sharedMesh = loadedData.chunkMesh;
         //chunk.AddComponent<Chunk>();
         
-        // Load chunk terrain objects 
-        for (int i = 0; i < loadedData.objects.Count; i++)
+        // Load chunk objects 
+        for (int i = 0; i < loadedData.objects.Count; i++) // TODO: Clean this mess up!
         {
             GameObject newObj = new GameObject(loadedData.objectNames[i]);
-            newObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
-            newObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
-            
+
+            if (loadedData.objectNames[i] != "EnemySpawner(Clone)")
+            {
+                newObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
+                newObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
+            }
+
+            if (loadedData.objectNames[i] == "EnemySpawner(Clone)")
+            {
+                newObj.AddComponent<EnemySpawner>().enemyPrefab = loadedData.spawnerPrefab;
+            }
+
             if (loadedData.objectNames[i] == "Tree2(Clone)")
             {
                 newObj.AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[i];
-                newObj.transform.localScale = new Vector3(2, 2, 2);
-            }
-            
-            newObj.transform.position = loadedData.objectPos[i];
-            newObj.transform.parent = chunk.transform;
-            
-            if (loadedData.objectNames[i] == "Tree2(Clone)")
-            {
                 newObj.AddComponent<LOD>();
                 newObj.GetComponent<LOD>().lodMesh = new Mesh[3];
                 for (int j = 0; j < newObj.GetComponent<LOD>().lodMesh.Length; j++)
@@ -74,8 +81,12 @@ public class SaveManager : MonoBehaviour
                 newObj.GetComponent<LOD>().distanceLOD1   = 30;
                 newObj.GetComponent<LOD>().distanceLOD2   = 50;
                 newObj.GetComponent<LOD>().updateInterval = 2;
+                newObj.transform.localScale = new Vector3(2, 2, 2);
             }
             
+            newObj.transform.position = loadedData.objectPos[i];
+            newObj.transform.parent = chunk.transform;
+
             chunk.GetComponent<Chunk>().chunkObjects.Add(newObj);
         }
         
@@ -103,15 +114,23 @@ public class SaveManager : MonoBehaviour
         newChunkData.objectMeshes       = new Mesh[newChunkData.objects.Count];
         newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
         newChunkData.treeLODMeshes      = new Mesh[3];
+        //newChunkData.spawnerPrefab      = new GameObject();
         
         for (int i = 0; i < newChunkData.objects.Count; i++)
         {
             if (newChunkData.objectPos != null)
             {
-                newChunkData.objectNames[i] = chunk.GetComponent<Chunk>().chunkObjects[i].name;
-                newChunkData.objectMeshes[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshFilter>().sharedMesh;
-                newChunkData.objectMaterials[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshRenderer>().sharedMaterial;
-                newChunkData.objectPos[i] = chunk.GetComponent<Chunk>().chunkObjects[i].transform.position;
+                var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];
+                newChunkData.objectNames[i]     = chunkObj.name;
+                newChunkData.objectMeshes[i]    = chunkObj.GetComponent<MeshFilter>().sharedMesh;
+                newChunkData.objectMaterials[i] = chunkObj.GetComponent<MeshRenderer>().sharedMaterial;
+                newChunkData.objectPos[i]       = chunkObj.transform.position;
+                
+                // Spawners
+                if (chunkObj.GetComponent<EnemySpawner>() != null)
+                {
+                    newChunkData.spawnerPrefab = chunkObj.GetComponent<EnemySpawner>().enemyPrefab;
+                }
                 
                 // Objects with LOD components
                 if (chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>() != null)
@@ -176,22 +195,37 @@ public class SaveManager : MonoBehaviour
             newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
             newChunkData.treeLODMeshes      = new Mesh[3];
 
-            // All objects (trees, houses)
+            // All objects (trees, houses, spawners)
             for (int i = 0; i < newChunkData.objects.Count; i++)
             {
                 if (newChunkData.objectPos != null)
                 {
-                    newChunkData.objectNames[i]     = chunk.GetComponent<Chunk>().chunkObjects[i].name;
-                    newChunkData.objectMeshes[i]    = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshFilter>().sharedMesh;
-                    newChunkData.objectMaterials[i] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<MeshRenderer>().sharedMaterial;
-                    newChunkData.objectPos[i]       = chunk.GetComponent<Chunk>().chunkObjects[i].transform.position;
+                    var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];
+                    newChunkData.objectNames[i]     = chunkObj.name;
+                    newChunkData.objectPos[i]       = chunkObj.transform.position;
+
+                    if (chunkObj.GetComponent<MeshFilter>() != null)
+                    {
+                        newChunkData.objectMeshes[i]    = chunkObj.GetComponent<MeshFilter>().sharedMesh;
+                    }
+
+                    if (chunkObj.GetComponent<MeshRenderer>() != null)
+                    {
+                        newChunkData.objectMaterials[i] = chunkObj.GetComponent<MeshRenderer>().sharedMaterial; 
+                    }
+                    
+                    // Spawners
+                    if (chunkObj.GetComponent<EnemySpawner>() != null)
+                    {
+                        newChunkData.spawnerPrefab = chunkObj.GetComponent<EnemySpawner>().enemyPrefab;
+                    }
 
                     // Objects with LOD components
-                    if (chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>() != null)
+                    if (chunkObj.GetComponent<LOD>() != null)
                     {
-                        for (int j = 0; j < chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>().lodMesh.Length; j++)
+                        for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)
                         {
-                            newChunkData.treeLODMeshes[j] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>().lodMesh[j];
+                            newChunkData.treeLODMeshes[j] = chunkObj.GetComponent<LOD>().lodMesh[j];
                         }
                     }
                 }
