@@ -1,158 +1,33 @@
 {
     "name": "chunk 3 , 6",
     "chunkMesh": {
-        "instanceID": -675866
+        "instanceID": -153590
     },
     "material": {
-        "instanceID": -675868
+        "instanceID": -153592
     },
     "position": {
         "x": 192.0,
         "y": 0.0,
         "z": 384.0
     },
-    "objectNames": [
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)"
-    ],
-    "objects": [
-        {
-            "instanceID": -675878
-        },
-        {
-            "instanceID": -675890
-        },
-        {
-            "instanceID": -675902
-        },
-        {
-            "instanceID": -675914
-        },
-        {
-            "instanceID": -675926
-        },
-        {
-            "instanceID": -675938
-        },
-        {
-            "instanceID": -675950
-        },
-        {
-            "instanceID": -675962
-        }
-    ],
-    "objectMeshes": [
-        {
-            "instanceID": 95688
-        },
-        {
-            "instanceID": 95688
-        },
-        {
-            "instanceID": 95688
-        },
-        {
-            "instanceID": 95688
-        },
-        {
-            "instanceID": 95688
-        },
-        {
-            "instanceID": 95688
-        },
-        {
-            "instanceID": 95688
-        },
-        {
-            "instanceID": 95688
-        }
-    ],
-    "objectMaterials": [
-        {
-            "instanceID": 27866
-        },
-        {
-            "instanceID": 27866
-        },
-        {
-            "instanceID": 27866
-        },
-        {
-            "instanceID": 27866
-        },
-        {
-            "instanceID": 27866
-        },
-        {
-            "instanceID": 27866
-        },
-        {
-            "instanceID": 27866
-        },
-        {
-            "instanceID": 27866
-        }
-    ],
-    "objectPos": [
-        {
-            "x": 223.8939666748047,
-            "y": 41.960784912109378,
-            "z": 386.5657043457031
-        },
-        {
-            "x": 195.0844268798828,
-            "y": 51.30754089355469,
-            "z": 419.6395568847656
-        },
-        {
-            "x": 211.51478576660157,
-            "y": 45.47859573364258,
-            "z": 405.4520263671875
-        },
-        {
-            "x": 243.2662353515625,
-            "y": 41.35981369018555,
-            "z": 393.7395324707031
-        },
-        {
-            "x": 250.2925567626953,
-            "y": 41.960784912109378,
-            "z": 414.7796630859375
-        },
-        {
-            "x": 214.01296997070313,
-            "y": 47.043556213378909,
-            "z": 423.6706237792969
-        },
-        {
-            "x": 241.45811462402345,
-            "y": 43.13726043701172,
-            "z": 432.2962341308594
-        },
-        {
-            "x": 229.8863525390625,
-            "y": 43.13725280761719,
-            "z": 409.5154113769531
-        }
-    ],
+    "objectNames": [],
+    "objects": [],
+    "objectMeshes": [],
+    "objectMaterials": [],
+    "objectPos": [],
     "spawnerPrefab": {
         "instanceID": 0
     },
     "treeLODMeshes": [
         {
-            "instanceID": 95634
+            "instanceID": 0
         },
         {
-            "instanceID": 95670
+            "instanceID": 0
         },
         {
-            "instanceID": 95688
+            "instanceID": 0
         }
     ]
 }
