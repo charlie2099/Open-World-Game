@@ -12,16 +12,19 @@ public class ThirdPersonShooterController : MonoBehaviour
     [SerializeField] private float normalSensitivity;
     [SerializeField] private float aimSensitivity;
     [SerializeField] private LayerMask aimColliderLayerMask;
-    [SerializeField] private Transform debugTransform;
-    [SerializeField] private Transform vfxHitEffect;
+    [SerializeField] private Transform bloodSplatterHitEffect;
+    [SerializeField] private Transform muzzleFlash;
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
+    private List<GameObject> bloodSplatterEffectsList = new List<GameObject>();
+    private Animator animator;
 
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -33,16 +36,16 @@ public class ThirdPersonShooterController : MonoBehaviour
         Transform hitTransform = null;
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
         {
-            debugTransform.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
             hitTransform = raycastHit.transform;
         }
         
-        if (starterAssetsInputs.aim)
+        if (starterAssetsInputs.aim) // Right mouse click
         {
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity);
             thirdPersonController.SetRotateOnMove(false);
+            animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1.0f, Time.deltaTime * 10.0f));
 
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
@@ -55,24 +58,30 @@ public class ThirdPersonShooterController : MonoBehaviour
             aimVirtualCamera.gameObject.SetActive(false);
             thirdPersonController.SetSensitivity(normalSensitivity);
             thirdPersonController.SetRotateOnMove(true);
+            animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0.0f, Time.deltaTime * 10.0f));
         }
 
-        if (starterAssetsInputs.shoot)
+        if (starterAssetsInputs.shoot) // Left mouse click
         {
             if (hitTransform != null)
             {
+                StartCoroutine(PlayMuzzleFlashEffect());
+                
                 if (hitTransform.GetComponent<Zombie>() != null)
                 {
-                    // zombie hit effect + damage
+                    Transform effect = Instantiate(bloodSplatterHitEffect, mouseWorldPosition, hitTransform.rotation * new Quaternion(180,0,180,0));
+                    bloodSplatterEffectsList.Add(effect.gameObject);
                 }
-                else
-                {
-                    // didn't hit zombie
-                }
-
-                Instantiate(vfxHitEffect, mouseWorldPosition, Quaternion.identity);
-                // muzzle flash effect 
             }
+            
+            starterAssetsInputs.shoot = false;
         }
+    }
+
+    private IEnumerator PlayMuzzleFlashEffect()
+    {
+        muzzleFlash.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        muzzleFlash.gameObject.SetActive(false);
     }
 }
