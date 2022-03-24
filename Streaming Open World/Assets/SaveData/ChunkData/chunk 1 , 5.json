@@ -1,33 +1,113 @@
 {
     "name": "chunk 1 , 5",
     "chunkMesh": {
-        "instanceID": -97780
+        "instanceID": -674776
     },
     "material": {
-        "instanceID": -97782
+        "instanceID": -674778
     },
     "position": {
         "x": 64.0,
         "y": 0.0,
         "z": 320.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
-    "objectMaterials": [],
-    "objectPos": [],
+    "objectNames": [
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -674788
+        },
+        {
+            "instanceID": -674800
+        },
+        {
+            "instanceID": -674812
+        },
+        {
+            "instanceID": -674824
+        },
+        {
+            "instanceID": -674836
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 95688
+        },
+        {
+            "instanceID": 95688
+        },
+        {
+            "instanceID": 95688
+        },
+        {
+            "instanceID": 95688
+        },
+        {
+            "instanceID": 95688
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 119.17451477050781,
+            "y": 48.02998352050781,
+            "z": 379.431884765625
+        },
+        {
+            "x": 91.37841033935547,
+            "y": 57.594032287597659,
+            "z": 338.25946044921877
+        },
+        {
+            "x": 83.85643005371094,
+            "y": 61.34537887573242,
+            "z": 357.4434814453125
+        },
+        {
+            "x": 90.49797058105469,
+            "y": 59.023597717285159,
+            "z": 376.1390380859375
+        },
+        {
+            "x": 123.26022338867188,
+            "y": 50.1148681640625,
+            "z": 355.4409484863281
+        }
+    ],
     "spawnerPrefab": {
         "instanceID": 0
     },
     "treeLODMeshes": [
         {
-            "instanceID": 0
+            "instanceID": 95634
         },
         {
-            "instanceID": 0
+            "instanceID": 95670
         },
         {
-            "instanceID": 0
+            "instanceID": 95688
         }
     ]
 }

@@ -1,22 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class EnemySpawner : MonoBehaviour
+namespace Chilli.Ai
 {
-    public GameObject enemyPrefab;
-    [SerializeField] private float spawnRate = 10.0f;
-
-    
-    private void Start()
+    public class EnemySpawner : MonoBehaviour
     {
-        InvokeRepeating(nameof(SpawnEnemy), 0, spawnRate);
-    }
+        public GameObject enemyPrefab;
+        [SerializeField] private float spawnRate = 20.0f;
 
-    private void SpawnEnemy()
-    {
-        GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        private void Start()
+        {
+            InvokeRepeating(nameof(SpawnEnemy), 0, spawnRate);
+        }
+
+        private void SpawnEnemy()
+        {
+            GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            enemy.transform.parent = transform.parent;
+            transform.parent.GetComponent<Chunk>().chunkObjects.Add(enemy);
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Chilli.Terrain
         private void Start()
         {
             player = transform;
-            InvokeRepeating(nameof(CheckChunkDistance), 5.0f, checkRate);
+            InvokeRepeating(nameof(CheckChunkDistance), 0.0f, checkRate);
         }
 
         private void CheckChunkDistance()

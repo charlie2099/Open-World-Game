@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Chilli.Ai;
+using Chilli.Ai.Zombies;
 using Chilli.Terrain;
-using Unity.VisualScripting;
 using UnityEngine;
-using Object = System.Object;
 
 /// <summary>
 /// Saves chunk data, terrain data, and npc data to json files.
@@ -42,6 +42,14 @@ public class SaveManager : MonoBehaviour
         public int terrainHeight;
     }
 
+    public class NPCData
+    {
+        public string[] name;
+        public string questName;
+        public bool questStatus;
+        public Vector3[] position;
+    }
+
     private static string _jsonFile;
 
     public static void LoadChunk(GameObject chunk)
@@ -52,7 +60,7 @@ public class SaveManager : MonoBehaviour
         chunk.AddComponent<MeshRenderer>().sharedMaterial = loadedData.material;
         chunk.AddComponent<MeshCollider>().sharedMesh = loadedData.chunkMesh;
         //chunk.AddComponent<Chunk>();
-        
+
         // Load chunk objects 
         for (int i = 0; i < loadedData.objects.Count; i++) // TODO: Clean this mess up!
         {
@@ -102,12 +110,38 @@ public class SaveManager : MonoBehaviour
     {
         chunk.GetComponent<Chunk>().isLoaded = false;
         
-        // Update chunk data to the state when it was unloaded
+        /*AiData newAiData = new AiData();
+        int zombieCount = 0;
+        for (int i = 0; i < chunk.transform.childCount; i++)
+        {
+            // For every child with a Zombie component
+            if (chunk.transform.GetChild(i).GetComponent<Zombie>() != null)
+            {
+                /*zombieCount++;
+                newAiData.name        = new string[zombieCount];
+                newAiData.position    = new Vector3[zombieCount];
+                print(chunk.name + ": " + zombieCount);#1#
+                
+                /*newAiData.name[i]     = chunk.transform.GetChild(i).name;
+                newAiData.position[i] = chunk.transform.GetChild(i).position;
+                
+                // Converts new Ai data to JSON form.
+                _jsonFile = JsonUtility.ToJson(newAiData, true);
+
+                // Writes terrainData to json file
+                string aiDataPath = Application.dataPath + "/SaveData/AiData/" + newAiData.name[i] + ".json";
+                File.WriteAllText(aiDataPath, _jsonFile);#1#
+            }
+        }*/
+        
+        // Get latest chunk data when it was unloaded
         ChunkData newChunkData = new ChunkData();
         newChunkData.material           = chunk.GetComponent<MeshRenderer>().sharedMaterial;
         newChunkData.chunkMesh          = chunk.GetComponent<MeshFilter>().sharedMesh;
         newChunkData.position           = chunk.transform.position;
         newChunkData.name               = chunk.name;
+        
+        // chunk objects
         newChunkData.objects            = chunk.GetComponent<Chunk>().chunkObjects;
         newChunkData.objectNames        = new string[newChunkData.objects.Count];
         newChunkData.objectPos          = new Vector3[newChunkData.objects.Count];
@@ -115,17 +149,23 @@ public class SaveManager : MonoBehaviour
         newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
         newChunkData.treeLODMeshes      = new Mesh[3];
         //newChunkData.spawnerPrefab      = new GameObject();
-        
+
+
+        // Loop through all chunk objects
         for (int i = 0; i < newChunkData.objects.Count; i++)
         {
             if (newChunkData.objectPos != null)
             {
                 var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];
                 newChunkData.objectNames[i]     = chunkObj.name;
-                newChunkData.objectMeshes[i]    = chunkObj.GetComponent<MeshFilter>().sharedMesh;
-                newChunkData.objectMaterials[i] = chunkObj.GetComponent<MeshRenderer>().sharedMaterial;
                 newChunkData.objectPos[i]       = chunkObj.transform.position;
-                
+
+                if (chunkObj.GetComponent<MeshFilter>() != null)
+                {
+                    newChunkData.objectMeshes[i]    = chunkObj.GetComponent<MeshFilter>().sharedMesh;
+                    newChunkData.objectMaterials[i] = chunkObj.GetComponent<MeshRenderer>().sharedMaterial;
+                }
+
                 // Spawners
                 if (chunkObj.GetComponent<EnemySpawner>() != null)
                 {
@@ -163,7 +203,7 @@ public class SaveManager : MonoBehaviour
         chunk.tag = "Untagged";
     }
 
-    public static void SaveToFile() // Saves terrain, chunk, and other data to file
+    public static void SaveToFile() // Saves terrain, chunk, and Ai data to file
     {
         print("Size when saving to file: " + TerrainGenerator.GetChunks().Count);
 

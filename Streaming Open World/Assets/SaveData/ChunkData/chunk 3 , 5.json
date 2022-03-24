@@ -1,33 +1,308 @@
 {
     "name": "chunk 3 , 5",
     "chunkMesh": {
-        "instanceID": -98132
+        "instanceID": -675670
     },
     "material": {
-        "instanceID": -98134
+        "instanceID": -675672
     },
     "position": {
         "x": 192.0,
         "y": 0.0,
         "z": 320.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
-    "objectMaterials": [],
-    "objectPos": [],
+    "objectNames": [
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "GrassPatch2(Clone)",
+        "GrassPatch2(Clone)",
+        "GrassPatch2(Clone)",
+        "GrassPatch2(Clone)",
+        "GrassPatch2(Clone)",
+        "GrassPatch2(Clone)",
+        "SmallRocks3(Clone)",
+        "SmallRocks3(Clone)",
+        "SmallRocks3(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -675682
+        },
+        {
+            "instanceID": -675694
+        },
+        {
+            "instanceID": -675706
+        },
+        {
+            "instanceID": -675718
+        },
+        {
+            "instanceID": -675730
+        },
+        {
+            "instanceID": -675742
+        },
+        {
+            "instanceID": -675754
+        },
+        {
+            "instanceID": -675766
+        },
+        {
+            "instanceID": -675778
+        },
+        {
+            "instanceID": -675790
+        },
+        {
+            "instanceID": -675798
+        },
+        {
+            "instanceID": -675806
+        },
+        {
+            "instanceID": -675814
+        },
+        {
+            "instanceID": -675822
+        },
+        {
+            "instanceID": -675830
+        },
+        {
+            "instanceID": -675838
+        },
+        {
+            "instanceID": -675846
+        },
+        {
+            "instanceID": -675854
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 27862
+        },
+        {
+            "instanceID": 27862
+        },
+        {
+            "instanceID": 27862
+        },
+        {
+            "instanceID": 27862
+        },
+        {
+            "instanceID": 27862
+        },
+        {
+            "instanceID": 27862
+        },
+        {
+            "instanceID": 27862
+        },
+        {
+            "instanceID": 27862
+        },
+        {
+            "instanceID": 27862
+        },
+        {
+            "instanceID": 27872
+        },
+        {
+            "instanceID": 27872
+        },
+        {
+            "instanceID": 27872
+        },
+        {
+            "instanceID": 27872
+        },
+        {
+            "instanceID": 27872
+        },
+        {
+            "instanceID": 27872
+        },
+        {
+            "instanceID": 94838
+        },
+        {
+            "instanceID": 94838
+        },
+        {
+            "instanceID": 94838
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 246.92318725585938,
+            "y": 36.47058868408203,
+            "z": 341.46246337890627
+        },
+        {
+            "x": 222.88824462890626,
+            "y": 39.60784912109375,
+            "z": 322.1314697265625
+        },
+        {
+            "x": 199.8861083984375,
+            "y": 39.55522155761719,
+            "z": 343.4539794921875
+        },
+        {
+            "x": 195.32113647460938,
+            "y": 38.69758987426758,
+            "z": 364.92303466796877
+        },
+        {
+            "x": 226.9284210205078,
+            "y": 38.431373596191409,
+            "z": 365.4185485839844
+        },
+        {
+            "x": 214.61671447753907,
+            "y": 41.960784912109378,
+            "z": 377.8621520996094
+        },
+        {
+            "x": 237.75839233398438,
+            "y": 38.431373596191409,
+            "z": 320.3592834472656
+        },
+        {
+            "x": 243.39471435546876,
+            "y": 38.96837615966797,
+            "z": 377.1846923828125
+        },
+        {
+            "x": 222.289794921875,
+            "y": 37.25490188598633,
+            "z": 342.47515869140627
+        },
+        {
+            "x": 249.51614379882813,
+            "y": 37.33769226074219,
+            "z": 327.21112060546877
+        },
+        {
+            "x": 215.89361572265626,
+            "y": 38.431373596191409,
+            "z": 336.0882263183594
+        },
+        {
+            "x": 208.65740966796876,
+            "y": 37.64706039428711,
+            "z": 360.300048828125
+        },
+        {
+            "x": 200.21694946289063,
+            "y": 40.912986755371097,
+            "z": 375.109375
+        },
+        {
+            "x": 225.58749389648438,
+            "y": 40.0931510925293,
+            "z": 371.60968017578127
+        },
+        {
+            "x": 236.43234252929688,
+            "y": 39.637149810791019,
+            "z": 375.02490234375
+        },
+        {
+            "x": 199.85646057128907,
+            "y": 40.896888732910159,
+            "z": 335.03631591796877
+        },
+        {
+            "x": 217.64260864257813,
+            "y": 36.89103317260742,
+            "z": 354.35302734375
+        },
+        {
+            "x": 240.93597412109376,
+            "y": 37.83094024658203,
+            "z": 363.4896240234375
+        }
+    ],
     "spawnerPrefab": {
         "instanceID": 0
     },
     "treeLODMeshes": [
         {
-            "instanceID": 0
+            "instanceID": 95634
         },
         {
-            "instanceID": 0
+            "instanceID": 95670
         },
         {
-            "instanceID": 0
+            "instanceID": 95688
         }
     ]
 }

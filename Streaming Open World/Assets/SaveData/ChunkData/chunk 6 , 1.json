@@ -1,33 +1,68 @@
 {
     "name": "chunk 6 , 1",
     "chunkMesh": {
-        "instanceID": -98596
+        "instanceID": -677854
     },
     "material": {
-        "instanceID": -98598
+        "instanceID": -677856
     },
     "position": {
         "x": 384.0,
         "y": 0.0,
         "z": 64.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
-    "objectMaterials": [],
-    "objectPos": [],
+    "objectNames": [
+        "Tree2(Clone)",
+        "Tree2(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -677866
+        },
+        {
+            "instanceID": -677878
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 95688
+        },
+        {
+            "instanceID": 95688
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": 27866
+        },
+        {
+            "instanceID": 27866
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 421.2781677246094,
+            "y": 47.014892578125,
+            "z": 123.0373306274414
+        },
+        {
+            "x": 398.7261962890625,
+            "y": 38.65018081665039,
+            "z": 67.4420394897461
+        }
+    ],
     "spawnerPrefab": {
         "instanceID": 0
     },
     "treeLODMeshes": [
         {
-            "instanceID": 0
+            "instanceID": 95634
         },
         {
-            "instanceID": 0
+            "instanceID": 95670
         },
         {
-            "instanceID": 0
+            "instanceID": 95688
         }
     ]
 }
