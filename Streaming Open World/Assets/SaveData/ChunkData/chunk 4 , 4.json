@@ -1,23 +1,43 @@
 {
     "name": "chunk 4 , 4",
     "chunkMesh": {
-        "instanceID": -600562
+        "instanceID": -188662
     },
     "material": {
-        "instanceID": -600564
+        "instanceID": -188664
     },
     "position": {
         "x": 256.0,
         "y": 0.0,
         "z": 256.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
-    "objectMaterials": [],
-    "objectPos": [],
+    "objectNames": [
+        "EnemySpawner(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -188674
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 0
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": 0
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 308.91851806640627,
+            "y": 38.09547424316406,
+            "z": 279.42828369140627
+        }
+    ],
     "spawnerPrefab": {
-        "instanceID": 0
+        "instanceID": 26096
     },
     "treeLODMeshes": [
         {

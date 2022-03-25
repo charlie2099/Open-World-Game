@@ -5,7 +5,7 @@ namespace Chilli.Ai
     public class EnemySpawner : MonoBehaviour
     {
         public GameObject enemyPrefab;
-        [SerializeField] private float spawnRate = 10.0f;
+        [SerializeField] private float spawnRate = 5.0f;
         private LayerMask mask;
         private float radius;
 
