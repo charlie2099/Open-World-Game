@@ -1,10 +1,10 @@
 {
     "name": "chunk 1 , 4",
     "chunkMesh": {
-        "instanceID": -188134
+        "instanceID": -159014
     },
     "material": {
-        "instanceID": -188136
+        "instanceID": -159016
     },
     "position": {
         "x": 64.0,
