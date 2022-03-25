@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,20 +10,26 @@ namespace Chilli.Ai.Zombies
     public class Zombie : MonoBehaviour
     { 
         private Transform playerRef;
+        private Animator animator;
         private static readonly int Walk = Animator.StringToHash("Walk");
         private static readonly int Run = Animator.StringToHash("Run");
         private float detectionRange;
         private float chaseRange;
         private float speed;
         private Vector3 spawnPos;
+        private float health;
+        private bool isDying;
 
         private void Awake() // cache references
         {
+            isDying = false;
             playerRef = GameObject.FindWithTag("Player").transform;
+            animator = GetComponent<Animator>();
         }
 
         private void Start()
         {
+            health = 100;
             spawnPos = transform.position;
             detectionRange = 30; /*Random.Range(15, 20)*/
             chaseRange = detectionRange / 2.0f;
@@ -31,24 +40,27 @@ namespace Chilli.Ai.Zombies
 
         private void Update()
         {
-            if (PlayerInDetectionRange())
+            if (!isDying)
             {
-                Investigate();
-            }
-            else if (PlayerInChaseRange())
-            {
-                Chase();
-            }
-            else
-            {
-                WanderAroundRandomly();
-            }
+                if (PlayerInDetectionRange())
+                {
+                    Investigate();
+                }
+                else if (PlayerInChaseRange())
+                {
+                    Chase();
+                }
+                else
+                {
+                    WanderAroundRandomly();
+                }
             
-            if (PlayerInDetectionRange() || PlayerInChaseRange())
-            {
-                float step =  speed * Time.deltaTime;
-                transform.LookAt(playerRef.position);
-                transform.position = Vector3.MoveTowards(transform.position, playerRef.position, step);
+                if (PlayerInDetectionRange() || PlayerInChaseRange())
+                {
+                    float step =  speed * Time.deltaTime;
+                    transform.LookAt(playerRef.position);
+                    transform.position = Vector3.MoveTowards(transform.position, playerRef.position, step);
+                }
             }
         }
 
@@ -137,6 +149,30 @@ namespace Chilli.Ai.Zombies
             {
                 GetComponent<Animator>().SetBool(Walk, false);
             }
+        }
+
+        public void TakeDamage(float damage)
+        {
+            health -= damage;
+            if (health <= 0)
+            {
+                StartCoroutine(PlayDeathAnimation());
+            }
+        }
+
+        public bool IsDying()
+        {
+            return isDying;
+        }
+        
+        private IEnumerator PlayDeathAnimation()
+        {
+            isDying = true;
+            animator.SetBool("Dying", true);
+            Destroy(GetComponentInChildren<CapsuleCollider>());
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            yield return new WaitForSeconds(10.0f);
+            Destroy(gameObject);
         }
     }
 }

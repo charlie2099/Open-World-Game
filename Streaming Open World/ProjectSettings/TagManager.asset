@@ -6,11 +6,12 @@ TagManager:
   tags:
   - TerrainChunk
   - MainTerrain
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

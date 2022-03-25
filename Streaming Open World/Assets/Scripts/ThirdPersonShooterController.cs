@@ -67,10 +67,12 @@ public class ThirdPersonShooterController : MonoBehaviour
             {
                 StartCoroutine(PlayMuzzleFlashEffect());
                 
-                if (hitTransform.GetComponent<Zombie>() != null)
+                if (hitTransform.GetComponent<Zombie>() != null && !hitTransform.GetComponent<Zombie>().IsDying())
                 {
                     Transform effect = Instantiate(bloodSplatterHitEffect, mouseWorldPosition, hitTransform.rotation * new Quaternion(180,0,180,0));
                     bloodSplatterEffectsList.Add(effect.gameObject);
+                    StartCoroutine(DestroyEffect(effect));
+                    hitTransform.GetComponent<Zombie>().TakeDamage(25);
                 }
             }
             
@@ -83,5 +85,11 @@ public class ThirdPersonShooterController : MonoBehaviour
         muzzleFlash.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.gameObject.SetActive(false);
+    }
+    
+    private IEnumerator DestroyEffect(Transform effect)
+    {
+        yield return new WaitForSeconds(2.0f);
+        Destroy(effect.gameObject);
     }
 }
