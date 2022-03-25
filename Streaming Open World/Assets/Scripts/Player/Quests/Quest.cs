@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Chilli.Quests;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,11 +29,38 @@ namespace Chilli.Quests
             public QuestType questType;
             public QuestStatus questStatus;
         }
-    
+        
         [SerializeField] private QuestData questData;
         private GameObject questDialogueText;
         private GameObject player;
-        //private bool playerInBounds;
+        private int zombiesKilled;
+        private int zombiesToKill;
+        private bool questCollected;
+        private StarterAssetsInputs starterAssetsInputs;
+
+        private void OnEnable()
+        {
+            EventManager.StartListening("ZombieKilled", IncrementKills);
+        }
+        
+        private void OnDisable()
+        {
+            EventManager.StopListening("ZombieKilled", IncrementKills);
+        }
+
+        private void OnApplicationQuit()
+        {
+            EventManager.StopListening("ZombieKilled", IncrementKills);
+        }
+
+        private void IncrementKills(EventParam eventParam)
+        {
+            if (questCollected)
+            {
+                zombiesKilled += 1;
+                zombiesToKill -= 1;
+            }
+        }
 
         private void Awake() // cache references
         {
@@ -42,16 +70,31 @@ namespace Chilli.Quests
 
         private void Start()
         {
+            zombiesToKill = 5;
             questDialogueText.SetActive(false);
+            starterAssetsInputs = player.GetComponentInChildren<StarterAssetsInputs>();
         }
 
         private void Update()
         {
+            if (!questCollected)
+            {
+                if(starterAssetsInputs.interact)
+                {
+                    questCollected = true;
+                }
+                else
+                {
+                    questDialogueText.GetComponentInChildren<Text>().text = "I have a quest for you! (Press E to collect)";
+                    return;
+                }
+            }
+            
             if (questData.questType == QuestType.KillZombies && questData.questStatus == QuestStatus.Incomplete)
             {
-                questDialogueText.GetComponentInChildren<Text>().text = "Kill 5 zombies and I will reward you!";
+                questDialogueText.GetComponentInChildren<Text>().text = "Kill " + zombiesToKill + " zombies and I will reward you!";
 
-                if (player.GetComponent<QuestManager>().GetZombiesKilled() >= 5)
+                if (zombiesKilled >= 5)            
                 {
                     StartCoroutine(PlayQuestCompletionDialogue());
                 }

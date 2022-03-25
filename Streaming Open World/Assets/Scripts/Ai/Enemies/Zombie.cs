@@ -157,7 +157,7 @@ namespace Chilli.Ai.Zombies
             health -= damage;
             if (health <= 0)
             {
-                playerRef.GetComponentInParent<QuestManager>().IncrementZombiesKilled(1);
+                EventManager.TriggerEvent("ZombieKilled", new EventParam());
                 StartCoroutine(PlayDeathAnimation());
             }
         }

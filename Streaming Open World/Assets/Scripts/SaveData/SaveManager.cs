@@ -56,7 +56,7 @@ public class SaveManager : MonoBehaviour
 
     private static string _jsonFile;
 
-    public static void LoadChunk(GameObject chunk)
+    public static void LoadChunk(GameObject chunk) 
     { 
         string path = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
         ChunkData loadedData = JsonUtility.FromJson<ChunkData>(File.ReadAllText(path));
@@ -132,41 +132,16 @@ public class SaveManager : MonoBehaviour
         }
         
         chunk.transform.position = loadedData.position;
+        // bake nav mesh
 
         chunk.GetComponent<Chunk>().isLoaded = true;
         chunk.tag = "TerrainChunk";
-                
-        print("Terrain List: " + TerrainGenerator.instance.GetChunks().Count);
     }
 
     public static void UnloadChunk(GameObject chunk)
     {
         chunk.GetComponent<Chunk>().isLoaded = false;
-        
-        /*AiData newAiData = new AiData();
-        int zombieCount = 0;
-        for (int i = 0; i < chunk.transform.childCount; i++)
-        {
-            // For every child with a Zombie component
-            if (chunk.transform.GetChild(i).GetComponent<Zombie>() != null)
-            {
-                /*zombieCount++;
-                newAiData.name        = new string[zombieCount];
-                newAiData.position    = new Vector3[zombieCount];
-                print(chunk.name + ": " + zombieCount);#1#
-                
-                /*newAiData.name[i]     = chunk.transform.GetChild(i).name;
-                newAiData.position[i] = chunk.transform.GetChild(i).position;
-                
-                // Converts new Ai data to JSON form.
-                _jsonFile = JsonUtility.ToJson(newAiData, true);
 
-                // Writes terrainData to json file
-                string aiDataPath = Application.dataPath + "/SaveData/AiData/" + newAiData.name[i] + ".json";
-                File.WriteAllText(aiDataPath, _jsonFile);#1#
-            }
-        }*/
-        
         // Get latest chunk data when it was unloaded
         ChunkData newChunkData = new ChunkData();
         newChunkData.material           = chunk.GetComponent<MeshRenderer>().sharedMaterial;
@@ -181,8 +156,6 @@ public class SaveManager : MonoBehaviour
         newChunkData.objectMeshes       = new Mesh[newChunkData.objects.Count];
         newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
         newChunkData.treeLODMeshes      = new Mesh[3];
-        //newChunkData.spawnerPrefab      = new GameObject();
-
 
         // Loop through all chunk objects
         for (int i = 0; i < newChunkData.objects.Count; i++)
@@ -358,6 +331,6 @@ public class SaveManager : MonoBehaviour
         }
         //print("<color=orange> Chunks unloaded </color>");
         //print("<color=orange> Chunk data written to file </color>");
-        Debug.Log("Saving!");
+        Debug.Log("<color=orange>Saving!</color>");
     }
 }

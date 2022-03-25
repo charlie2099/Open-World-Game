@@ -19,16 +19,6 @@ namespace Chilli.Quests
             instance = this;
         }
 
-        public void IncrementZombiesKilled(int kills)
-        {
-            zombiesKilled += kills;
-        }
-    
-        public int GetZombiesKilled()
-        {
-            return zombiesKilled;
-        }
-    
         public void IncrementPointsCollected(int points)
         {
             pointsCollected += points;
