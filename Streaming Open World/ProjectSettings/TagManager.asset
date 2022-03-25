@@ -7,6 +7,7 @@ TagManager:
   - TerrainChunk
   - MainTerrain
   - CinemachineTarget
+  - Dialogue
   layers:
   - Default
   - TransparentFX

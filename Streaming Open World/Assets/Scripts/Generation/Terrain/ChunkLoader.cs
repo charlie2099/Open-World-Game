@@ -27,10 +27,10 @@ namespace Chilli.Terrain
             var playerPos = player.position;
             playerPos.y = 0;
 
-            foreach (var chunk in TerrainGenerator.GetChunks().ToArray())
+            foreach (var chunk in TerrainGenerator.instance.GetChunks().ToArray())
             {
                 // Center pos of chunk
-                Vector3 chunkCenterPos = chunk.transform.position + new Vector3(TerrainGenerator.GetChunkSize() / 2.0f, 0, TerrainGenerator.GetChunkSize() / 2.0f);
+                Vector3 chunkCenterPos = chunk.transform.position + new Vector3(TerrainGenerator.instance.GetChunkSize() / 2.0f, 0, TerrainGenerator.instance.GetChunkSize() / 2.0f);
             
                 // If distance between player and center of chunk is more than maxViewDistance AND chunk is loaded, unload it
                 if (Vector3.Distance(playerPos, chunkCenterPos) > maxChunkLoadDistance) 

@@ -1,0 +1,12 @@
+{
+    "npcName": "NPC_Father(Clone)",
+    "position": {
+        "x": 310.66900634765627,
+        "y": 37.63916778564453,
+        "z": 302.5533142089844
+    },
+    "questName": "Zombie Kill Quest 1",
+    "rewardPoints": 100,
+    "questType": 0,
+    "questStatus": 1
+}

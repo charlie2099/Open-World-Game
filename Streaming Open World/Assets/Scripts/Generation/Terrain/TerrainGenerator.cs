@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Chilli.Ai;
+using Chilli.Quests;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Chilli.Terrain
@@ -12,6 +16,8 @@ namespace Chilli.Terrain
 
     public class TerrainGenerator : MonoBehaviour
     {
+        public static TerrainGenerator instance;
+        
         // Terrain
         [SerializeField] private Texture2D heightmap;
         [SerializeField] private Material serialisedChunkMaterial;
@@ -19,26 +25,31 @@ namespace Chilli.Terrain
         [SerializeField] private int serialisedTerrainWidth;
         [SerializeField] private int serialisedTerrainHeight;
     
-        private static int _numberOfChunks;
-        private static int _totalChunks;
-        private static int _chunkSize;
-        private static int _terrainWidth;
-        private static int _terrainHeight;
-        private static GameObject _container;
-        private static List<GameObject> _generatedChunks = new List<GameObject>();
-        private static Mesh _mesh;
-        private static Vector3[] _vertices;
-        private static int[] _triangles;
+        private int _numberOfChunks;
+        private int _totalChunks;
+        private int _chunkSize;
+        private int _terrainWidth;
+        private int _terrainHeight;
+        private GameObject _container;
+        private List<GameObject> _generatedChunks = new List<GameObject>();
+        private Mesh _mesh;
+        private Vector3[] _vertices;
+        private int[] _triangles;
     
         // Terrain Objects
-        private static ObjectGenerator _objectGenerator;
+        //private static ObjectGenerator _objectGenerator;
 
         private void Awake()
+        {
+            instance = this;
+        }
+
+        private void Start()
         {
             GenerateMap(heightmap, serialisedChunkMaterial, serialisedChunkSize, serialisedTerrainWidth, serialisedTerrainHeight);
         }
 
-        public static void GenerateMap(Texture2D heightMap, Material terrainMaterial, int chunkSize, int terrainWidth, int terrainHeight)
+        public void GenerateMap(Texture2D heightMap, Material terrainMaterial, int chunkSize, int terrainWidth, int terrainHeight)
         {
             // Create chunk container 
             _container = new GameObject("Terrain");
@@ -98,8 +109,10 @@ namespace Chilli.Terrain
                         {
                             GameObject chunkObj = new GameObject(loadedData.objectNames[i]);
 
-                            if (loadedData.objectNames[i] != "EnemySpawner(Clone)")
+                            // Not a great method of handling this...
+                            if (loadedData.objectNames[i] != "EnemySpawner(Clone)" && loadedData.objectNames[i] != "NPC_Father(Clone)")
                             {
+                                print("hello");
                                 chunkObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
                                 chunkObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
                             }
@@ -123,10 +136,39 @@ namespace Chilli.Terrain
                                 chunkObj.GetComponent<LOD>().updateInterval = 2;
                                 chunkObj.transform.localScale = new Vector3(2, 2, 2);
                             }
-                        
-                            chunkObj.transform.position = loadedData.objectPos[i];
-                            chunkObj.transform.parent = chunk.transform;
-                            chunk.GetComponent<Chunk>().chunkObjects.Add(chunkObj);
+
+                            if (loadedData.objectNames[i] == "NPC_Father(Clone)")
+                            {
+                                // Instantiate on generation 
+                                // On load - set enabled to true, load quest data and position from file
+                                // On Unload - set enabled to false, save quest data and position to file
+
+                                chunkObj.name = "DestroyThis";
+                                GameObject npc = Instantiate(QuestManager.instance.npcPrefab);
+                                npc.transform.parent = chunk.transform;
+                                
+                                string npcDataDir = Application.dataPath + "/SaveData/NPCData/" + loadedData.objectNames[i] + i + ".json"; 
+                                if (File.Exists(npcDataDir))
+                                {
+                                    SaveManager.NPCData loadedNpcData = JsonUtility.FromJson<SaveManager.NPCData>(File.ReadAllText(npcDataDir));
+                                    npc.name = loadedNpcData.npcName;
+                                    npc.transform.position = loadedNpcData.position;
+                                    npc.GetComponent<Quest>().GetQuestData().name = loadedNpcData.questName;
+                                    npc.GetComponent<Quest>().GetQuestData().rewardPoints = loadedNpcData.rewardPoints;
+                                    npc.GetComponent<Quest>().GetQuestData().questType = loadedNpcData.questType;
+                                    npc.GetComponent<Quest>().GetQuestData().questStatus = loadedNpcData.questStatus;
+                                    chunk.GetComponent<Chunk>().chunkObjects.Add(npc);
+                                }
+                                
+                                DestroyImmediate(chunkObj);
+                            }
+
+                            if (loadedData.objectNames[i] != "NPC_Father(Clone)")
+                            {
+                                chunkObj.transform.position = loadedData.objectPos[i];
+                                chunkObj.transform.parent = chunk.transform;
+                                chunk.GetComponent<Chunk>().chunkObjects.Add(chunkObj);
+                            }
                         }
                     }
                     else
@@ -146,7 +188,7 @@ namespace Chilli.Terrain
 
 
         // Creates mesh for a single chunk
-        public static void CreateMesh(Texture2D heightMap, int chunkSize, int multiplier, int offsetX, int offsetZ)
+        public void CreateMesh(Texture2D heightMap, int chunkSize, int multiplier, int offsetX, int offsetZ)
         {
             _vertices = new Vector3[(chunkSize + 1) * (chunkSize + 1)];
 
@@ -181,7 +223,7 @@ namespace Chilli.Terrain
             }
         }
 
-        private static void UpdateMesh()
+        private void UpdateMesh()
         {
             _mesh.Clear();
             _mesh.vertices = _vertices.ToArray();
@@ -190,22 +232,22 @@ namespace Chilli.Terrain
             _mesh.RecalculateBounds();
         }
 
-        public static List<GameObject> GetChunks()
+        public List<GameObject> GetChunks()
         {
             return _generatedChunks;
         }
 
-        public static int GetChunkSize()
+        public int GetChunkSize()
         {
             return _chunkSize;
         }
 
-        public static int GetTerrainWidth()
+        public int GetTerrainWidth()
         {
             return _terrainWidth;
         }
     
-        public static int GetTerrainHeight()
+        public int GetTerrainHeight()
         {
             return _terrainHeight;
         }

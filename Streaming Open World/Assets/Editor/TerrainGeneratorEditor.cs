@@ -127,7 +127,7 @@ public class TerrainGeneratorEditor : EditorWindow
     private void LoadExistingTerrain()
     {
         NullChecks();
-        TerrainGenerator.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+        TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
         Debug.Log("<color=cyan> A terrain has been loaded from file! </color>");
     }
 
@@ -136,18 +136,18 @@ public class TerrainGeneratorEditor : EditorWindow
         NullChecks();
 
         // if no terrain exists already, generate a terrain
-        if (TerrainGenerator.GetChunks().Count <= 0)
+        if (TerrainGenerator.instance.GetChunks().Count <= 0)
         {
-            TerrainGenerator.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+            TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
             Debug.Log("<color=lime> A new terrain has been generated! </color>");
         }
         else // if a terrain exists delete it's save data, clear list and regenerate the terrain
         {
             DeleteSavedData();
             DestroyActiveTerrain();
-            TerrainGenerator.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+            TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
             Debug.Log("<color=green> Existing terrain has been regenerated! </color>");
-            Debug.Log("Chunks list size: " + TerrainGenerator.GetChunks().Count);
+            Debug.Log("Chunks list size: " + TerrainGenerator.instance.GetChunks().Count);
         }
     }
 
@@ -181,7 +181,7 @@ public class TerrainGeneratorEditor : EditorWindow
             }
         }
 
-        TerrainGenerator.GetChunks().Clear();
+        TerrainGenerator.instance.GetChunks().Clear();
     }
 
     private void NullChecks()

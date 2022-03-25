@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Security.Cryptography;
+using Chilli.Quests;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;

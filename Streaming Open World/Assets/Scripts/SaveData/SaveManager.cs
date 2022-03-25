@@ -5,6 +5,8 @@ using System.IO;
 using Chilli.Ai;
 using Chilli.Ai.Zombies;
 using Chilli.Terrain;
+using Chilli.Quests;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -44,10 +46,12 @@ public class SaveManager : MonoBehaviour
 
     public class NPCData
     {
-        public string[] name;
+        public string npcName;
+        public Vector3 position;
         public string questName;
-        public bool questStatus;
-        public Vector3[] position;
+        public int rewardPoints;
+        public Quest.QuestType questType;
+        public Quest.QuestStatus questStatus;
     }
 
     private static string _jsonFile;
@@ -66,7 +70,7 @@ public class SaveManager : MonoBehaviour
         {
             GameObject newObj = new GameObject(loadedData.objectNames[i]);
 
-            if (loadedData.objectNames[i] != "EnemySpawner(Clone)")
+            if (loadedData.objectNames[i] != "EnemySpawner(Clone)" && loadedData.objectNames[i] != "NPC_Father(Clone)")
             {
                 newObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
                 newObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
@@ -92,10 +96,39 @@ public class SaveManager : MonoBehaviour
                 newObj.transform.localScale = new Vector3(2, 2, 2);
             }
             
-            newObj.transform.position = loadedData.objectPos[i];
-            newObj.transform.parent = chunk.transform;
+            if (loadedData.objectNames[i] == "NPC_Father(Clone)")
+            {
+                // Instantiate on generation 
+                // On load - set enabled to true, load quest data and position from file
+                // On Unload - set enabled to false, save quest data and position to file
 
-            chunk.GetComponent<Chunk>().chunkObjects.Add(newObj);
+                newObj.name = "DestroyThis";
+                GameObject npc = Instantiate(QuestManager.instance.npcPrefab);
+                npc.transform.parent = chunk.transform;
+                                
+                string npcDataDir = Application.dataPath + "/SaveData/NPCData/" + loadedData.objectNames[i] + i + ".json";  
+                if (File.Exists(npcDataDir))
+                {
+                    NPCData loadedNpcData = JsonUtility.FromJson<NPCData>(File.ReadAllText(npcDataDir));
+                    npc.name = loadedNpcData.npcName;
+                    npc.transform.position = loadedNpcData.position;
+                    npc.GetComponent<Quest>().GetQuestData().name = loadedNpcData.questName;
+                    npc.GetComponent<Quest>().GetQuestData().rewardPoints = loadedNpcData.rewardPoints;
+                    npc.GetComponent<Quest>().GetQuestData().questType = loadedNpcData.questType;
+                    npc.GetComponent<Quest>().GetQuestData().questStatus = loadedNpcData.questStatus;
+                    chunk.GetComponent<Chunk>().chunkObjects.Add(npc);
+                }
+                                
+                Destroy(newObj);
+            }
+
+            if (loadedData.objectNames[i] != "NPC_Father(Clone)")
+            {
+                newObj.transform.position = loadedData.objectPos[i];
+                newObj.transform.parent = chunk.transform;
+
+                chunk.GetComponent<Chunk>().chunkObjects.Add(newObj);
+            }
         }
         
         chunk.transform.position = loadedData.position;
@@ -103,7 +136,7 @@ public class SaveManager : MonoBehaviour
         chunk.GetComponent<Chunk>().isLoaded = true;
         chunk.tag = "TerrainChunk";
                 
-        print("Terrain List: " + TerrainGenerator.GetChunks().Count);
+        print("Terrain List: " + TerrainGenerator.instance.GetChunks().Count);
     }
 
     public static void UnloadChunk(GameObject chunk)
@@ -180,6 +213,27 @@ public class SaveManager : MonoBehaviour
                         newChunkData.treeLODMeshes[j] = chunk.GetComponent<Chunk>().chunkObjects[i].GetComponent<LOD>().lodMesh[j];
                     }
                 }
+                
+                // NPC data - Assumption that all NPCs have quests
+                if (chunkObj.GetComponent<Quest>() != null)
+                {
+                    NPCData newNpcData = new NPCData();
+                    newNpcData.npcName      = chunkObj.name;
+                    newNpcData.position     = chunkObj.transform.position;
+                    newNpcData.questName    = chunkObj.GetComponent<Quest>().GetQuestData().name;
+                    newNpcData.rewardPoints = chunkObj.GetComponent<Quest>().GetQuestData().rewardPoints;
+                    newNpcData.questType    = chunkObj.GetComponent<Quest>().GetQuestData().questType;
+                    newNpcData.questStatus  = chunkObj.GetComponent<Quest>().GetQuestData().questStatus;
+                    
+                    Destroy(chunkObj);
+
+                    // Converts new npc data to JSON form.
+                    _jsonFile = JsonUtility.ToJson(newNpcData, true);
+
+                    // Writes npcData to json file
+                    string npcDataDir = Application.dataPath + "/SaveData/NPCData/" + newNpcData.npcName + i + ".json"; 
+                    File.WriteAllText(npcDataDir, _jsonFile);
+                }
             }
         }
         
@@ -194,9 +248,14 @@ public class SaveManager : MonoBehaviour
         Destroy(chunk.GetComponent<MeshRenderer>());
         Destroy(chunk.GetComponent<MeshFilter>());
         Destroy(chunk.GetComponent<MeshCollider>());
+        
+        // Destroy chunk objects and clear the list
         foreach (var obj in chunk.GetComponent<Chunk>().chunkObjects.ToArray())
         {
-            Destroy(obj);
+            if (obj.name != "NPC_Father(Clone)")
+            {
+                Destroy(obj);
+            }
         }
         chunk.GetComponent<Chunk>().chunkObjects.Clear();
         //Destroy(chunk.GetComponent<Chunk>());
@@ -205,12 +264,12 @@ public class SaveManager : MonoBehaviour
 
     public static void SaveToFile() // Saves terrain, chunk, and Ai data to file
     {
-        print("Size when saving to file: " + TerrainGenerator.GetChunks().Count);
+        print("Size when saving to file: " + TerrainGenerator.instance.GetChunks().Count);
 
         TerrainData newTerrainData = new TerrainData();
-        newTerrainData.chunkSize     = TerrainGenerator.GetChunkSize();
-        newTerrainData.terrainWidth  = TerrainGenerator.GetTerrainWidth();
-        newTerrainData.terrainHeight = TerrainGenerator.GetTerrainHeight();
+        newTerrainData.chunkSize     = TerrainGenerator.instance.GetChunkSize();
+        newTerrainData.terrainWidth  = TerrainGenerator.instance.GetTerrainWidth();
+        newTerrainData.terrainHeight = TerrainGenerator.instance.GetTerrainHeight();
 
         // Converts new terrain data to JSON form.
         _jsonFile = JsonUtility.ToJson(newTerrainData, true);
@@ -220,7 +279,7 @@ public class SaveManager : MonoBehaviour
         File.WriteAllText(terrainPath, _jsonFile);
 
         // Update chunk data when unloaded
-        foreach (var chunk in TerrainGenerator.GetChunks())
+        foreach (var chunk in TerrainGenerator.instance.GetChunks())
         {
             ChunkData newChunkData = new ChunkData();
             newChunkData.material           = chunk.GetComponent<MeshRenderer>().sharedMaterial;
@@ -235,7 +294,7 @@ public class SaveManager : MonoBehaviour
             newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
             newChunkData.treeLODMeshes      = new Mesh[3];
 
-            // All objects (trees, houses, spawners)
+            // All objects (trees, houses, spawners, npcs)
             for (int i = 0; i < newChunkData.objects.Count; i++)
             {
                 if (newChunkData.objectPos != null)
@@ -267,6 +326,25 @@ public class SaveManager : MonoBehaviour
                         {
                             newChunkData.treeLODMeshes[j] = chunkObj.GetComponent<LOD>().lodMesh[j];
                         }
+                    }
+                    
+                    // NPC data - Assumption that all NPCs have quests
+                    if (chunkObj.GetComponent<Quest>() != null)
+                    {
+                        NPCData newNpcData = new NPCData();
+                        newNpcData.npcName      = chunkObj.name;
+                        newNpcData.position     = chunkObj.transform.position;
+                        newNpcData.questName    = chunkObj.GetComponent<Quest>().GetQuestData().name;
+                        newNpcData.rewardPoints = chunkObj.GetComponent<Quest>().GetQuestData().rewardPoints;
+                        newNpcData.questType    = chunkObj.GetComponent<Quest>().GetQuestData().questType;
+                        newNpcData.questStatus  = chunkObj.GetComponent<Quest>().GetQuestData().questStatus;
+                        
+                        // Converts new npc data to JSON form.
+                        _jsonFile = JsonUtility.ToJson(newNpcData, true);
+
+                        // Writes npcData to json file
+                        string npcDataDir = Application.dataPath + "/SaveData/NPCData/" + newNpcData.npcName + i + ".json";
+                        File.WriteAllText(npcDataDir, _jsonFile);
                     }
                 }
             }
