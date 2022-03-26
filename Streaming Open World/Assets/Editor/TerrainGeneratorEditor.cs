@@ -102,16 +102,19 @@ public class TerrainGeneratorEditor : EditorWindow
             {
                 if (_activeAssigner)
                 {
-                    GameObject spawnedObj = Instantiate(objectToPaint, hit.point, Quaternion.identity);
-                    hit.collider.gameObject.GetComponent<Chunk>().chunkObjects.Add(spawnedObj);
-                    spawnedObj.transform.parent = hit.transform;
+                    if (hit.collider.gameObject.GetComponent<Chunk>() != null)
+                    {
+                        GameObject spawnedObj = Instantiate(objectToPaint, hit.point, Quaternion.identity);
+                        hit.collider.gameObject.GetComponent<Chunk>().chunkObjects.Add(spawnedObj);
+                        spawnedObj.transform.parent = hit.transform;
+                    }
                 }
 
                 else if (_activeDeassigner)
                 {
-                    var chunkObj = hit.collider.gameObject.GetComponent<Chunk>().chunkObjects;
-                    if (chunkObj != null)
+                    if (hit.collider.gameObject.GetComponent<Chunk>() != null)
                     {
+                        var chunkObj = hit.collider.gameObject.GetComponent<Chunk>().chunkObjects;
                         foreach (var obj in chunkObj.ToArray())
                         {
                             DestroyImmediate(obj, true);

@@ -1,21 +1,41 @@
 {
     "name": "chunk 5 , 3",
     "chunkMesh": {
-        "instanceID": -55298
+        "instanceID": -1616284
     },
     "material": {
-        "instanceID": -55300
+        "instanceID": -1616286
     },
     "position": {
         "x": 320.0,
         "y": 0.0,
         "z": 192.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
-    "objectMaterials": [],
-    "objectPos": [],
+    "objectNames": [
+        "Zombie_Hobo(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -1616296
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 0
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": 0
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 321.8128356933594,
+            "y": 45.09189987182617,
+            "z": 256.2466125488281
+        }
+    ],
     "spawnerPrefab": {
         "instanceID": 0
     },
