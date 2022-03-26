@@ -11,10 +11,15 @@ using UnityEngine;
 public class Chunk : MonoBehaviour
 {
     public List<GameObject> chunkObjects = new List<GameObject>();
-    [HideInInspector] public bool isLoaded = false;
+    private bool isLoaded = false;
 
     public bool IsLoaded()
     {
         return isLoaded;
+    }
+
+    public void SetLoaded(bool load)
+    {
+        isLoaded = load;
     }
 }

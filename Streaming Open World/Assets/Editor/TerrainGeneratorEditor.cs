@@ -55,16 +55,23 @@ public class TerrainGeneratorEditor : EditorWindow
         {
             GenerateNewTerrain();
         }
+        
+        else if (GUILayout.Button("Bake nav mesh", buttonStyle))
+        {
+            if (TerrainGenerator.instance.GetContainer() != null)
+            {
+                NavMeshGenerator.GenerateNavMesh();
+            }
+        }
 
         else if (GUILayout.Button("Save to file", buttonStyle))
         {
-            SaveManager.SaveToFile();
+            SaveToFile();
         }
         
         else if (GUILayout.Button("Destroy active terrain", buttonStyle))
         {
             DestroyActiveTerrain();
-            Debug.Log("<color=orange> Active terrain has been destroyed! </color>");
         }
         
         GUILayout.Space(25);
@@ -77,7 +84,7 @@ public class TerrainGeneratorEditor : EditorWindow
             _activeAssigner = !_activeAssigner;
         }
         
-        if (GUILayout.Button("Despawner: " + _activeDeassigner, buttonStyle))
+        else if (GUILayout.Button("Despawner: " + _activeDeassigner, buttonStyle))
         {
             _activeDeassigner = !_activeDeassigner;
         }
@@ -129,28 +136,61 @@ public class TerrainGeneratorEditor : EditorWindow
 
     private void LoadExistingTerrain()
     {
-        NullChecks();
-        TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+        if (TerrainGenerator.instance == null)
+        {
+            if (GameObject.Find("Generator") == null)
+            {
+                Debug.LogError("<color=red> Error: Could not find the gameobject called 'Generator', so the TerrainGenerator component could not be found </color>");
+                return;
+            }
+            TerrainGenerator.instance = GameObject.Find("Generator").GetComponent<TerrainGenerator>();
+        }
+        
+        // Delete existing terrain data
+        string terrainPath = Application.dataPath + "/SaveData/TerrainData/terrain.json";
+        if (!File.Exists(terrainPath))
+        {
+            Debug.LogError("<color=red> Error: Could not find any existing terrain data from file </color>");
+            return;
+        }
+
+        // Delete existing chunk data
+        string chunkPath = Application.dataPath + "/SaveData/ChunkData/";
+        var dir = Directory.GetFiles(chunkPath);
+        foreach (var chunkFile in dir)
+        {
+            if (!File.Exists(chunkFile))
+            {
+                Debug.LogError("<color=red> Error: Could not find any chunk terrain data from file </color>");
+                return;
+            }
+        }
+
+        var loadedHeightMap = TerrainGenerator.instance.GetHeightMap();
+        var loadedMaterial = TerrainGenerator.instance.GetMaterial();
+        TerrainGenerator.instance.GenerateMap(loadedHeightMap, loadedMaterial, chunkSize, terrainWidth, terrainHeight, true);
         Debug.Log("<color=cyan> A terrain has been loaded from file! </color>");
     }
 
     private void GenerateNewTerrain()
     {
-        NullChecks();
+        if (!NullChecks())
+        {
+            return;
+        }
 
-        // if no terrain exists already, generate a terrain
+        // if no terrain exists already, generate a new terrain
         if (TerrainGenerator.instance.GetChunks().Count <= 0)
         {
-            TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+            TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight, false);
             Debug.Log("<color=lime> A new terrain has been generated! </color>");
         }
-        else // if a terrain exists delete it's save data, clear list and regenerate the terrain
+        else // if a terrain exists in the scene clear chunk list and regenerate the terrain
         {
-            DeleteSavedData();
+            //DeleteSavedData();
             DestroyActiveTerrain();
-            TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight);
+            TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight, false);
             Debug.Log("<color=green> Existing terrain has been regenerated! </color>");
-            Debug.Log("Chunks list size: " + TerrainGenerator.instance.GetChunks().Count);
         }
     }
 
@@ -165,46 +205,82 @@ public class TerrainGeneratorEditor : EditorWindow
 
         // Delete existing chunk data
         string chunkPath = Application.dataPath + "/SaveData/ChunkData/";
-        var dir = Directory.GetFiles(chunkPath);
-        foreach (var chunkFile in dir)
+        var chunkDir = Directory.GetFiles(chunkPath);
+        foreach (var chunkFile in chunkDir)
         {
             File.Delete(chunkFile);
+        } 
+        
+        string npcPath = Application.dataPath + "/SaveData/NPCData/";
+        var npcDir = Directory.GetFiles(npcPath);
+        foreach (var npcFile in npcDir)
+        {
+            File.Delete(npcFile);
         }
     }
 
     private void DestroyActiveTerrain()
     {
+        if (GameObject.FindWithTag("MainTerrain") == null)
+        {
+            Debug.LogError("<color=red> Error: There is no active terrain in the scene, OR it is not tagged with 'MainTerrain'! </color>");
+            return;
+        }
+        
         // if a terrain exists destroy it's container 
         foreach (var gObj in FindObjectsOfType<GameObject>())
         {
             if (gObj.CompareTag("MainTerrain"))
             {
-                //Debug.Log("Main terrain found");
                 DestroyImmediate(gObj);
             }
         }
 
         TerrainGenerator.instance.GetChunks().Clear();
+        Debug.Log("<color=orange> Active terrain has been destroyed! </color>");
     }
 
-    private void NullChecks()
+    private void SaveToFile()
     {
+        if (TerrainGenerator.instance.GetChunks() == null)
+        {
+            Debug.LogError("<color=red> Error: No existing data to save");
+            return;
+        }
+            
+        SaveManager.SaveToFile();
+    }
+
+    private bool NullChecks()
+    {
+        if (TerrainGenerator.instance == null)
+        {
+            if (GameObject.Find("Generator") == null)
+            {
+                Debug.LogError("<color=red> Error: Could not find the gameobject called 'Generator', so the TerrainGenerator component could not be found </color>");
+                return false;
+            }
+            TerrainGenerator.instance = GameObject.Find("Generator").GetComponent<TerrainGenerator>();
+        }
+
         if (heightMap == null)
         {
             Debug.LogError("<color=red> Error: Please assign a heightmap to be used! </color>");
-            return;
+            return false;
         }
 
         if (material == null)
         {
             Debug.LogError("<color=red> Error: Please assign a material to be used! </color>");
-            return;
+            return false;
         }
         
         if (terrainWidth < chunkSize)
         {
             Debug.LogError("<color=red> Error: Terrain width should be larger than the chunk size! </color>");
-            return;
+            return false;
         }
+
+        return true;
     }
 }

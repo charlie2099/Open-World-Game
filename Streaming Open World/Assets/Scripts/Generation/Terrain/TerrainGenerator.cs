@@ -25,7 +25,7 @@ namespace Chilli.Terrain
         [SerializeField] private int serialisedTerrainWidth;
         [SerializeField] private int serialisedTerrainHeight;
     
-        private int _numberOfChunks;
+        private int _rowLength;
         private int _totalChunks;
         private int _chunkSize;
         private int _terrainWidth;
@@ -46,13 +46,14 @@ namespace Chilli.Terrain
 
         private void Start()
         {
-            GenerateMap(heightmap, serialisedChunkMaterial, serialisedChunkSize, serialisedTerrainWidth, serialisedTerrainHeight);
+            // Loads a terrain from file on start
+            GenerateMap(heightmap, serialisedChunkMaterial, serialisedChunkSize, serialisedTerrainWidth, serialisedTerrainHeight, true);
         }
 
-        public void GenerateMap(Texture2D heightMap, Material terrainMaterial, int chunkSize, int terrainWidth, int terrainHeight)
+        public void GenerateMap(Texture2D heightMap, Material terrainMaterial, int chunkSize, int terrainWidth, int terrainHeight, bool readFromFile)
         {
             // Create chunk container 
-            _container = new GameObject("Terrain");
+            _container = new GameObject("Terrain ");
         
             // Remove previously existing terrain from list
             foreach (var chunk in _generatedChunks.ToArray())
@@ -62,7 +63,7 @@ namespace Chilli.Terrain
         
             // Read terrain related data from file should it exist
             string terrainPath = Application.dataPath + "/SaveData/TerrainData/terrain.json";
-            if (File.Exists(terrainPath))
+            if (File.Exists(terrainPath) && readFromFile)
             {
                 SaveManager.TerrainData loadedData = JsonUtility.FromJson<SaveManager.TerrainData>(File.ReadAllText(terrainPath));
                 chunkSize     = loadedData.chunkSize;
@@ -75,12 +76,12 @@ namespace Chilli.Terrain
             _terrainWidth = terrainWidth;
             _terrainHeight = terrainHeight;
 
-            _numberOfChunks = terrainWidth / chunkSize;
-            _totalChunks = _numberOfChunks * _numberOfChunks;
+            _rowLength = terrainWidth / chunkSize;
+            _totalChunks = _rowLength * _rowLength;
 
-            for (int x = 0; x < _numberOfChunks; x++)
+            for (int x = 0; x < _rowLength; x++)
             {
-                for (int z = 0; z < _numberOfChunks; z++)
+                for (int z = 0; z < _rowLength; z++)
                 {
                     GameObject chunk = new GameObject("chunk " + x + " , " + z);
                     chunk.tag = "TerrainChunk";
@@ -93,10 +94,10 @@ namespace Chilli.Terrain
                     chunk.AddComponent<MeshFilter>().sharedMesh = _mesh;
                     chunk.AddComponent<MeshRenderer>().sharedMaterial = testMaterial;
                     chunk.AddComponent<MeshCollider>().sharedMesh = _mesh;
-                    chunk.AddComponent<Chunk>().isLoaded = true;
+                    chunk.AddComponent<Chunk>().SetLoaded(true);
                 
                     string chunkPath = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
-                    if (File.Exists(chunkPath))
+                    if (File.Exists(chunkPath) && readFromFile)
                     {
                         SaveManager.ChunkData loadedData = JsonUtility.FromJson<SaveManager.ChunkData>(File.ReadAllText(chunkPath));
                         chunk.GetComponent<MeshRenderer>().sharedMaterial = testMaterial;
@@ -148,7 +149,7 @@ namespace Chilli.Terrain
                                 npc.transform.parent = chunk.transform;
                                 
                                 string npcDataDir = Application.dataPath + "/SaveData/NPCData/" + loadedData.objectNames[i] + i + ".json"; 
-                                if (File.Exists(npcDataDir))
+                                if (File.Exists(npcDataDir)) 
                                 {
                                     SaveManager.NPCData loadedNpcData = JsonUtility.FromJson<SaveManager.NPCData>(File.ReadAllText(npcDataDir));
                                     npc.name = loadedNpcData.npcName;
@@ -183,7 +184,9 @@ namespace Chilli.Terrain
                     _generatedChunks.Add(chunk);
                 }
             }
-            SaveManager.SaveToFile();
+            
+            _container.name = "Terrain [chunks: " + _totalChunks + "] [" + _rowLength + "x" + _rowLength + "] [chunk size: " + chunkSize + "]"; 
+            //SaveManager.SaveToFile();
         }
 
 
@@ -232,6 +235,11 @@ namespace Chilli.Terrain
             _mesh.RecalculateBounds();
         }
 
+        public GameObject GetContainer()
+        {
+            return _container;
+        }
+
         public List<GameObject> GetChunks()
         {
             return _generatedChunks;
@@ -251,7 +259,16 @@ namespace Chilli.Terrain
         {
             return _terrainHeight;
         }
-    
+
+        public Texture2D GetHeightMap()
+        {
+            return heightmap;
+        }
+
+        public Material GetMaterial()
+        {
+            return serialisedChunkMaterial;
+        }
     }
 }
 

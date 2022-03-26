@@ -134,13 +134,13 @@ public class SaveManager : MonoBehaviour
         chunk.transform.position = loadedData.position;
         // bake nav mesh
 
-        chunk.GetComponent<Chunk>().isLoaded = true;
+        chunk.GetComponent<Chunk>().SetLoaded(true);
         chunk.tag = "TerrainChunk";
     }
 
     public static void UnloadChunk(GameObject chunk)
     {
-        chunk.GetComponent<Chunk>().isLoaded = false;
+        chunk.GetComponent<Chunk>().SetLoaded(false);
 
         // Get latest chunk data when it was unloaded
         ChunkData newChunkData = new ChunkData();
@@ -237,8 +237,6 @@ public class SaveManager : MonoBehaviour
 
     public static void SaveToFile() // Saves terrain, chunk, and Ai data to file
     {
-        print("Size when saving to file: " + TerrainGenerator.instance.GetChunks().Count);
-
         TerrainData newTerrainData = new TerrainData();
         newTerrainData.chunkSize     = TerrainGenerator.instance.GetChunkSize();
         newTerrainData.terrainWidth  = TerrainGenerator.instance.GetTerrainWidth();
