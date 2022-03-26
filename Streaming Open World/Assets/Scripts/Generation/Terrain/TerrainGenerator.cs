@@ -102,9 +102,7 @@ namespace Chilli.Terrain
                         SaveManager.ChunkData loadedData = JsonUtility.FromJson<SaveManager.ChunkData>(File.ReadAllText(chunkPath));
                         chunk.GetComponent<MeshRenderer>().sharedMaterial = testMaterial;
                         chunk.transform.position = loadedData.position;
-                    
-                        //print("loaded chunk (" + x + " , " + z + ") obj count: " + loadedData.objects.Count);
-                    
+
                         // Load terrain objects in each chunk 
                         for (int i = 0; i < loadedData.objects.Count; i++)
                         {
@@ -120,7 +118,7 @@ namespace Chilli.Terrain
 
                             if (loadedData.objectNames[i] == "EnemySpawner(Clone)")
                             {
-                                chunkObj.AddComponent<EnemySpawner>().enemyPrefab = loadedData.spawnerPrefab;
+                                chunkObj.AddComponent<EnemySpawner>().prefabCatalogueSo = loadedData.spawnerScriptableObject;
                             }
 
                             if (loadedData.objectNames[i] == "Tree2(Clone)")
@@ -145,7 +143,12 @@ namespace Chilli.Terrain
                                 // On Unload - set enabled to false, save quest data and position to file
 
                                 chunkObj.name = "DestroyThis";
-                                GameObject npc = Instantiate(QuestManager.instance.npcPrefab);
+                                if (QuestManager.instance == null)
+                                {
+                                    QuestManager.instance = GameObject.FindWithTag("Player").transform.parent.GetComponent<QuestManager>();
+                                }
+                                
+                                GameObject npc = Instantiate(QuestManager.instance.prefabCatalogueSo.prefab[1]);
                                 npc.transform.parent = chunk.transform;
                                 
                                 string npcDataDir = Application.dataPath + "/SaveData/NPCData/" + loadedData.objectNames[i] + i + ".json"; 

@@ -41,7 +41,7 @@ namespace Chilli.Ai.Zombies
 
         private void Update()
         {
-            if (!isDying)
+            if (!isDying && playerRef != null)
             {
                 if (PlayerInDetectionRange())
                 {
@@ -67,20 +67,25 @@ namespace Chilli.Ai.Zombies
 
         private bool PlayerInDetectionRange()
         {
+            if (playerRef == null) { return false; }
+            
             return Vector3.Distance(transform.position, playerRef.position) < detectionRange && 
                    Vector3.Distance(transform.position, playerRef.position) > chaseRange;
         }
         
         private bool PlayerInChaseRange()
         {
+            if (playerRef == null) { return false; }
+            
             return Vector3.Distance(transform.position, playerRef.position) <= chaseRange;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            var chunk = collision.gameObject.GetComponent<Chunk>(); // null check here?
-            if (chunk != null)
+            if (collision.gameObject.GetComponent<Chunk>() != null)
             {
+                var chunk = collision.gameObject.GetComponent<Chunk>(); 
+                
                 // If the zombie doesn't already belong to the chunk, parent itself to it and add to it's list
                 if (transform.parent != chunk.transform)
                 {
@@ -102,6 +107,15 @@ namespace Chilli.Ai.Zombies
                     // be written to file for that npc's quest. Therefore NPCs should be loaded / unloaded from file.
                     
                     chunk.GetComponent<Chunk>().chunkObjects.Add(gameObject);
+                }
+            }
+
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                if (collision.transform.parent != null)
+                {
+                    collision.transform.parent.GetComponent<Player>().TakeDamage(10);
+                    print("Player health: " + collision.transform.parent.GetComponent<Player>().GetHealth());
                 }
             }
         }

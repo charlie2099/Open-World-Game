@@ -31,7 +31,8 @@ public class SaveManager : MonoBehaviour
         public Vector3[] objectPos;
         
         // Spawners
-        public GameObject spawnerPrefab;
+        //public GameObject spawnerPrefab;
+        public PrefabCatalogueSO spawnerScriptableObject;
         
         // LOD
         public Mesh[] treeLODMeshes;
@@ -78,7 +79,7 @@ public class SaveManager : MonoBehaviour
 
             if (loadedData.objectNames[i] == "EnemySpawner(Clone)")
             {
-                newObj.AddComponent<EnemySpawner>().enemyPrefab = loadedData.spawnerPrefab;
+                newObj.AddComponent<EnemySpawner>().prefabCatalogueSo = loadedData.spawnerScriptableObject;
             }
 
             if (loadedData.objectNames[i] == "Tree2(Clone)")
@@ -103,7 +104,13 @@ public class SaveManager : MonoBehaviour
                 // On Unload - set enabled to false, save quest data and position to file
 
                 newObj.name = "DestroyThis";
-                GameObject npc = Instantiate(QuestManager.instance.npcPrefab);
+                
+                if (QuestManager.instance == null)
+                {
+                    QuestManager.instance = GameObject.FindWithTag("Player").transform.parent.GetComponent<QuestManager>();
+                }
+                
+                GameObject npc = Instantiate(QuestManager.instance.prefabCatalogueSo.prefab[1]);
                 npc.transform.parent = chunk.transform;
                                 
                 string npcDataDir = Application.dataPath + "/SaveData/NPCData/" + loadedData.objectNames[i] + i + ".json";  
@@ -175,7 +182,7 @@ public class SaveManager : MonoBehaviour
                 // Spawners
                 if (chunkObj.GetComponent<EnemySpawner>() != null)
                 {
-                    newChunkData.spawnerPrefab = chunkObj.GetComponent<EnemySpawner>().enemyPrefab;
+                    newChunkData.spawnerScriptableObject = chunkObj.GetComponent<EnemySpawner>().prefabCatalogueSo;
                 }
                 
                 // Objects with LOD components
@@ -272,7 +279,7 @@ public class SaveManager : MonoBehaviour
                 {
                     var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];
                     newChunkData.objectNames[i]     = chunkObj.name;
-                    newChunkData.objectPos[i]       = chunkObj.transform.position;
+                    newChunkData.objectPos[i] = chunkObj.transform.position;
 
                     if (chunkObj.GetComponent<MeshFilter>() != null)
                     {
@@ -287,7 +294,7 @@ public class SaveManager : MonoBehaviour
                     // Spawners
                     if (chunkObj.GetComponent<EnemySpawner>() != null)
                     {
-                        newChunkData.spawnerPrefab = chunkObj.GetComponent<EnemySpawner>().enemyPrefab;
+                        newChunkData.spawnerScriptableObject = chunkObj.GetComponent<EnemySpawner>().prefabCatalogueSo;
                     }
 
                     // Objects with LOD components

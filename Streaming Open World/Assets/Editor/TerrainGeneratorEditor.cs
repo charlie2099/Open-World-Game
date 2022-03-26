@@ -74,6 +74,11 @@ public class TerrainGeneratorEditor : EditorWindow
             DestroyActiveTerrain();
         }
         
+        else if (GUILayout.Button("Delete existing saved data", buttonStyle))
+        {
+            DeleteSavedData();
+        }
+        
         GUILayout.Space(25);
         GUILayout.Label("Chunk Object Spawner", EditorStyles.boldLabel);
         GUILayout.Space(10);
@@ -146,7 +151,7 @@ public class TerrainGeneratorEditor : EditorWindow
             TerrainGenerator.instance = GameObject.Find("Generator").GetComponent<TerrainGenerator>();
         }
         
-        // Delete existing terrain data
+        // Check that terrain data exists
         string terrainPath = Application.dataPath + "/SaveData/TerrainData/terrain.json";
         if (!File.Exists(terrainPath))
         {
@@ -154,7 +159,7 @@ public class TerrainGeneratorEditor : EditorWindow
             return;
         }
 
-        // Delete existing chunk data
+        // Check that chunk data exists
         string chunkPath = Application.dataPath + "/SaveData/ChunkData/";
         var dir = Directory.GetFiles(chunkPath);
         foreach (var chunkFile in dir)
@@ -179,7 +184,7 @@ public class TerrainGeneratorEditor : EditorWindow
             return;
         }
 
-        // if no terrain exists already, generate a new terrain
+        // if no terrain exists in the scene already, generate a new terrain
         if (TerrainGenerator.instance.GetChunks().Count <= 0)
         {
             TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight, false);
@@ -187,7 +192,6 @@ public class TerrainGeneratorEditor : EditorWindow
         }
         else // if a terrain exists in the scene clear chunk list and regenerate the terrain
         {
-            //DeleteSavedData();
             DestroyActiveTerrain();
             TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight, false);
             Debug.Log("<color=green> Existing terrain has been regenerated! </color>");

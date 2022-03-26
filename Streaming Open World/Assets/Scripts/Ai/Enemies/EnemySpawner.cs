@@ -4,7 +4,8 @@ namespace Chilli.Ai
 {
     public class EnemySpawner : MonoBehaviour
     {
-        public GameObject enemyPrefab;
+        //public GameObject enemyPrefab;
+        public PrefabCatalogueSO prefabCatalogueSo;
         [SerializeField] private float spawnRate = 5.0f;
         private LayerMask mask;
         private float radius;
@@ -12,6 +13,7 @@ namespace Chilli.Ai
         private void Start()
         {
             mask = LayerMask.GetMask("Default");
+
             InvokeRepeating(nameof(SpawnEnemy), 0, spawnRate);
         }
 
@@ -26,7 +28,7 @@ namespace Chilli.Ai
             {        
                 if (hit.collider != null)
                 {
-                    GameObject enemy = Instantiate(enemyPrefab);
+                    GameObject enemy = Instantiate(prefabCatalogueSo.prefab[0]);
                     //enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                     
                     // Sets the vertical offset to the object's collider bounds' extends
