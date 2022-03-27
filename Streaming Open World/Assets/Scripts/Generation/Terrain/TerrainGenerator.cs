@@ -47,6 +47,16 @@ namespace Chilli.Terrain
 
         private void Start()
         {
+            // Destroy any existing terrain in scene on play
+            foreach (var gObj in FindObjectsOfType<GameObject>())
+            {
+                if (gObj.CompareTag("MainTerrain"))
+                {
+                    DestroyImmediate(gObj);
+                }
+            }
+            _generatedChunks.Clear();
+
             // Loads a terrain from file on start
             GenerateMap(heightmap, serialisedChunkMaterial, serialisedChunkSize, serialisedTerrainWidth, serialisedTerrainHeight, true);
         }
@@ -114,8 +124,8 @@ namespace Chilli.Terrain
                             if (loadedData.objectNames[i] != "EnemySpawner(Clone)" && loadedData.objectNames[i] != "NPC_Father(Clone)")
                             {
                                 print("hello");
-                                chunkObj.AddComponent<MeshFilter>().sharedMesh       = loadedData.objectMeshes[i];
-                                chunkObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
+                                chunkObj.AddComponent<MeshFilter>().mesh       = loadedData.objectMeshes[i];
+                                chunkObj.AddComponent<MeshRenderer>().material = loadedData.objectMaterials[i];
                             }
 
                             if (loadedData.objectNames[i] == "EnemySpawner(Clone)")
@@ -125,7 +135,7 @@ namespace Chilli.Terrain
 
                             if (loadedData.objectNames[i] == "Tree2(Clone)")
                             {
-                                chunkObj.AddComponent<MeshCollider>().sharedMesh = loadedData.objectMeshes[i];
+                                chunkObj.AddComponent<MeshCollider>().sharedMesh = chunkObj.GetComponent<MeshFilter>().sharedMesh; /*loadedData.objectMeshes[i]*/;
                                 chunkObj.AddComponent<LOD>();
                                 chunkObj.GetComponent<LOD>().lodMesh = new Mesh[3];
                                 for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)

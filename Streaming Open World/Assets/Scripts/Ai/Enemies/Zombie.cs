@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Security.Cryptography;
 using Chilli.Quests;
+using Chilli.Terrain;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,7 +20,7 @@ namespace Chilli.Ai.Zombies
         private Vector3 _spawnPos;
         private float _health;
         private bool _isDying;
-        
+
         private static readonly int Walk = Animator.StringToHash("Walk");
         private static readonly int Run = Animator.StringToHash("Run");
 
@@ -89,29 +90,32 @@ namespace Chilli.Ai.Zombies
         {
             if (collision.gameObject.GetComponent<Chunk>() != null)
             {
-                var chunk = collision.gameObject.GetComponent<Chunk>(); 
+                var chunk = collision.gameObject.GetComponent<Chunk>();
                 
-                // If the zombie doesn't already belong to the chunk, parent itself to it and add to it's list
-                if (transform.parent != chunk.transform)
+                if (chunk.IsLoaded())
                 {
-                    transform.parent = chunk.transform;
+                    // If the zombie doesn't already belong to the chunk, parent itself to it and add to it's list
+                    if (transform.parent != chunk.transform)
+                    {
+                        transform.parent = chunk.transform;
                     
-                    // NOTE 1:
-                    //
-                    // Because zombies are dynamic objects and don't belong to any one chunk for the duration of play;
-                    // they should not be added to the list of chunk objects. Chunk objects unload with it's chunk and
-                    // if the zombie has moved chunk it would not make sense to unload it if it's current chunk remains
-                    // loaded.
+                        // NOTE 1:
+                        //
+                        // Because zombies are dynamic objects and don't belong to any one chunk for the duration of play;
+                        // they should not be added to the list of chunk objects. Chunk objects unload with it's chunk and
+                        // if the zombie has moved chunk it would not make sense to unload it if it's current chunk remains
+                        // loaded.
                     
-                    // NOTE 2:
-                    // 
-                    // Zombie data doesn't need to be loaded and unloaded from file as they are spawned with spawners.
-                    // Each zombie is the same as each other so it is a waste of memory and cpu cycles to read and 
-                    // write data for each and every zombie when loaded/unloaded.
-                    // NPCs however possess data about quests, which is important to the player and progress should
-                    // be written to file for that npc's quest. Therefore NPCs should be loaded / unloaded from file.
+                        // NOTE 2:
+                        // 
+                        // Zombie data doesn't need to be loaded and unloaded from file as they are spawned with spawners.
+                        // Each zombie is the same as each other so it is a waste of memory and cpu cycles to read and 
+                        // write data for each and every zombie when loaded/unloaded.
+                        // NPCs however possess data about quests, which is important to the player and progress should
+                        // be written to file for that npc's quest. Therefore NPCs should be loaded / unloaded from file.
                     
-                    chunk.GetComponent<Chunk>().chunkObjects.Add(gameObject);
+                        chunk.GetComponent<Chunk>().chunkObjects.Add(gameObject);
+                    }
                 }
             }
 
@@ -127,11 +131,12 @@ namespace Chilli.Ai.Zombies
 
         private void OnCollisionExit(Collision collision) 
         {
-            var chunk = collision.gameObject.GetComponent<Chunk>(); // null check here?
-            if (chunk != null)
+            if (collision.gameObject.GetComponent<Chunk>() != null)
             {
+                var chunk = collision.gameObject.GetComponent<Chunk>();
+                
                 // Remove from list of previous chunk
-                if (transform.parent != chunk.transform)
+                if (transform.parent != chunk.transform && !chunk.IsLoaded())
                 {
                     chunk.GetComponent<Chunk>().chunkObjects.Remove(gameObject);
                 }
@@ -193,6 +198,7 @@ namespace Chilli.Ai.Zombies
             Destroy(GetComponentInChildren<CapsuleCollider>());
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(10.0f);
+            transform.parent.GetComponent<Chunk>().chunkObjects.Remove(gameObject);
             Destroy(gameObject);
         }
     }

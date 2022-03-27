@@ -34,8 +34,8 @@ public class TerrainGeneratorEditor : EditorWindow
     private void OnGUI()
     {
         GUILayout.Label("Terrain Customisation", EditorStyles.boldLabel);
-        _heightMap     = EditorGUILayout.ObjectField("Heightmap", _heightMap, typeof(Texture2D), false) as Texture2D;
-        _material      = EditorGUILayout.ObjectField("Material", _material, typeof(Material), false) as Material;
+        _heightMap     = (Texture2D)EditorGUILayout.ObjectField("Heightmap", _heightMap, typeof(Texture2D), false);
+        _material      = (Material)EditorGUILayout.ObjectField("Material", _material, typeof(Material), false);
         _terrainWidth  = EditorGUILayout.IntSlider("Terrain Width", _terrainWidth, 0, 1024);
         _terrainHeight = EditorGUILayout.IntSlider("Terrain Height", _terrainHeight, 0, 1024);
         _chunkSize     = EditorGUILayout.IntField("Chunk Size", _chunkSize);
@@ -85,7 +85,7 @@ public class TerrainGeneratorEditor : EditorWindow
         
         GUILayout.Label("Chunk Object Spawner", EditorStyles.boldLabel);
         GUILayout.Space(10);
-        _objectToPaint = EditorGUILayout.ObjectField("Object To Spawn", _objectToPaint, typeof(GameObject), false) as GameObject;
+        _objectToPaint = (GameObject)EditorGUILayout.ObjectField("Object To Spawn", _objectToPaint, typeof(GameObject), false);
         
         if (GUILayout.Button("Spawner: " + _activeAssigner, buttonStyle))
         {

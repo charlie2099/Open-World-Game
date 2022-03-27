@@ -19,9 +19,21 @@ namespace Chilli.Ai
 
         private void SpawnEnemy()
         {
+            GameObject enemy = Instantiate(prefabCatalogueSo.prefab[0], transform.position, Quaternion.identity);
+            enemy.transform.parent = transform.parent;
+                    
+            if (transform.parent != null)
+            {
+                transform.parent.GetComponent<Chunk>().chunkObjects.Add(enemy);
+            }
+            
+            
+            
+            
+            
             // Shoots down a ray from a 100 units above the enemy spawner. If it hits the layerMaskCollider, a 
             // zombie is spawned.
-            var raycastStartHeight = 100;
+            /*var raycastStartHeight = 100;
             RaycastHit hit;
             Ray ray = new Ray (transform.position + Vector3.up * raycastStartHeight, Vector3.down);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) 
@@ -54,7 +66,7 @@ namespace Chilli.Ai
                         transform.parent.GetComponent<Chunk>().chunkObjects.Add(enemy);
                     }
                 }
-            }
+            }*/
         }
     }
 }

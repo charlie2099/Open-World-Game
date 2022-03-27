@@ -10,7 +10,6 @@ namespace Chilli.Terrain
 
     public class ChunkLoader : MonoBehaviour
     {
-        [SerializeField] private Transform activeOceanChunks;
         [SerializeField] private int maxChunkLoadDistance = 400;
         [SerializeField] private float checkRate = 2.0f;
         private Transform player;
@@ -58,19 +57,6 @@ namespace Chilli.Terrain
                             chunkNavSurface.center = new Vector3(32, 47.70573f, 31.84137f);
                             chunkNavSurface.BuildNavMesh();
                         }
-                    }
-                }
-        
-                // Ocean Terrain
-                for (int i = 0; i < activeOceanChunks.childCount; i++)
-                {
-                    if (Vector3.Distance(playerPos, activeOceanChunks.GetChild(i).position) > maxChunkLoadDistance)
-                    {
-                        activeOceanChunks.GetChild(i).gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        activeOceanChunks.GetChild(i).gameObject.SetActive(true);
                     }
                 }
             }

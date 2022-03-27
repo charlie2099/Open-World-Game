@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabCatalogueSo: {fileID: 11400000, guid: d013fd7449b27d646866a509464ccde1, type: 2}
-  spawnRate: 5
+  spawnRate: 20

@@ -169,7 +169,7 @@ public class SaveManager : MonoBehaviour
         {
             if (newChunkData.objectPos != null)
             {
-                var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];
+                var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];  
                 newChunkData.objectNames[i]     = chunkObj.name;
                 newChunkData.objectPos[i]       = chunkObj.transform.position;
 
