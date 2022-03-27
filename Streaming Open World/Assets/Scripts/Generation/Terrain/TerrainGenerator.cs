@@ -7,6 +7,7 @@ using Chilli.Quests;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Chilli.Terrain
 {
@@ -95,7 +96,8 @@ namespace Chilli.Terrain
                     chunk.AddComponent<MeshRenderer>().sharedMaterial = testMaterial;
                     chunk.AddComponent<MeshCollider>().sharedMesh = _mesh;
                     chunk.AddComponent<Chunk>().SetLoaded(true);
-                
+                    chunk.AddComponent<NavMeshSurface>().collectObjects = CollectObjects.Volume;
+
                     string chunkPath = Application.dataPath + "/SaveData/ChunkData/" + chunk.name + ".json";
                     if (File.Exists(chunkPath) && readFromFile)
                     {
@@ -181,6 +183,10 @@ namespace Chilli.Terrain
                     }
 
                     UpdateMesh();
+                    var chunkNavSurface = chunk.GetComponent<NavMeshSurface>();
+                    chunkNavSurface.size = new Vector3(64.3f, 29.41867f, 64.48733f);
+                    chunkNavSurface.center = new Vector3(32, 47.70573f, 31.84137f);
+                    chunkNavSurface.BuildNavMesh();
 
                     chunk.transform.parent = _container.transform;
                     _container.tag = "MainTerrain";

@@ -14,16 +14,16 @@ using UnityEditor;
 public class TerrainGeneratorEditor : EditorWindow
 {
     // Terrain
-    private Texture2D heightMap;
-    private Material material;
-    private int chunkSize        = 32;
-    private int terrainWidth     = 500;
-    private int terrainHeight    = 100;
+    private Texture2D _heightMap;
+    private Material _material;
+    private int _chunkSize     = 32;
+    private int _terrainWidth  = 500;
+    private int _terrainHeight = 100;
 
     // Terrain Objects
     private static bool _activeAssigner;
     private static bool _activeDeassigner;
-    private GameObject objectToPaint;
+    private GameObject _objectToPaint;
 
     [MenuItem("My Tools/TerrainGenerator")]
     public static void ShowWindow()
@@ -34,11 +34,11 @@ public class TerrainGeneratorEditor : EditorWindow
     private void OnGUI()
     {
         GUILayout.Label("Terrain Customisation", EditorStyles.boldLabel);
-        heightMap     = EditorGUILayout.ObjectField("Heightmap", heightMap, typeof(Texture2D), false) as Texture2D;
-        material      = EditorGUILayout.ObjectField("Material", material, typeof(Material), false) as Material;
-        terrainWidth  = EditorGUILayout.IntSlider("Terrain Width", terrainWidth, 0, 1024);
-        terrainHeight = EditorGUILayout.IntSlider("Terrain Height", terrainHeight, 0, 1024);
-        chunkSize     = EditorGUILayout.IntField("Chunk Size", chunkSize);
+        _heightMap     = EditorGUILayout.ObjectField("Heightmap", _heightMap, typeof(Texture2D), false) as Texture2D;
+        _material      = EditorGUILayout.ObjectField("Material", _material, typeof(Material), false) as Material;
+        _terrainWidth  = EditorGUILayout.IntSlider("Terrain Width", _terrainWidth, 0, 1024);
+        _terrainHeight = EditorGUILayout.IntSlider("Terrain Height", _terrainHeight, 0, 1024);
+        _chunkSize     = EditorGUILayout.IntField("Chunk Size", _chunkSize);
 
         GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
         buttonStyle.padding = new RectOffset(5, 5, 5, 5);
@@ -56,12 +56,15 @@ public class TerrainGeneratorEditor : EditorWindow
             GenerateNewTerrain();
         }
         
-        else if (GUILayout.Button("Bake nav mesh", buttonStyle))
+        GUILayout.Label("Nav Mesh", EditorStyles.boldLabel);
+        if (GUILayout.Button("Bake nav mesh", buttonStyle))
         {
-            if (TerrainGenerator.instance.GetContainer() != null)
-            {
-                NavMeshGenerator.GenerateNavMesh();
-            }
+            NavMeshGenerator.GenerateNavMesh();
+        }
+        
+        else if (GUILayout.Button("Clear nav mesh data", buttonStyle))
+        { 
+            NavMeshGenerator.ClearNavMeshData();
         }
 
         else if (GUILayout.Button("Save to file", buttonStyle))
@@ -69,7 +72,8 @@ public class TerrainGeneratorEditor : EditorWindow
             SaveToFile();
         }
         
-        else if (GUILayout.Button("Destroy active terrain", buttonStyle))
+        GUILayout.Label("Destructional", EditorStyles.boldLabel);
+        if (GUILayout.Button("Destroy active terrain", buttonStyle))
         {
             DestroyActiveTerrain();
         }
@@ -79,10 +83,9 @@ public class TerrainGeneratorEditor : EditorWindow
             DeleteSavedData();
         }
         
-        GUILayout.Space(25);
         GUILayout.Label("Chunk Object Spawner", EditorStyles.boldLabel);
         GUILayout.Space(10);
-        objectToPaint = EditorGUILayout.ObjectField("Object To Spawn", objectToPaint, typeof(GameObject), false) as GameObject;
+        _objectToPaint = EditorGUILayout.ObjectField("Object To Spawn", _objectToPaint, typeof(GameObject), false) as GameObject;
         
         if (GUILayout.Button("Spawner: " + _activeAssigner, buttonStyle))
         {
@@ -116,7 +119,7 @@ public class TerrainGeneratorEditor : EditorWindow
                 {
                     if (hit.collider.gameObject.GetComponent<Chunk>() != null)
                     {
-                        GameObject spawnedObj = Instantiate(objectToPaint, hit.point, Quaternion.identity);
+                        GameObject spawnedObj = Instantiate(_objectToPaint, hit.point, Quaternion.identity);
                         hit.collider.gameObject.GetComponent<Chunk>().chunkObjects.Add(spawnedObj);
                         spawnedObj.transform.parent = hit.transform;
                     }
@@ -173,7 +176,7 @@ public class TerrainGeneratorEditor : EditorWindow
 
         var loadedHeightMap = TerrainGenerator.instance.GetHeightMap();
         var loadedMaterial = TerrainGenerator.instance.GetMaterial();
-        TerrainGenerator.instance.GenerateMap(loadedHeightMap, loadedMaterial, chunkSize, terrainWidth, terrainHeight, true);
+        TerrainGenerator.instance.GenerateMap(loadedHeightMap, loadedMaterial, _chunkSize, _terrainWidth, _terrainHeight, true);
         Debug.Log("<color=cyan> A terrain has been loaded from file! </color>");
     }
 
@@ -187,13 +190,13 @@ public class TerrainGeneratorEditor : EditorWindow
         // if no terrain exists in the scene already, generate a new terrain
         if (TerrainGenerator.instance.GetChunks().Count <= 0)
         {
-            TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight, false);
+            TerrainGenerator.instance.GenerateMap(_heightMap, _material, _chunkSize, _terrainWidth, _terrainHeight, false);
             Debug.Log("<color=lime> A new terrain has been generated! </color>");
         }
         else // if a terrain exists in the scene clear chunk list and regenerate the terrain
         {
             DestroyActiveTerrain();
-            TerrainGenerator.instance.GenerateMap(heightMap, material, chunkSize, terrainWidth, terrainHeight, false);
+            TerrainGenerator.instance.GenerateMap(_heightMap, _material, _chunkSize, _terrainWidth, _terrainHeight, false);
             Debug.Log("<color=green> Existing terrain has been regenerated! </color>");
         }
     }
@@ -267,19 +270,19 @@ public class TerrainGeneratorEditor : EditorWindow
             TerrainGenerator.instance = GameObject.Find("Generator").GetComponent<TerrainGenerator>();
         }
 
-        if (heightMap == null)
+        if (_heightMap == null)
         {
             Debug.LogError("<color=red> Error: Please assign a heightmap to be used! </color>");
             return false;
         }
 
-        if (material == null)
+        if (_material == null)
         {
             Debug.LogError("<color=red> Error: Please assign a material to be used! </color>");
             return false;
         }
         
-        if (terrainWidth < chunkSize)
+        if (_terrainWidth < _chunkSize)
         {
             Debug.LogError("<color=red> Error: Terrain width should be larger than the chunk size! </color>");
             return false;

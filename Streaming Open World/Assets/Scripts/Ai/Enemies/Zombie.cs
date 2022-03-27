@@ -4,36 +4,39 @@ using System.Security.Cryptography;
 using Chilli.Quests;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace Chilli.Ai.Zombies
 {
     public class Zombie : MonoBehaviour
     { 
-        private Transform playerRef;
-        private Animator animator;
+        private Transform _playerRef;
+        private Animator _animator;
+        private NavMeshAgent _navMeshAgent;
+        private float _detectionRange;
+        private float _chaseRange;
+        private Vector3 _spawnPos;
+        private float _health;
+        private bool _isDying;
+        
         private static readonly int Walk = Animator.StringToHash("Walk");
         private static readonly int Run = Animator.StringToHash("Run");
-        private float detectionRange;
-        private float chaseRange;
-        private float speed;
-        private Vector3 spawnPos;
-        private float health;
-        private bool isDying;
 
         private void Awake() // cache references
         {
-            isDying = false;
-            playerRef = GameObject.FindWithTag("Player").transform;
-            animator = GetComponent<Animator>();
+            _isDying = false;
+            _playerRef = GameObject.FindWithTag("Player").transform;
+            _animator = GetComponent<Animator>();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         private void Start()
         {
-            health = 100;
-            spawnPos = transform.position;
-            detectionRange = 30; /*Random.Range(15, 20)*/
-            chaseRange = detectionRange / 2.0f;
+            _health = 100;
+            _spawnPos = transform.position;
+            _detectionRange = 30; /*Random.Range(15, 20)*/
+            _chaseRange = _detectionRange / 2.0f;
             
             InvokeRepeating(nameof(PlayerInDetectionRange), 0, 0.5f);
             InvokeRepeating(nameof(PlayerInChaseRange), 0, 0.5f);
@@ -41,7 +44,7 @@ namespace Chilli.Ai.Zombies
 
         private void Update()
         {
-            if (!isDying && playerRef != null)
+            if (!_isDying && _playerRef != null)
             {
                 if (PlayerInDetectionRange())
                 {
@@ -58,26 +61,28 @@ namespace Chilli.Ai.Zombies
             
                 if (PlayerInDetectionRange() || PlayerInChaseRange())
                 {
-                    float step =  speed * Time.deltaTime;
-                    transform.LookAt(playerRef.position);
-                    transform.position = Vector3.MoveTowards(transform.position, playerRef.position, step);
+                    //float step =  _speed * Time.deltaTime;
+                    //transform.LookAt(_playerRef.position);
+                    //transform.position = Vector3.MoveTowards(transform.position, _playerRef.position, step);
+                    _navMeshAgent.SetDestination(_playerRef.position);
+                    _navMeshAgent.speed = 0.75f;
                 }
             }
         }
 
         private bool PlayerInDetectionRange()
         {
-            if (playerRef == null) { return false; }
+            if (_playerRef == null) { return false; }
             
-            return Vector3.Distance(transform.position, playerRef.position) < detectionRange && 
-                   Vector3.Distance(transform.position, playerRef.position) > chaseRange;
+            return Vector3.Distance(transform.position, _playerRef.position) < _detectionRange && 
+                   Vector3.Distance(transform.position, _playerRef.position) > _chaseRange;
         }
         
         private bool PlayerInChaseRange()
         {
-            if (playerRef == null) { return false; }
+            if (_playerRef == null) { return false; }
             
-            return Vector3.Distance(transform.position, playerRef.position) <= chaseRange;
+            return Vector3.Distance(transform.position, _playerRef.position) <= _chaseRange;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -137,28 +142,28 @@ namespace Chilli.Ai.Zombies
         {
             GetComponent<Animator>().SetBool(Walk, true);
             GetComponent<Animator>().SetBool(Run, false);
-            speed = 0.25f;
         }
         
         private void Chase()
         {
             GetComponent<Animator>().SetBool(Run, true);
-            speed = 1.0f;
         }
 
         private void WanderAroundRandomly()
         {
             // If zombie is roughly at their start position, return to idle state
-            var xRange = Mathf.Clamp(transform.position.x, spawnPos.x - 1, spawnPos.x + 1);
-            var zRange = Mathf.Clamp(transform.position.z, spawnPos.z - 1, spawnPos.z + 1);
+            var xRange = Mathf.Clamp(transform.position.x, _spawnPos.x - 1, _spawnPos.x + 1);
+            var zRange = Mathf.Clamp(transform.position.z, _spawnPos.z - 1, _spawnPos.z + 1);
             if (transform.position != new Vector3(xRange, transform.position.y, zRange))
             {
                 GetComponent<Animator>().SetBool(Run, false);
                 GetComponent<Animator>().SetBool(Walk, true);
-                speed = 0.25f;
-                float step =  speed * Time.deltaTime;
-                transform.LookAt(new Vector3(spawnPos.x, transform.position.y, spawnPos.z));
-                transform.position = Vector3.MoveTowards(transform.position, spawnPos, step);
+                //_speed = 0.25f;
+                //float step =  _speed * Time.deltaTime;
+                //transform.LookAt(new Vector3(_spawnPos.x, transform.position.y, _spawnPos.z));
+                //transform.position = Vector3.MoveTowards(transform.position, _spawnPos, step);]
+                _navMeshAgent.SetDestination(_spawnPos);
+                _navMeshAgent.speed = 0.25f;
             }
             else
             {
@@ -168,8 +173,8 @@ namespace Chilli.Ai.Zombies
 
         public void TakeDamage(float damage)
         {
-            health -= damage;
-            if (health <= 0)
+            _health -= damage;
+            if (_health <= 0)
             {
                 EventManager.TriggerEvent("ZombieKilled", new EventParam());
                 StartCoroutine(PlayDeathAnimation());
@@ -178,13 +183,13 @@ namespace Chilli.Ai.Zombies
 
         public bool IsDying()
         {
-            return isDying;
+            return _isDying;
         }
         
         private IEnumerator PlayDeathAnimation()
         {
-            isDying = true;
-            animator.SetBool("Dying", true);
+            _isDying = true;
+            _animator.SetBool("Dying", true);
             Destroy(GetComponentInChildren<CapsuleCollider>());
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(10.0f);

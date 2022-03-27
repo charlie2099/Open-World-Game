@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Chilli.Terrain
 {
@@ -11,7 +12,7 @@ namespace Chilli.Terrain
     {
         [SerializeField] private Transform activeOceanChunks;
         [SerializeField] private int maxChunkLoadDistance = 400;
-        [SerializeField] private float checkRate = 1.0f;
+        [SerializeField] private float checkRate = 2.0f;
         private Transform player;
 
         private void Start()
@@ -40,6 +41,8 @@ namespace Chilli.Terrain
                         if (chunk.GetComponent<Chunk>().IsLoaded())
                         {
                             SaveManager.UnloadChunk(chunk);
+                            chunk.GetComponent<NavMeshSurface>().RemoveData();
+                            chunk.GetComponent<NavMeshSurface>().navMeshData = null;
                         }
                     }
             
@@ -49,6 +52,11 @@ namespace Chilli.Terrain
                         if (!chunk.GetComponent<Chunk>().IsLoaded())
                         {
                             SaveManager.LoadChunk(chunk);
+                            chunk.AddComponent<NavMeshSurface>().collectObjects = CollectObjects.Volume;
+                            var chunkNavSurface = chunk.GetComponent<NavMeshSurface>();
+                            chunkNavSurface.size = new Vector3(64.3f, 29.41867f, 64.48733f);
+                            chunkNavSurface.center = new Vector3(32, 47.70573f, 31.84137f);
+                            chunkNavSurface.BuildNavMesh();
                         }
                     }
                 }
