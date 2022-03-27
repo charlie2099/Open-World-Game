@@ -27,23 +27,21 @@ public class NavMeshGenerator : MonoBehaviour
                 }
                 
                 var chunkNavSurface = chunk.GetComponent<NavMeshSurface>();
-                /*if (chunk.GetComponent<Chunk>().IsLoaded())
-                {*/
-                    // Build a nav mesh for the loaded chunk if doesn't already exist
-                    if (chunkNavSurface.navMeshData == null)
-                    {
-                        print("Building nav mesh");
-                        chunkNavSurface.size = new Vector3(64.3f, 29.41867f, 64.48733f);
-                        chunkNavSurface.center = new Vector3(32, 47.70573f, 31.84137f);
-                        chunkNavSurface.BuildNavMesh();
-                    }
-                    // Update the nav mesh for the loaded chunk if it already has a nav mesh
-                    else
-                    {
-                        print("Updating nav mesh");
-                        chunkNavSurface.UpdateNavMesh(chunkNavSurface.navMeshData);
-                    }
-                /*}*/
+              
+                // Build a nav mesh for the loaded chunk if doesn't already exist
+                if (chunkNavSurface.navMeshData == null)
+                {
+                    print("Building nav mesh");
+                    chunkNavSurface.size = new Vector3(64.3f, 29.41867f, 64.48733f);
+                    chunkNavSurface.center = new Vector3(32, 47.70573f, 31.84137f);
+                    chunkNavSurface.BuildNavMesh();
+                }
+                // Update the nav mesh for the loaded chunk if it already has a nav mesh
+                else
+                {
+                    print("Updating nav mesh");
+                    chunkNavSurface.UpdateNavMesh(chunkNavSurface.navMeshData);
+                }
             }
             
             /*for (int i = 0; i < terrain.transform.childCount; i++)

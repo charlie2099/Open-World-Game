@@ -16,8 +16,8 @@ public class TerrainGeneratorEditor : EditorWindow
     // Terrain
     private Texture2D _heightMap;
     private Material _material;
-    private int _chunkSize     = 32;
-    private int _terrainWidth  = 500;
+    private int _chunkSize     = 64;
+    private int _terrainWidth  = 750;
     private int _terrainHeight = 100;
 
     // Terrain Objects
@@ -56,6 +56,11 @@ public class TerrainGeneratorEditor : EditorWindow
             GenerateNewTerrain();
         }
         
+        else if (GUILayout.Button("Save to file", buttonStyle))
+        {
+            SaveToFile();
+        }
+        
         GUILayout.Label("Nav Mesh", EditorStyles.boldLabel);
         if (GUILayout.Button("Bake nav mesh", buttonStyle))
         {
@@ -67,11 +72,6 @@ public class TerrainGeneratorEditor : EditorWindow
             NavMeshGenerator.ClearNavMeshData();
         }
 
-        else if (GUILayout.Button("Save to file", buttonStyle))
-        {
-            SaveToFile();
-        }
-        
         GUILayout.Label("Destructional", EditorStyles.boldLabel);
         if (GUILayout.Button("Destroy active terrain", buttonStyle))
         {

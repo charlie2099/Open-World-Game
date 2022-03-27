@@ -184,8 +184,8 @@ namespace Chilli.Terrain
 
                     UpdateMesh();
                     var chunkNavSurface = chunk.GetComponent<NavMeshSurface>();
-                    chunkNavSurface.size = new Vector3(64.3f, 29.41867f, 64.48733f);
-                    chunkNavSurface.center = new Vector3(32, 47.70573f, 31.84137f);
+                    chunkNavSurface.size = new Vector3(64.3f, 29.41867f, 64.14941f);
+                    chunkNavSurface.center = new Vector3(32, 47.70573f, 32.0011f);
                     chunkNavSurface.BuildNavMesh();
 
                     chunk.transform.parent = _container.transform;
