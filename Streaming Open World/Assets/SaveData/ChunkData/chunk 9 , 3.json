@@ -1,10 +1,10 @@
 {
     "name": "chunk 9 , 3",
     "chunkMesh": {
-        "instanceID": -20936
+        "instanceID": -4474
     },
     "material": {
-        "instanceID": -20938
+        "instanceID": -4476
     },
     "position": {
         "x": 576.0,
@@ -12,23 +12,16 @@
         "z": 192.0
     },
     "objectNames": [
-        "Tree2(Clone)",
         "Tree2(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -27888
-        },
-        {
-            "instanceID": -28228
+            "instanceID": -14822
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 23554
-        },
-        {
-            "instanceID": 23554
+            "instanceID": 25222
         }
     ],
     "objectVertices": [
@@ -6825,39 +6818,22 @@
     ],
     "objectTextures": [
         {
-            "instanceID": 23624
-        },
-        {
-            "instanceID": 23624
+            "instanceID": 23836
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": 23558
-        },
-        {
-            "instanceID": 23558
+            "instanceID": 23784
         }
     ],
     "objectPos": [
         {
-            "x": 615.94189453125,
-            "y": 58.039222717285159,
-            "z": 240.9251251220703
-        },
-        {
-            "x": 583.2146606445313,
-            "y": 52.82508850097656,
-            "z": 198.23464965820313
+            "x": 605.9020385742188,
+            "y": 64.70588684082031,
+            "z": 226.53207397460938
         }
     ],
     "objectRot": [
-        {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0,
-            "w": 1.0
-        },
         {
             "x": 0.0,
             "y": 0.0,
@@ -6870,13 +6846,13 @@
     },
     "treeLODMeshes": [
         {
-            "instanceID": 26778
+            "instanceID": 27558
         },
         {
-            "instanceID": 26780
+            "instanceID": 27560
         },
         {
-            "instanceID": 26782
+            "instanceID": 27562
         }
     ]
 }

@@ -1,10 +1,10 @@
 {
     "name": "chunk 9 , 10",
     "chunkMesh": {
-        "instanceID": -21076
+        "instanceID": -4614
     },
     "material": {
-        "instanceID": -21078
+        "instanceID": -4616
     },
     "position": {
         "x": 576.0,
@@ -12,16 +12,30 @@
         "z": 640.0
     },
     "objectNames": [
+        "Tree2(Clone)",
+        "Tree2(Clone)",
         "Tree2(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -29564
+            "instanceID": -9326
+        },
+        {
+            "instanceID": -9410
+        },
+        {
+            "instanceID": -9510
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 23554
+            "instanceID": 25222
+        },
+        {
+            "instanceID": 25222
+        },
+        {
+            "instanceID": 25222
         }
     ],
     "objectVertices": [
@@ -6818,22 +6832,56 @@
     ],
     "objectTextures": [
         {
-            "instanceID": 23624
+            "instanceID": 23836
+        },
+        {
+            "instanceID": 23836
+        },
+        {
+            "instanceID": 23836
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": 23558
+            "instanceID": 23784
+        },
+        {
+            "instanceID": 23784
+        },
+        {
+            "instanceID": 23784
         }
     ],
     "objectPos": [
         {
-            "x": 627.5076904296875,
-            "y": 41.17045593261719,
-            "z": 676.22119140625
+            "x": 636.6741333007813,
+            "y": 41.960784912109378,
+            "z": 685.0633544921875
+        },
+        {
+            "x": 607.0509033203125,
+            "y": 45.038143157958987,
+            "z": 685.481689453125
+        },
+        {
+            "x": 607.59130859375,
+            "y": 39.144081115722659,
+            "z": 660.007080078125
         }
     ],
     "objectRot": [
+        {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
+        {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        },
         {
             "x": 0.0,
             "y": 0.0,
@@ -6846,13 +6894,13 @@
     },
     "treeLODMeshes": [
         {
-            "instanceID": 26778
+            "instanceID": 27558
         },
         {
-            "instanceID": 26780
+            "instanceID": 27560
         },
         {
-            "instanceID": 26782
+            "instanceID": 27562
         }
     ]
 }

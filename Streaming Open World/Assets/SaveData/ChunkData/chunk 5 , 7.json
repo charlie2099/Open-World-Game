@@ -1,10 +1,10 @@
 {
     "name": "chunk 5 , 7",
     "chunkMesh": {
-        "instanceID": -20136
+        "instanceID": -3674
     },
     "material": {
-        "instanceID": -20138
+        "instanceID": -3676
     },
     "position": {
         "x": 320.0,
@@ -12,23 +12,16 @@
         "z": 448.0
     },
     "objectNames": [
-        "Tree2(Clone)",
         "Tree2(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -23620
-        },
-        {
-            "instanceID": -23852
+            "instanceID": -11102
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 23554
-        },
-        {
-            "instanceID": 23554
+            "instanceID": 25222
         }
     ],
     "objectVertices": [
@@ -6825,39 +6818,22 @@
     ],
     "objectTextures": [
         {
-            "instanceID": 23624
-        },
-        {
-            "instanceID": 23624
+            "instanceID": 23836
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": 23558
-        },
-        {
-            "instanceID": 23558
+            "instanceID": 23784
         }
     ],
     "objectPos": [
         {
-            "x": 323.4126281738281,
-            "y": 41.798973083496097,
-            "z": 449.84783935546877
-        },
-        {
-            "x": 330.86785888671877,
-            "y": 41.960784912109378,
-            "z": 509.13665771484377
+            "x": 327.96612548828127,
+            "y": 45.12461471557617,
+            "z": 480.4805908203125
         }
     ],
     "objectRot": [
-        {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0,
-            "w": 1.0
-        },
         {
             "x": 0.0,
             "y": 0.0,
@@ -6870,13 +6846,13 @@
     },
     "treeLODMeshes": [
         {
-            "instanceID": 26778
+            "instanceID": 27558
         },
         {
-            "instanceID": 26780
+            "instanceID": 27560
         },
         {
-            "instanceID": 26782
+            "instanceID": 27562
         }
     ]
 }

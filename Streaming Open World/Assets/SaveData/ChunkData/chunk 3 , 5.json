@@ -1,10 +1,10 @@
 {
     "name": "chunk 3 , 5",
     "chunkMesh": {
-        "instanceID": -19656
+        "instanceID": -3194
     },
     "material": {
-        "instanceID": -19658
+        "instanceID": -3196
     },
     "position": {
         "x": 192.0,
@@ -12,23 +12,23 @@
         "z": 320.0
     },
     "objectNames": [
-        "EnemySpawner(Clone)",
-        "Tree2(Clone)"
+        "Tree2(Clone)",
+        "EnemySpawner(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -21430
+            "instanceID": -11686
         },
         {
-            "instanceID": -22262
+            "instanceID": -16742
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 0
+            "instanceID": 25222
         },
         {
-            "instanceID": 23554
+            "instanceID": 0
         }
     ],
     "objectVertices": [
@@ -6825,30 +6825,30 @@
     ],
     "objectTextures": [
         {
-            "instanceID": 0
+            "instanceID": 23836
         },
         {
-            "instanceID": 23624
+            "instanceID": 0
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": 0
+            "instanceID": 23784
         },
         {
-            "instanceID": 23558
+            "instanceID": 0
         }
     ],
     "objectPos": [
         {
-            "x": 219.96507263183595,
-            "y": 39.607845306396487,
-            "z": 370.6029052734375
+            "x": 246.30467224121095,
+            "y": 36.47058868408203,
+            "z": 336.2601318359375
         },
         {
-            "x": 230.4475555419922,
-            "y": 38.431373596191409,
-            "z": 366.2823791503906
+            "x": 217.80819702148438,
+            "y": 37.593421936035159,
+            "z": 352.2373962402344
         }
     ],
     "objectRot": [
@@ -6866,17 +6866,17 @@
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 23570
+        "instanceID": 23786
     },
     "treeLODMeshes": [
         {
-            "instanceID": 26778
+            "instanceID": 27558
         },
         {
-            "instanceID": 26780
+            "instanceID": 27560
         },
         {
-            "instanceID": 26782
+            "instanceID": 27562
         }
     ]
 }

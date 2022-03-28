@@ -1,10 +1,10 @@
 {
     "name": "chunk 4 , 7",
     "chunkMesh": {
-        "instanceID": -19916
+        "instanceID": -3454
     },
     "material": {
-        "instanceID": -19918
+        "instanceID": -3456
     },
     "position": {
         "x": 256.0,
@@ -17,18 +17,18 @@
     ],
     "objects": [
         {
-            "instanceID": -23704
+            "instanceID": -6920
         },
         {
-            "instanceID": -30404
+            "instanceID": -7008
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 23554
+            "instanceID": 25222
         },
         {
-            "instanceID": 23554
+            "instanceID": 25222
         }
     ],
     "objectVertices": [
@@ -6825,30 +6825,30 @@
     ],
     "objectTextures": [
         {
-            "instanceID": 23624
+            "instanceID": 23836
         },
         {
-            "instanceID": 23624
+            "instanceID": 23836
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": 23558
+            "instanceID": 23784
         },
         {
-            "instanceID": 23558
+            "instanceID": 23784
         }
     ],
     "objectPos": [
         {
-            "x": 268.7323303222656,
-            "y": 58.039215087890628,
-            "z": 483.8434143066406
+            "x": 291.70318603515627,
+            "y": 48.93363952636719,
+            "z": 454.8330993652344
         },
         {
-            "x": 310.6229553222656,
-            "y": 49.41176986694336,
-            "z": 486.9705810546875
+            "x": 260.99945068359377,
+            "y": 56.86274719238281,
+            "z": 487.43011474609377
         }
     ],
     "objectRot": [
@@ -6870,13 +6870,13 @@
     },
     "treeLODMeshes": [
         {
-            "instanceID": 26778
+            "instanceID": 27558
         },
         {
-            "instanceID": 26780
+            "instanceID": 27560
         },
         {
-            "instanceID": 26782
+            "instanceID": 27562
         }
     ]
 }

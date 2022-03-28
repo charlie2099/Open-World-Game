@@ -517,30 +517,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192259277}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e57d9c5b4a2c2ef4ca7601014eb5b585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData:
-  - name: Tree
-    mesh: {fileID: 4300000, guid: bbe1c95a2bfd1564dbb0cab5e9679440, type: 3}
-    collisionMesh: {fileID: 43243102622818808, guid: 6fad61d5188818841bc2b086726ea05a, type: 2}
-    material:
-    - {fileID: 2100000, guid: 28646867ddcf90a4989276acd313ea43, type: 2}
-    position: {x: 0, y: 0, z: 0}
-  - name: Church
-    mesh: {fileID: 4300000, guid: 9904406e34eee1b4292b52dd0ec6028a, type: 3}
-    collisionMesh: {fileID: 4300000, guid: 6ec7fed0602eafb4a9d1055b9b0af3ea, type: 3}
-    material:
-    - {fileID: 2100000, guid: 28646867ddcf90a4989276acd313ea43, type: 2}
-    position: {x: 0, y: 0, z: 0}
-  - name: GrassPatch
-    mesh: {fileID: 4300000, guid: 875eaef8cf5940242aea92ac0cedeef4, type: 3}
-    collisionMesh: {fileID: 43472407286584762, guid: 43c2dcc4f24737b4fb74e73288996583, type: 2}
-    material:
-    - {fileID: 2100000, guid: 28646867ddcf90a4989276acd313ea43, type: 2}
-    position: {x: 0, y: 0, z: 0}
+  prefabCatalogueSo: {fileID: 11400000, guid: d013fd7449b27d646866a509464ccde1, type: 2}
+  treeMaterial: {fileID: 2100000, guid: 28646867ddcf90a4989276acd313ea43, type: 2}
+  treeLodMeshes:
+  - {fileID: 7381432648153889556, guid: 4ecbaa2f83caf7b4b9c0c0d42cc05b27, type: 3}
+  - {fileID: 7381432648153889556, guid: 72ceba2cf48f09f46b2f124bf7913942, type: 3}
+  - {fileID: 7381432648153889556, guid: fc562c1135686444082eca928f39ac54, type: 3}
 --- !u!114 &192259282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,7 +1541,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3259842, y: 1}
+    m_SensorSize: {x: 1.3188181, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1893,7 +1880,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ed8544ee3a26ff140bc6fad8e6785e6a, type: 2}
+  - {fileID: 2100000, guid: 24f68563c54c9b54d9f166614560f0cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2880,7 +2867,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3259842, y: 1}
+    m_SensorSize: {x: 1.3188181, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

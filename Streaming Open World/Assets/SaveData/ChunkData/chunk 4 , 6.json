@@ -1,10 +1,10 @@
 {
     "name": "chunk 4 , 6",
     "chunkMesh": {
-        "instanceID": -19896
+        "instanceID": -3434
     },
     "material": {
-        "instanceID": -19898
+        "instanceID": -3436
     },
     "position": {
         "x": 256.0,
@@ -12,65 +12,51 @@
         "z": 384.0
     },
     "objectNames": [
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
+        "Tree2(Clone)",
         "EnemySpawner(Clone)",
-        "NPC_Father(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)",
-        "Tree2(Clone)"
+        "NPC_Father(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -21332
+            "instanceID": -6222
         },
         {
-            "instanceID": -21614
+            "instanceID": -6832
         },
         {
-            "instanceID": -22898
+            "instanceID": -11374
         },
         {
-            "instanceID": -22986
+            "instanceID": -11458
         },
         {
-            "instanceID": -23060
+            "instanceID": -16588
         },
         {
-            "instanceID": -23146
-        },
-        {
-            "instanceID": -23232
-        },
-        {
-            "instanceID": -23318
+            "instanceID": -18284
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 0
+            "instanceID": 25222
+        },
+        {
+            "instanceID": 25222
+        },
+        {
+            "instanceID": 25222
+        },
+        {
+            "instanceID": 25222
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": 23554
-        },
-        {
-            "instanceID": 23554
-        },
-        {
-            "instanceID": 23554
-        },
-        {
-            "instanceID": 23554
-        },
-        {
-            "instanceID": 23554
-        },
-        {
-            "instanceID": 23554
+            "instanceID": 0
         }
     ],
     "objectVertices": [
@@ -6867,96 +6853,74 @@
     ],
     "objectTextures": [
         {
-            "instanceID": 0
+            "instanceID": 23836
+        },
+        {
+            "instanceID": 23836
+        },
+        {
+            "instanceID": 23836
+        },
+        {
+            "instanceID": 23836
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": 23624
-        },
-        {
-            "instanceID": 23624
-        },
-        {
-            "instanceID": 23624
-        },
-        {
-            "instanceID": 23624
-        },
-        {
-            "instanceID": 23624
-        },
-        {
-            "instanceID": 23624
+            "instanceID": 0
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": 0
+            "instanceID": 23784
+        },
+        {
+            "instanceID": 23784
+        },
+        {
+            "instanceID": 23784
+        },
+        {
+            "instanceID": 23784
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": 23558
-        },
-        {
-            "instanceID": 23558
-        },
-        {
-            "instanceID": 23558
-        },
-        {
-            "instanceID": 23558
-        },
-        {
-            "instanceID": 23558
-        },
-        {
-            "instanceID": 23558
+            "instanceID": 0
         }
     ],
     "objectPos": [
         {
-            "x": 266.6012268066406,
+            "x": 296.2149963378906,
+            "y": 45.09803771972656,
+            "z": 389.3763427734375
+        },
+        {
+            "x": 315.5232238769531,
+            "y": 42.32363510131836,
+            "z": 401.0141296386719
+        },
+        {
+            "x": 278.09466552734377,
+            "y": 45.09803771972656,
+            "z": 430.5914001464844
+        },
+        {
+            "x": 275.5739440917969,
             "y": 41.960784912109378,
-            "z": 398.2915954589844
+            "z": 405.5458984375
         },
         {
-            "x": 298.08880615234377,
-            "y": 45.09803771972656,
-            "z": 398.5528869628906
-        },
-        {
-            "x": 266.3925476074219,
-            "y": 41.568626403808597,
-            "z": 385.742431640625
-        },
-        {
-            "x": 278.7092590332031,
-            "y": 41.96078109741211,
-            "z": 406.8218994140625
-        },
-        {
-            "x": 297.7638244628906,
-            "y": 45.09803771972656,
-            "z": 404.7916259765625
-        },
-        {
-            "x": 305.9281311035156,
-            "y": 45.09803771972656,
-            "z": 387.55804443359377
-        },
-        {
-            "x": 312.5416564941406,
+            "x": 265.23944091796877,
             "y": 41.960784912109378,
-            "z": 410.533203125
+            "z": 397.16461181640627
         },
         {
-            "x": 273.239501953125,
+            "x": 297.043701171875,
             "y": 45.09804153442383,
-            "z": 431.38873291015627
+            "z": 397.41778564453127
         }
     ],
     "objectRot": [
@@ -6995,32 +6959,20 @@
             "y": 0.0,
             "z": 0.0,
             "w": 1.0
-        },
-        {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0,
-            "w": 1.0
-        },
-        {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0,
-            "w": 1.0
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 23570
+        "instanceID": 23786
     },
     "treeLODMeshes": [
         {
-            "instanceID": 26778
+            "instanceID": 27558
         },
         {
-            "instanceID": 26780
+            "instanceID": 27560
         },
         {
-            "instanceID": 26782
+            "instanceID": 27562
         }
     ]
 }

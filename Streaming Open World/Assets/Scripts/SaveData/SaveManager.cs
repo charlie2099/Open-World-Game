@@ -13,7 +13,7 @@ using UnityEngine;
 /// Saves chunk data, terrain data, and npc data to json files.
 /// </summary>
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
 {
     public class ChunkData
     {

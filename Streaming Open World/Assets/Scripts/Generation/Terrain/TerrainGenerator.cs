@@ -18,7 +18,7 @@ namespace Chilli.Terrain
     /// Generates a chunked terrain and reads chunk data from file should it exist.
     /// </summary>
 
-    public class TerrainGenerator : MonoBehaviour
+    public class TerrainGenerator : MonoBehaviour // TODO: Big clean-up needed
     {
         public static TerrainGenerator instance;
         
@@ -28,7 +28,7 @@ namespace Chilli.Terrain
         [SerializeField] private int serialisedChunkSize;
         [SerializeField] private int serialisedTerrainWidth;
         [SerializeField] private int serialisedTerrainHeight;
-    
+
         private int _rowLength;
         private int _totalChunks;
         private int _chunkSize;
@@ -142,10 +142,16 @@ namespace Chilli.Terrain
                                 // Object mesh instance only exists while in Unity, destroyed reference upon exiting (I think?)
                                 // So create new one here
                                 Mesh testMesh    = new Mesh();
-
                                 chunkObj.AddComponent<MeshFilter>().sharedMesh = testMesh;
-                                chunkObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
-                                chunkObj.GetComponent<MeshRenderer>().sharedMaterial.mainTexture = loadedData.objectTextures[i];
+
+                                if (ObjectGenerator.instance == null)
+                                {
+                                    ObjectGenerator.instance = FindObjectOfType<ObjectGenerator>();
+                                }
+
+                                Material treeMat = new Material(ObjectGenerator.instance.treeMaterial);
+                                chunkObj.AddComponent<MeshRenderer>().sharedMaterial = treeMat;
+                                //chunkObj.GetComponent<MeshRenderer>().sharedMaterial.mainTexture = loadedData.objectTextures[i];
 
                                 testMesh.Clear();
                                 testMesh.vertices = loadedData.objectVertices.ToArray();   
@@ -157,6 +163,7 @@ namespace Chilli.Terrain
 
                             if (loadedData.objectNames[i] == "EnemySpawner(Clone)")
                             {
+                                loadedData.spawnerScriptableObject = GameObject.Find("Generator").GetComponent<ObjectGenerator>().prefabCatalogueSo;
                                 chunkObj.AddComponent<EnemySpawner>().prefabCatalogueSo = loadedData.spawnerScriptableObject;
                             }
 
@@ -168,40 +175,15 @@ namespace Chilli.Terrain
                             if (loadedData.objectNames[i] == "Tree2(Clone)")
                             {
                                 chunkObj.AddComponent<MeshCollider>().sharedMesh = chunkObj.GetComponent<MeshFilter>().sharedMesh; 
-                                //chunkObj.AddComponent<LOD>();
-                                //chunkObj.GetComponent<LOD>().lodMesh = new Mesh[3];
-
-                                //for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)
-                                //{
-                                    //chunkObj.GetComponent<LOD>().lodMesh[j] = loadedData.treeLODMeshes[j];
-                                    
-                                    // vertices for lod mesh 0 = size of the vertex count
-                                    /*print("tree lod mesh (" + j + ") " + loadedData.treeVertices.Length);
-                                    chunkObj.GetComponent<LOD>().lodMesh[j].vertices  = new Vector3[loadedData.treeVertices.Length];
-                                    chunkObj.GetComponent<LOD>().lodMesh[j].triangles = new int[loadedData.treeTriangles.Length];
-                                    chunkObj.GetComponent<LOD>().lodMesh[j].uv        = new Vector2[loadedData.treeUvs.Length];
-
-                                    // For vertices in each lod mesh
-                                    for (int k = 0; k < chunkObj.GetComponent<LOD>().lodMesh[j].vertexCount; k++)
-                                    {
-                                        chunkObj.GetComponent<LOD>().lodMesh[j].vertices[k] = loadedData.treeVertices[k];
-                                    }
-                        
-                                    // For triangles in each lod mesh
-                                    for (int k = 0; k < chunkObj.GetComponent<LOD>().lodMesh[j].triangles.Length; k++)
-                                    {
-                                        chunkObj.GetComponent<LOD>().lodMesh[j].triangles[k] = loadedData.treeTriangles[k];
-                                    }
-                        
-                                    // For uvs in each lod mesh
-                                    for (int k = 0; k < chunkObj.GetComponent<LOD>().lodMesh[j].uv.Length; k++)
-                                    {
-                                        chunkObj.GetComponent<LOD>().lodMesh[j].uv[k] = loadedData.treeUvs[k];
-                                    }*/
-                               // }
-                                /*chunkObj.GetComponent<LOD>().distanceLOD1   = 30;
+                                chunkObj.AddComponent<LOD>();
+                                chunkObj.GetComponent<LOD>().lodMesh = new Mesh[3];
+                                for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)
+                                {
+                                    chunkObj.GetComponent<LOD>().lodMesh[j] = ObjectGenerator.instance.treeLodMeshes[j];
+                                }
+                                chunkObj.GetComponent<LOD>().distanceLOD1   = 30;
                                 chunkObj.GetComponent<LOD>().distanceLOD2   = 50;
-                                chunkObj.GetComponent<LOD>().updateInterval = 2;*/
+                                chunkObj.GetComponent<LOD>().updateInterval = 2;
                                 chunkObj.transform.localScale = new Vector3(2, 2, 2);
                             }
 

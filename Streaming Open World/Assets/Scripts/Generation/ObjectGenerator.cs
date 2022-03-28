@@ -6,7 +6,17 @@ using UnityEngine;
 
 public class ObjectGenerator : MonoBehaviour
 {
-    [Serializable]
+    public static ObjectGenerator instance;
+    public PrefabCatalogueSO prefabCatalogueSo;
+    public Material treeMaterial;
+    public Mesh[] treeLodMeshes;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    /*[Serializable]
     public class ObjectData
     {
         public string name;
@@ -18,7 +28,7 @@ public class ObjectGenerator : MonoBehaviour
     
     [SerializeField] private ObjectData[] objectData;
 
-    private GameObject createdObj;
+    private GameObject createdObj;*/
 
     private void Start()
     {
@@ -37,7 +47,7 @@ public class ObjectGenerator : MonoBehaviour
         //CreateMesh("Tree");
     }
 
-    public void CreateMesh(string meshName)
+    /*public void CreateMesh(string meshName)
     {
         GameObject newObj = new GameObject(meshName);
 
@@ -52,7 +62,7 @@ public class ObjectGenerator : MonoBehaviour
                 }
                 newObj.AddComponent<MeshCollider>().sharedMesh = obj.collisionMesh;
             }
-        }*/
+        }#1#
 
         createdObj = newObj;
     }
@@ -60,5 +70,5 @@ public class ObjectGenerator : MonoBehaviour
     public GameObject GetMesh()
     {
         return createdObj;
-    }
+    }*/
 }
