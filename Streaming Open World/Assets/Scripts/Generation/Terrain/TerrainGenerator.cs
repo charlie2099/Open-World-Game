@@ -221,7 +221,7 @@ namespace Chilli.Terrain
                             if (loadedData.objectNames[i] != "NPC_Father(Clone)")
                             {
                                 chunkObj.transform.position = loadedData.objectPos[i];
-                                chunkObj.transform.rotation = loadedData.objectRot[i];
+                                //chunkObj.transform.rotation = loadedData.objectRot[i];
                                 chunkObj.transform.parent = chunk.transform;
                                 chunk.GetComponent<Chunk>().chunkObjects.Add(chunkObj);
                             }

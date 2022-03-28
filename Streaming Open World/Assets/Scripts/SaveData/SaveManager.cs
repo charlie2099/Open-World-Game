@@ -33,7 +33,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
         public Texture[] objectTextures;
         public Material[] objectMaterials;
         public Vector3[] objectPos;
-        public Quaternion[] objectRot;
+        //public Quaternion[] objectRot;
         
         // Spawners
         //public GameObject spawnerPrefab;
@@ -140,6 +140,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
             if (loadedData.objectNames[i] != "NPC_Father(Clone)")
             {
                 newObj.transform.position = loadedData.objectPos[i];
+                //newObj.transform.rotation = loadedData.objectRot[i];
                 newObj.transform.parent = chunk.transform;
 
                 chunk.GetComponent<Chunk>().chunkObjects.Add(newObj);
@@ -168,6 +169,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
         newChunkData.objects            = chunk.GetComponent<Chunk>().chunkObjects;
         newChunkData.objectNames        = new string[newChunkData.objects.Count];
         newChunkData.objectPos          = new Vector3[newChunkData.objects.Count];
+        //newChunkData.objectRot          = new Quaternion[newChunkData.objects.Count];
         newChunkData.objectMeshes       = new Mesh[newChunkData.objects.Count];
         //newChunkData.objectVertices     = new Vector3[chunk.GetComponent<Chunk>().chunkObjects[];
         newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
@@ -181,6 +183,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
                 var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];  
                 newChunkData.objectNames[i]     = chunkObj.name;
                 newChunkData.objectPos[i]       = chunkObj.transform.position;
+                //newChunkData.objectRot[i]       = chunkObj.transform.rotation;
 
                 if (chunkObj.GetComponent<MeshFilter>() != null)
                 {
@@ -283,7 +286,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
             newChunkData.objects            = chunk.GetComponent<Chunk>().chunkObjects;
             newChunkData.objectNames        = new string[newChunkData.objects.Count];
             newChunkData.objectPos          = new Vector3[newChunkData.objects.Count];
-            newChunkData.objectRot          = new Quaternion[newChunkData.objects.Count];
+            //newChunkData.objectRot          = new Quaternion[newChunkData.objects.Count];
             newChunkData.objectMeshes       = new Mesh[newChunkData.objects.Count];
             newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
             newChunkData.treeLODMeshes      = new Mesh[3];
@@ -297,7 +300,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
                     var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];
                     newChunkData.objectNames[i] = chunkObj.name;
                     newChunkData.objectPos[i]   = chunkObj.transform.position;
-                    newChunkData.objectRot[i]   = chunkObj.transform.rotation;
+                    //newChunkData.objectRot[i]   = chunkObj.transform.rotation;
 
                     if (chunkObj.GetComponent<MeshFilter>() != null)
                     {
