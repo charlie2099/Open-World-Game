@@ -1,10 +1,10 @@
 {
     "name": "chunk 1 , 4",
     "chunkMesh": {
-        "instanceID": -581072
+        "instanceID": -415002
     },
     "material": {
-        "instanceID": -581074
+        "instanceID": -415004
     },
     "position": {
         "x": 64.0,
@@ -12,16 +12,149 @@
         "z": 256.0
     },
     "objectNames": [
-        "Tree2(Clone)"
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Tree2(Clone)",
+        "EnemySpawner(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -589076
+            "instanceID": -415016
+        },
+        {
+            "instanceID": -415028
+        },
+        {
+            "instanceID": -415040
+        },
+        {
+            "instanceID": -415052
+        },
+        {
+            "instanceID": -415068
+        },
+        {
+            "instanceID": -415074
+        },
+        {
+            "instanceID": -415086
+        },
+        {
+            "instanceID": -415098
+        },
+        {
+            "instanceID": -415110
+        },
+        {
+            "instanceID": -415122
+        },
+        {
+            "instanceID": -415134
+        },
+        {
+            "instanceID": -415146
+        },
+        {
+            "instanceID": -415158
+        },
+        {
+            "instanceID": -415170
+        },
+        {
+            "instanceID": -415182
+        },
+        {
+            "instanceID": -415194
+        },
+        {
+            "instanceID": -415206
+        },
+        {
+            "instanceID": -415218
+        },
+        {
+            "instanceID": -415230
+        },
+        {
+            "instanceID": -415242
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 23542
+            "instanceID": -415020
+        },
+        {
+            "instanceID": -415032
+        },
+        {
+            "instanceID": -415044
+        },
+        {
+            "instanceID": 23844
+        },
+        {
+            "instanceID": 0
+        },
+        {
+            "instanceID": -415078
+        },
+        {
+            "instanceID": -415090
+        },
+        {
+            "instanceID": -415102
+        },
+        {
+            "instanceID": -415114
+        },
+        {
+            "instanceID": -415126
+        },
+        {
+            "instanceID": -415138
+        },
+        {
+            "instanceID": -415150
+        },
+        {
+            "instanceID": -415162
+        },
+        {
+            "instanceID": -415174
+        },
+        {
+            "instanceID": -415186
+        },
+        {
+            "instanceID": -415198
+        },
+        {
+            "instanceID": -415210
+        },
+        {
+            "instanceID": -415222
+        },
+        {
+            "instanceID": -415234
+        },
+        {
+            "instanceID": -415246
         }
     ],
     "objectVertices": [],
@@ -30,29 +163,180 @@
     "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -581094
+            "instanceID": -415024
+        },
+        {
+            "instanceID": -415036
+        },
+        {
+            "instanceID": -415048
+        },
+        {
+            "instanceID": -415060
+        },
+        {
+            "instanceID": 0
+        },
+        {
+            "instanceID": -415082
+        },
+        {
+            "instanceID": -415094
+        },
+        {
+            "instanceID": -415106
+        },
+        {
+            "instanceID": -415118
+        },
+        {
+            "instanceID": -415130
+        },
+        {
+            "instanceID": -415142
+        },
+        {
+            "instanceID": -415154
+        },
+        {
+            "instanceID": -415166
+        },
+        {
+            "instanceID": -415178
+        },
+        {
+            "instanceID": -415190
+        },
+        {
+            "instanceID": -415202
+        },
+        {
+            "instanceID": -415214
+        },
+        {
+            "instanceID": -415226
+        },
+        {
+            "instanceID": -415238
+        },
+        {
+            "instanceID": -415250
         }
     ],
     "objectPos": [
         {
+            "x": 98.31974029541016,
+            "y": -6306.83984375,
+            "z": 288.61297607421877
+        },
+        {
+            "x": 108.37371826171875,
+            "y": -3014.53662109375,
+            "z": 291.5102233886719
+        },
+        {
+            "x": 91.591552734375,
+            "y": -5619.9501953125,
+            "z": 276.4491882324219
+        },
+        {
             "x": 121.92664337158203,
             "y": 49.411766052246097,
             "z": 266.9294738769531
+        },
+        {
+            "x": 101.35044860839844,
+            "y": 52.54902648925781,
+            "z": 283.8710021972656
+        },
+        {
+            "x": 106.51123046875,
+            "y": 51.663814544677737,
+            "z": 275.18243408203127
+        },
+        {
+            "x": 100.29966735839844,
+            "y": 53.46681213378906,
+            "z": 293.29010009765627
+        },
+        {
+            "x": 109.99217987060547,
+            "y": 51.870506286621097,
+            "z": 288.5870056152344
+        },
+        {
+            "x": 98.42321014404297,
+            "y": 52.55043029785156,
+            "z": 278.6690979003906
+        },
+        {
+            "x": 96.45845031738281,
+            "y": 53.52288055419922,
+            "z": 287.5412292480469
+        },
+        {
+            "x": 98.99834442138672,
+            "y": 51.94606018066406,
+            "z": 273.9351806640625
+        },
+        {
+            "x": 97.18318176269531,
+            "y": 53.52288055419922,
+            "z": 283.0187683105469
+        },
+        {
+            "x": 110.77983856201172,
+            "y": 51.81059265136719,
+            "z": 281.74615478515627
+        },
+        {
+            "x": 110.1496353149414,
+            "y": 51.810272216796878,
+            "z": 277.5097351074219
+        },
+        {
+            "x": 92.2228775024414,
+            "y": 54.72943115234375,
+            "z": 292.0491027832031
+        },
+        {
+            "x": 93.23350524902344,
+            "y": 54.633358001708987,
+            "z": 293.1533508300781
+        },
+        {
+            "x": 102.81192779541016,
+            "y": 52.73098373413086,
+            "z": 290.2027282714844
+        },
+        {
+            "x": 101.58245849609375,
+            "y": 52.633358001708987,
+            "z": 285.5859680175781
+        },
+        {
+            "x": 107.56028747558594,
+            "y": 51.883358001708987,
+            "z": 282.3065490722656
+        },
+        {
+            "x": 106.83932495117188,
+            "y": 52.13428497314453,
+            "z": 286.9195556640625
         }
     ],
-    "objectRot": [],
     "spawnerScriptableObject": {
-        "instanceID": 0
+        "instanceID": 23838
     },
     "treeLODMeshes": [
         {
-            "instanceID": 23538
+            "instanceID": 23840
         },
         {
-            "instanceID": 23540
+            "instanceID": 23842
         },
         {
-            "instanceID": 23542
+            "instanceID": 23844
         }
     ]
 }

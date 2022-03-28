@@ -1,28 +1,47 @@
 {
     "name": "chunk 2 , 8",
     "chunkMesh": {
-        "instanceID": -581500
+        "instanceID": -416192
     },
     "material": {
-        "instanceID": -581502
+        "instanceID": -416194
     },
     "position": {
         "x": 128.0,
         "y": 0.0,
         "z": 512.0
     },
-    "objectNames": [],
-    "objects": [],
-    "objectMeshes": [],
+    "objectNames": [
+        "EnemySpawner(Clone)"
+    ],
+    "objects": [
+        {
+            "instanceID": -416206
+        }
+    ],
+    "objectMeshes": [
+        {
+            "instanceID": 0
+        }
+    ],
     "objectVertices": [],
     "objectTriangles": [],
     "objectUvs": [],
     "objectTextures": [],
-    "objectMaterials": [],
-    "objectPos": [],
-    "objectRot": [],
+    "objectMaterials": [
+        {
+            "instanceID": 0
+        }
+    ],
+    "objectPos": [
+        {
+            "x": 150.52432250976563,
+            "y": 40.7843132019043,
+            "z": 572.9761352539063
+        }
+    ],
     "spawnerScriptableObject": {
-        "instanceID": 0
+        "instanceID": 23838
     },
     "treeLODMeshes": [
         {

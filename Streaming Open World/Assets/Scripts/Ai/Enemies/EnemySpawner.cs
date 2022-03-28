@@ -58,8 +58,8 @@ namespace Chilli.Ai
                         radius = 1f;
                     }
                     
-                    var xPos = Random.Range(transform.position.x - 5, transform.position.x + 5);
-                    var zPos = Random.Range(transform.position.z - 5, transform.position.z + 5);
+                    var xPos = Random.Range(transform.position.x - 10, transform.position.x + 10);
+                    var zPos = Random.Range(transform.position.z - 10, transform.position.z + 10);
                     enemy.transform.position = new Vector3(xPos, hit.point.y + radius, zPos);
                     enemy.transform.parent = transform.parent;
                     enemy.GetComponent<NavMeshAgent>().enabled = true;

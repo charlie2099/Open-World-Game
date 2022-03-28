@@ -5,8 +5,9 @@
         "y": 45.09804153442383,
         "z": 397.41778564453127
     },
-    "questName": "Zombie Kill Quest 2",
-    "rewardPoints": 150,
-    "questType": 1,
+    "questName": "Zombie Kill Quest 4",
+    "rewardPoints": 600,
+    "zombiesKilled": 0,
+    "questType": 3,
     "questStatus": 0
 }

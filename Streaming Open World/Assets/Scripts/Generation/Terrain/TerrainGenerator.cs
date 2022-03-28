@@ -210,6 +210,7 @@ namespace Chilli.Terrain
                                     npc.transform.position = loadedNpcData.position;
                                     npc.GetComponent<Quest>().GetQuestData().name = loadedNpcData.questName;
                                     npc.GetComponent<Quest>().GetQuestData().rewardPoints = loadedNpcData.rewardPoints;
+                                    npc.GetComponent<Quest>().GetQuestData().zombiesKilled = 0;
                                     npc.GetComponent<Quest>().GetQuestData().questType = loadedNpcData.questType;
                                     npc.GetComponent<Quest>().GetQuestData().questStatus = loadedNpcData.questStatus;
                                     chunk.GetComponent<Chunk>().chunkObjects.Add(npc);

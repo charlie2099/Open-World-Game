@@ -1,10 +1,10 @@
 {
     "name": "chunk 2 , 4",
     "chunkMesh": {
-        "instanceID": -581388
+        "instanceID": -416080
     },
     "material": {
-        "instanceID": -581390
+        "instanceID": -416082
     },
     "position": {
         "x": 128.0,
@@ -20,7 +20,6 @@
     "objectTextures": [],
     "objectMaterials": [],
     "objectPos": [],
-    "objectRot": [],
     "spawnerScriptableObject": {
         "instanceID": 0
     },

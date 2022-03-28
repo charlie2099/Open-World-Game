@@ -30,6 +30,7 @@ namespace Chilli.Quests
         {
             public string name;
             public int rewardPoints;
+            public int zombiesKilled;
             public QuestType questType;
             public QuestStatus questStatus;
         }
@@ -37,7 +38,6 @@ namespace Chilli.Quests
         [SerializeField] private QuestData questData;
         private GameObject questDialogueText;
         private GameObject player;
-        private int zombiesKilled;
         private int zombiesToKill;
         private bool questCollected;
         private StarterAssetsInputs starterAssetsInputs;
@@ -59,10 +59,10 @@ namespace Chilli.Quests
 
         private void IncrementKills(EventParam eventParam)
         {
-            if (questCollected)
+            if (questCollected && transform!=null)
             {
-                zombiesKilled += 1;
-                zombiesToKill -= 1;
+                questData.zombiesKilled += 1;
+                //zombiesToKill -= 1;
             }
         }
 
@@ -113,7 +113,7 @@ namespace Chilli.Quests
             }
             
             
-            foreach(QuestType questType in Enum.GetValues(typeof(QuestType)))
+            /*foreach(QuestType questType in Enum.GetValues(typeof(QuestType)))
             {
                 if (questData.questType == questType && questData.questStatus == QuestStatus.Incomplete)
                 {
@@ -124,11 +124,21 @@ namespace Chilli.Quests
                         StartCoroutine(PlayQuestCompletionDialogue());
                     }
                 }
-            }
+            }*/
 
-            if (questData.questType == QuestType.RetrieveItem)
+            /*if (questData.questType == QuestType.RetrieveItem)
             {
                 questDialogueText.GetComponentInChildren<Text>().text = "Get me my AXE back and I will reward you well!";
+            }*/
+            
+            if (questData.questType == QuestType.KillZombiesIV && questData.questStatus == QuestStatus.Incomplete)
+            {
+                questDialogueText.GetComponentInChildren<Text>().text = "[Zombie Quest IV] Kill " + zombiesToKill + " zombies and I will reward you!";
+                    
+                if (questData.zombiesKilled >= 20)            
+                {
+                    StartCoroutine(PlayQuestCompletionDialogue());
+                }
             }
 
             if (questData.questStatus == QuestStatus.Complete)

@@ -59,6 +59,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
         public Vector3 position;
         public string questName;
         public int rewardPoints;
+        public int zombiesKilled;
         public Quest.QuestType questType;
         public Quest.QuestStatus questStatus;
     }
@@ -129,6 +130,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
                     npc.transform.position = loadedNpcData.position;
                     npc.GetComponent<Quest>().GetQuestData().name = loadedNpcData.questName;
                     npc.GetComponent<Quest>().GetQuestData().rewardPoints = loadedNpcData.rewardPoints;
+                    npc.GetComponent<Quest>().GetQuestData().zombiesKilled = loadedNpcData.zombiesKilled;
                     npc.GetComponent<Quest>().GetQuestData().questType = loadedNpcData.questType;
                     npc.GetComponent<Quest>().GetQuestData().questStatus = loadedNpcData.questStatus;
                     chunk.GetComponent<Chunk>().chunkObjects.Add(npc);
@@ -178,7 +180,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
         // Loop through all chunk objects
         for (int i = 0; i < newChunkData.objects.Count; i++)
         {
-            if (newChunkData.objectPos != null)
+            if (newChunkData.objectPos != null && newChunkData.objectNames != null)
             {
                 var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];  
                 newChunkData.objectNames[i]     = chunkObj.name;
@@ -216,12 +218,13 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
                 if (chunkObj.GetComponent<Quest>() != null)
                 {
                     NPCData newNpcData = new NPCData();
-                    newNpcData.npcName      = chunkObj.name;
-                    newNpcData.position     = chunkObj.transform.position;
-                    newNpcData.questName    = chunkObj.GetComponent<Quest>().GetQuestData().name;
-                    newNpcData.rewardPoints = chunkObj.GetComponent<Quest>().GetQuestData().rewardPoints;
-                    newNpcData.questType    = chunkObj.GetComponent<Quest>().GetQuestData().questType;
-                    newNpcData.questStatus  = chunkObj.GetComponent<Quest>().GetQuestData().questStatus;
+                    newNpcData.npcName       = chunkObj.name;
+                    newNpcData.position      = chunkObj.transform.position;
+                    newNpcData.questName     = chunkObj.GetComponent<Quest>().GetQuestData().name;
+                    newNpcData.rewardPoints  = chunkObj.GetComponent<Quest>().GetQuestData().rewardPoints;
+                    newNpcData.zombiesKilled = chunkObj.GetComponent<Quest>().GetQuestData().zombiesKilled;
+                    newNpcData.questType     = chunkObj.GetComponent<Quest>().GetQuestData().questType;
+                    newNpcData.questStatus   = chunkObj.GetComponent<Quest>().GetQuestData().questStatus;
                     
                     Destroy(chunkObj);
 
@@ -375,6 +378,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
                         newNpcData.position     = chunkObj.transform.position;
                         newNpcData.questName    = chunkObj.GetComponent<Quest>().GetQuestData().name;
                         newNpcData.rewardPoints = chunkObj.GetComponent<Quest>().GetQuestData().rewardPoints;
+                        newNpcData.zombiesKilled = chunkObj.GetComponent<Quest>().GetQuestData().zombiesKilled;
                         newNpcData.questType    = chunkObj.GetComponent<Quest>().GetQuestData().questType;
                         newNpcData.questStatus  = chunkObj.GetComponent<Quest>().GetQuestData().questStatus;
                         

@@ -1,10 +1,10 @@
 {
     "name": "chunk 2 , 9",
     "chunkMesh": {
-        "instanceID": -581520
+        "instanceID": -416218
     },
     "material": {
-        "instanceID": -581522
+        "instanceID": -416220
     },
     "position": {
         "x": 128.0,
@@ -12,16 +12,23 @@
         "z": 576.0
     },
     "objectNames": [
+        "Tree2(Clone)",
         "Tree2(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -581534
+            "instanceID": -416232
+        },
+        {
+            "instanceID": -416248
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 23542
+            "instanceID": 23844
+        },
+        {
+            "instanceID": 23844
         }
     ],
     "objectVertices": [],
@@ -30,7 +37,10 @@
     "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -581542
+            "instanceID": -416240
+        },
+        {
+            "instanceID": -416256
         }
     ],
     "objectPos": [
@@ -38,21 +48,25 @@
             "x": 135.11859130859376,
             "y": 45.789344787597659,
             "z": 604.8849487304688
+        },
+        {
+            "x": 135.84524536132813,
+            "y": 45.21941375732422,
+            "z": 606.7709350585938
         }
     ],
-    "objectRot": [],
     "spawnerScriptableObject": {
         "instanceID": 0
     },
     "treeLODMeshes": [
         {
-            "instanceID": 23538
+            "instanceID": 23840
         },
         {
-            "instanceID": 23540
+            "instanceID": 23842
         },
         {
-            "instanceID": 23542
+            "instanceID": 23844
         }
     ]
 }
