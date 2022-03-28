@@ -11,7 +11,11 @@ namespace Chilli.Quests
     {
         public enum QuestType
         {
-            KillZombies,
+            KillZombiesI,
+            KillZombiesII,
+            KillZombiesIII,
+            KillZombiesIV,
+            KillZombiesV,
             RetrieveItem,
         }
     
@@ -70,7 +74,25 @@ namespace Chilli.Quests
 
         private void Start()
         {
-            zombiesToKill = 5;
+            switch (questData.questType)
+            {
+                case QuestType.KillZombiesI:
+                    zombiesToKill = 5;
+                    break;
+                case QuestType.KillZombiesII:
+                    zombiesToKill = 10;
+                    break;
+                case QuestType.KillZombiesIII:
+                    zombiesToKill = 15;
+                    break;
+                case QuestType.KillZombiesIV:
+                    zombiesToKill = 20;
+                    break;
+                case QuestType.KillZombiesV:
+                    zombiesToKill = 25;
+                    break;
+            }
+            
             questDialogueText.SetActive(false);
             starterAssetsInputs = player.GetComponentInChildren<StarterAssetsInputs>();
         }
@@ -90,17 +112,21 @@ namespace Chilli.Quests
                 }
             }
             
-            if (questData.questType == QuestType.KillZombies && questData.questStatus == QuestStatus.Incomplete)
+            
+            foreach(QuestType questType in Enum.GetValues(typeof(QuestType)))
             {
-                questDialogueText.GetComponentInChildren<Text>().text = "Kill " + zombiesToKill + " zombies and I will reward you!";
-
-                if (zombiesKilled >= 5)            
+                if (questData.questType == questType && questData.questStatus == QuestStatus.Incomplete)
                 {
-                    StartCoroutine(PlayQuestCompletionDialogue());
+                    questDialogueText.GetComponentInChildren<Text>().text = "[Zombie Quest IV] Kill " + zombiesToKill + " zombies and I will reward you!";
+                    
+                    if (zombiesKilled >= 20)            
+                    {
+                        StartCoroutine(PlayQuestCompletionDialogue());
+                    }
                 }
             }
-        
-            else if (questData.questType == QuestType.RetrieveItem)
+
+            if (questData.questType == QuestType.RetrieveItem)
             {
                 questDialogueText.GetComponentInChildren<Text>().text = "Get me my AXE back and I will reward you well!";
             }

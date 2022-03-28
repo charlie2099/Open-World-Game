@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Chilli.Ai
 {
@@ -19,13 +20,13 @@ namespace Chilli.Ai
 
         private void SpawnEnemy()
         {
-            GameObject enemy = Instantiate(prefabCatalogueSo.prefab[0], transform.position, Quaternion.identity);
+            /*GameObject enemy = Instantiate(prefabCatalogueSo.prefab[0], transform.position, Quaternion.identity);
             enemy.transform.parent = transform.parent;
                     
             if (transform.parent != null)
             {
                 transform.parent.GetComponent<Chunk>().chunkObjects.Add(enemy);
-            }
+            }*/
             
             
             
@@ -33,7 +34,7 @@ namespace Chilli.Ai
             
             // Shoots down a ray from a 100 units above the enemy spawner. If it hits the layerMaskCollider, a 
             // zombie is spawned.
-            /*var raycastStartHeight = 100;
+            var raycastStartHeight = 100;
             RaycastHit hit;
             Ray ray = new Ray (transform.position + Vector3.up * raycastStartHeight, Vector3.down);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) 
@@ -41,6 +42,7 @@ namespace Chilli.Ai
                 if (hit.collider != null)
                 {
                     GameObject enemy = Instantiate(prefabCatalogueSo.prefab[0]);
+                    enemy.GetComponent<NavMeshAgent>().enabled = false;
                     //enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                     
                     // Sets the vertical offset to the object's collider bounds' extends
@@ -60,13 +62,14 @@ namespace Chilli.Ai
                     var zPos = Random.Range(transform.position.z - 5, transform.position.z + 5);
                     enemy.transform.position = new Vector3(xPos, hit.point.y + radius, zPos);
                     enemy.transform.parent = transform.parent;
+                    enemy.GetComponent<NavMeshAgent>().enabled = true;
                     
                     if (transform.parent != null)
                     {
                         transform.parent.GetComponent<Chunk>().chunkObjects.Add(enemy);
                     }
                 }
-            }*/
+            }
         }
     }
 }

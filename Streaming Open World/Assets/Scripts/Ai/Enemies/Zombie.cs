@@ -74,7 +74,6 @@ namespace Chilli.Ai.Zombies
         private bool PlayerInDetectionRange()
         {
             if (_playerRef == null) { return false; }
-            
             return Vector3.Distance(transform.position, _playerRef.position) < _detectionRange && 
                    Vector3.Distance(transform.position, _playerRef.position) > _chaseRange;
         }
@@ -82,7 +81,6 @@ namespace Chilli.Ai.Zombies
         private bool PlayerInChaseRange()
         {
             if (_playerRef == null) { return false; }
-            
             return Vector3.Distance(transform.position, _playerRef.position) <= _chaseRange;
         }
 
