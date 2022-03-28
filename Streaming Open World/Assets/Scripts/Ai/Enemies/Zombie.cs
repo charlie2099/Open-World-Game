@@ -197,6 +197,7 @@ namespace Chilli.Ai.Zombies
             _animator.SetBool("Dying", true);
             Destroy(GetComponentInChildren<CapsuleCollider>());
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            _navMeshAgent.speed = 0;
             yield return new WaitForSeconds(10.0f);
             transform.parent.GetComponent<Chunk>().chunkObjects.Remove(gameObject);
             Destroy(gameObject);

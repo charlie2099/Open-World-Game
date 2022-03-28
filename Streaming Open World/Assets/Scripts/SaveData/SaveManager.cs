@@ -27,8 +27,13 @@ public class SaveManager : MonoBehaviour
         public string[] objectNames;
         public List<GameObject> objects; // don't write gameobjects to file?
         public Mesh[] objectMeshes;
+        public Vector3[] objectVertices;
+        public int[] objectTriangles;
+        public Vector2[] objectUvs;
+        public Texture[] objectTextures;
         public Material[] objectMaterials;
         public Vector3[] objectPos;
+        public Quaternion[] objectRot;
         
         // Spawners
         //public GameObject spawnerPrefab;
@@ -36,6 +41,9 @@ public class SaveManager : MonoBehaviour
         
         // LOD
         public Mesh[] treeLODMeshes;
+        //public Vector3[] treeVertices;
+        //public int[] treeTriangles;
+        //public Vector2[] treeUvs;
     }
 
     public class TerrainData
@@ -161,6 +169,7 @@ public class SaveManager : MonoBehaviour
         newChunkData.objectNames        = new string[newChunkData.objects.Count];
         newChunkData.objectPos          = new Vector3[newChunkData.objects.Count];
         newChunkData.objectMeshes       = new Mesh[newChunkData.objects.Count];
+        //newChunkData.objectVertices     = new Vector3[chunk.GetComponent<Chunk>().chunkObjects[];
         newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
         newChunkData.treeLODMeshes      = new Mesh[3];
 
@@ -175,7 +184,13 @@ public class SaveManager : MonoBehaviour
 
                 if (chunkObj.GetComponent<MeshFilter>() != null)
                 {
-                    newChunkData.objectMeshes[i]    = chunkObj.GetComponent<MeshFilter>().sharedMesh;
+                    newChunkData.objectMeshes[i]    = chunkObj.GetComponent<MeshFilter>().sharedMesh;  // each object, one mesh
+
+                    /*for (int j = 0; j < chunkObj.GetComponent<MeshFilter>().sharedMesh.vertexCount; j++) // for each mesh vertex count
+                    {
+                        newChunkData.objectVertices[j] = newChunkData.objectMeshes[i].vertices[j]; // grab vertices of each mesh
+                    }*/
+
                     newChunkData.objectMaterials[i] = chunkObj.GetComponent<MeshRenderer>().sharedMaterial;
                 }
 
@@ -268,9 +283,11 @@ public class SaveManager : MonoBehaviour
             newChunkData.objects            = chunk.GetComponent<Chunk>().chunkObjects;
             newChunkData.objectNames        = new string[newChunkData.objects.Count];
             newChunkData.objectPos          = new Vector3[newChunkData.objects.Count];
+            newChunkData.objectRot          = new Quaternion[newChunkData.objects.Count];
             newChunkData.objectMeshes       = new Mesh[newChunkData.objects.Count];
             newChunkData.objectMaterials    = new Material[newChunkData.objects.Count];
             newChunkData.treeLODMeshes      = new Mesh[3];
+            newChunkData.objectTextures     = new Texture[newChunkData.objects.Count];
 
             // All objects (trees, houses, spawners, npcs)
             for (int i = 0; i < newChunkData.objects.Count; i++)
@@ -278,12 +295,32 @@ public class SaveManager : MonoBehaviour
                 if (newChunkData.objectPos != null)
                 {
                     var chunkObj = chunk.GetComponent<Chunk>().chunkObjects[i];
-                    newChunkData.objectNames[i]     = chunkObj.name;
-                    newChunkData.objectPos[i] = chunkObj.transform.position;
+                    newChunkData.objectNames[i] = chunkObj.name;
+                    newChunkData.objectPos[i]   = chunkObj.transform.position;
+                    newChunkData.objectRot[i]   = chunkObj.transform.rotation;
 
                     if (chunkObj.GetComponent<MeshFilter>() != null)
                     {
                         newChunkData.objectMeshes[i]    = chunkObj.GetComponent<MeshFilter>().sharedMesh;
+                        newChunkData.objectTextures[i]  = chunkObj.GetComponent<MeshRenderer>().sharedMaterial.mainTexture;
+                        newChunkData.objectVertices     = new Vector3[chunkObj.GetComponent<MeshFilter>().sharedMesh.vertexCount];
+                        newChunkData.objectTriangles    = new int[chunkObj.GetComponent<MeshFilter>().sharedMesh.triangles.Length];
+                        newChunkData.objectUvs          = new Vector2[chunkObj.GetComponent<MeshFilter>().sharedMesh.uv.Length];
+
+                        for (int j = 0; j < chunkObj.GetComponent<MeshFilter>().sharedMesh.vertexCount; j++)
+                        {
+                            newChunkData.objectVertices[j] = chunkObj.GetComponent<MeshFilter>().sharedMesh.vertices[j];
+                        }
+                        
+                        for (int j = 0; j < chunkObj.GetComponent<MeshFilter>().sharedMesh.triangles.Length; j++)
+                        {
+                            newChunkData.objectTriangles[j] = chunkObj.GetComponent<MeshFilter>().sharedMesh.triangles[j];
+                        }
+                        
+                        for (int j = 0; j < chunkObj.GetComponent<MeshFilter>().sharedMesh.uv.Length; j++)
+                        {
+                            newChunkData.objectUvs[j] = chunkObj.GetComponent<MeshFilter>().sharedMesh.uv[j];
+                        }
                     }
 
                     if (chunkObj.GetComponent<MeshRenderer>() != null)
@@ -303,6 +340,27 @@ public class SaveManager : MonoBehaviour
                         for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)
                         {
                             newChunkData.treeLODMeshes[j] = chunkObj.GetComponent<LOD>().lodMesh[j];
+                            /*newChunkData.treeVertices     = new Vector3[chunkObj.GetComponent<LOD>().lodMesh[j].vertexCount];
+                            newChunkData.treeTriangles    = new int[chunkObj.GetComponent<LOD>().lodMesh[j].triangles.Length];
+                            newChunkData.treeUvs          = new Vector2[chunkObj.GetComponent<LOD>().lodMesh[j].uv.Length];*/
+
+                            // For vertices in each lod mesh
+                            /*for (int k = 0; k < chunkObj.GetComponent<LOD>().lodMesh[j].vertexCount; k++)
+                            {
+                                newChunkData.treeVertices[k] = chunkObj.GetComponent<LOD>().lodMesh[j].vertices[k];
+                            }
+                            
+                            // For triangles in each lod mesh
+                            for (int k = 0; k < chunkObj.GetComponent<LOD>().lodMesh[j].triangles.Length; k++)
+                            {
+                                newChunkData.treeTriangles[k] = chunkObj.GetComponent<LOD>().lodMesh[j].triangles[k];
+                            }
+                            
+                            // For uvs in each lod mesh
+                            for (int k = 0; k < chunkObj.GetComponent<LOD>().lodMesh[j].uv.Length; k++)
+                            {
+                                newChunkData.treeUvs[k] = chunkObj.GetComponent<LOD>().lodMesh[j].uv[k];
+                            }*/
                         }
                     }
                     

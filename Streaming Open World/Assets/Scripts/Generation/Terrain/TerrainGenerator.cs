@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using Chilli.Ai;
 using Chilli.Quests;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Chilli.Terrain
 {
@@ -123,9 +126,33 @@ namespace Chilli.Terrain
                             // Not a great method of handling this...
                             if (loadedData.objectNames[i] != "EnemySpawner(Clone)" && loadedData.objectNames[i] != "NPC_Father(Clone)")
                             {
-                                print("hello");
-                                chunkObj.AddComponent<MeshFilter>().mesh       = loadedData.objectMeshes[i];
-                                chunkObj.AddComponent<MeshRenderer>().material = loadedData.objectMaterials[i];
+                                // NOTE: 
+                                // - When SaveToFile is called, it populates objectMeshes with new meshes
+                                // - After exiting and reopening Unity and trying to load meshes from file,
+                                //   objectMeshes is no longer populated and so throws an error.
+
+                                /*if (loadedData.objectMeshes[i] == null)
+                                {
+                                    foreach (var obj in loadedData.objects)
+                                    {
+                                        loadedData.objectMeshes[i] = new Mesh();
+                                    }
+                                }*/
+
+                                // Object mesh instance only exists while in Unity, destroyed reference upon exiting (I think?)
+                                // So create new one here
+                                Mesh testMesh    = new Mesh();
+
+                                chunkObj.AddComponent<MeshFilter>().sharedMesh = testMesh;
+                                chunkObj.AddComponent<MeshRenderer>().sharedMaterial = loadedData.objectMaterials[i];
+                                chunkObj.GetComponent<MeshRenderer>().sharedMaterial.mainTexture = loadedData.objectTextures[i];
+
+                                testMesh.Clear();
+                                testMesh.vertices = loadedData.objectVertices.ToArray();   
+                                testMesh.triangles = loadedData.objectTriangles.ToArray();
+                                testMesh.uv = loadedData.objectUvs.ToArray();
+                                testMesh.RecalculateNormals();
+                                testMesh.RecalculateBounds();
                             }
 
                             if (loadedData.objectNames[i] == "EnemySpawner(Clone)")
@@ -133,18 +160,48 @@ namespace Chilli.Terrain
                                 chunkObj.AddComponent<EnemySpawner>().prefabCatalogueSo = loadedData.spawnerScriptableObject;
                             }
 
+                            if (loadedData.objectNames[i] == "Church(Clone)")
+                            {
+                                chunkObj.AddComponent<MeshCollider>().sharedMesh = chunkObj.GetComponent<MeshFilter>().sharedMesh; 
+                            }
+
                             if (loadedData.objectNames[i] == "Tree2(Clone)")
                             {
-                                chunkObj.AddComponent<MeshCollider>().sharedMesh = chunkObj.GetComponent<MeshFilter>().sharedMesh; /*loadedData.objectMeshes[i]*/;
-                                chunkObj.AddComponent<LOD>();
-                                chunkObj.GetComponent<LOD>().lodMesh = new Mesh[3];
-                                for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)
-                                {
-                                    chunkObj.GetComponent<LOD>().lodMesh[j] = loadedData.treeLODMeshes[j];
-                                }
-                                chunkObj.GetComponent<LOD>().distanceLOD1   = 30;
+                                chunkObj.AddComponent<MeshCollider>().sharedMesh = chunkObj.GetComponent<MeshFilter>().sharedMesh; 
+                                //chunkObj.AddComponent<LOD>();
+                                //chunkObj.GetComponent<LOD>().lodMesh = new Mesh[3];
+
+                                //for (int j = 0; j < chunkObj.GetComponent<LOD>().lodMesh.Length; j++)
+                                //{
+                                    //chunkObj.GetComponent<LOD>().lodMesh[j] = loadedData.treeLODMeshes[j];
+                                    
+                                    // vertices for lod mesh 0 = size of the vertex count
+                                    /*print("tree lod mesh (" + j + ") " + loadedData.treeVertices.Length);
+                                    chunkObj.GetComponent<LOD>().lodMesh[j].vertices  = new Vector3[loadedData.treeVertices.Length];
+                                    chunkObj.GetComponent<LOD>().lodMesh[j].triangles = new int[loadedData.treeTriangles.Length];
+                                    chunkObj.GetComponent<LOD>().lodMesh[j].uv        = new Vector2[loadedData.treeUvs.Length];
+
+                                    // For vertices in each lod mesh
+                                    for (int k = 0; k < chunkObj.GetComponent<LOD>().lodMesh[j].vertexCount; k++)
+                                    {
+                                        chunkObj.GetComponent<LOD>().lodMesh[j].vertices[k] = loadedData.treeVertices[k];
+                                    }
+                        
+                                    // For triangles in each lod mesh
+                                    for (int k = 0; k < chunkObj.GetComponent<LOD>().lodMesh[j].triangles.Length; k++)
+                                    {
+                                        chunkObj.GetComponent<LOD>().lodMesh[j].triangles[k] = loadedData.treeTriangles[k];
+                                    }
+                        
+                                    // For uvs in each lod mesh
+                                    for (int k = 0; k < chunkObj.GetComponent<LOD>().lodMesh[j].uv.Length; k++)
+                                    {
+                                        chunkObj.GetComponent<LOD>().lodMesh[j].uv[k] = loadedData.treeUvs[k];
+                                    }*/
+                               // }
+                                /*chunkObj.GetComponent<LOD>().distanceLOD1   = 30;
                                 chunkObj.GetComponent<LOD>().distanceLOD2   = 50;
-                                chunkObj.GetComponent<LOD>().updateInterval = 2;
+                                chunkObj.GetComponent<LOD>().updateInterval = 2;*/
                                 chunkObj.transform.localScale = new Vector3(2, 2, 2);
                             }
 
@@ -182,6 +239,7 @@ namespace Chilli.Terrain
                             if (loadedData.objectNames[i] != "NPC_Father(Clone)")
                             {
                                 chunkObj.transform.position = loadedData.objectPos[i];
+                                chunkObj.transform.rotation = loadedData.objectRot[i];
                                 chunkObj.transform.parent = chunk.transform;
                                 chunk.GetComponent<Chunk>().chunkObjects.Add(chunkObj);
                             }
@@ -204,8 +262,7 @@ namespace Chilli.Terrain
                 }
             }
             
-            _container.name = "Terrain [chunks: " + _totalChunks + "] [" + _rowLength + "x" + _rowLength + "] [chunk size: " + chunkSize + "]"; 
-            //SaveManager.SaveToFile();
+            _container.name = "Terrain [chunks: " + _totalChunks + "] [" + _rowLength + "x" + _rowLength + "] [chunk size: " + chunkSize + "]";
         }
 
 
