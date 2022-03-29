@@ -1,10 +1,10 @@
 {
     "name": "chunk 9 , 10",
     "chunkMesh": {
-        "instanceID": -173814
+        "instanceID": -36928
     },
     "material": {
-        "instanceID": -173816
+        "instanceID": -36930
     },
     "position": {
         "x": 576.0,
@@ -19,30 +19,30 @@
     ],
     "objects": [
         {
-            "instanceID": -173828
+            "instanceID": -36942
         },
         {
-            "instanceID": -173844
+            "instanceID": -36958
         },
         {
-            "instanceID": -173860
+            "instanceID": -36974
         },
         {
-            "instanceID": -173876
+            "instanceID": -36990
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": -173832
+            "instanceID": -36946
         },
         {
-            "instanceID": -173848
+            "instanceID": -36962
         },
         {
-            "instanceID": -173864
+            "instanceID": -36978
         },
         {
-            "instanceID": -173880
+            "instanceID": -36994
         }
     ],
     "objectVertices": [],
@@ -50,30 +50,30 @@
     "objectUvs": [],
     "objectTextures": [
         {
-            "instanceID": 23834
+            "instanceID": 23602
         },
         {
-            "instanceID": 23834
+            "instanceID": 23602
         },
         {
-            "instanceID": 23834
+            "instanceID": 23602
         },
         {
-            "instanceID": 23834
+            "instanceID": 23602
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": -173836
+            "instanceID": -36950
         },
         {
-            "instanceID": -173852
+            "instanceID": -36966
         },
         {
-            "instanceID": -173868
+            "instanceID": -36982
         },
         {
-            "instanceID": -173884
+            "instanceID": -36998
         }
     ],
     "objectPos": [
@@ -103,13 +103,13 @@
     },
     "treeLODMeshes": [
         {
-            "instanceID": 23770
+            "instanceID": 23538
         },
         {
-            "instanceID": 23772
+            "instanceID": 23540
         },
         {
-            "instanceID": 23774
+            "instanceID": 23542
         }
     ]
 }

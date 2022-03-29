@@ -8,6 +8,7 @@ using Chilli.Terrain;
 using Chilli.Quests;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// Saves chunk data, terrain data, and npc data to json files.
@@ -153,6 +154,11 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
         // bake nav mesh
 
         chunk.GetComponent<Chunk>().SetLoaded(true);
+        chunk.AddComponent<NavMeshSurface>().collectObjects = CollectObjects.Volume;
+        var chunkNavSurface = chunk.GetComponent<NavMeshSurface>();
+        chunkNavSurface.size = new Vector3(64.3f, 29.41867f, 64.48733f);
+        chunkNavSurface.center = new Vector3(32, 47.70573f, 31.84137f);
+        chunkNavSurface.BuildNavMesh();
         chunk.tag = "TerrainChunk";
     }
 
@@ -249,7 +255,7 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
         Destroy(chunk.GetComponent<MeshRenderer>());
         Destroy(chunk.GetComponent<MeshFilter>());
         Destroy(chunk.GetComponent<MeshCollider>());
-        
+
         // Destroy chunk objects and clear the list
         foreach (var obj in chunk.GetComponent<Chunk>().chunkObjects.ToArray())
         {
@@ -259,7 +265,9 @@ public class SaveManager : MonoBehaviour // TODO: Big clean-up needed
             }
         }
         chunk.GetComponent<Chunk>().chunkObjects.Clear();
-        //Destroy(chunk.GetComponent<Chunk>());
+        chunk.GetComponent<NavMeshSurface>().RemoveData();
+        chunk.GetComponent<NavMeshSurface>().navMeshData = null;
+       
         chunk.tag = "Untagged";
     }
 
