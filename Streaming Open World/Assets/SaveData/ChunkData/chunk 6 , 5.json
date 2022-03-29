@@ -1,10 +1,10 @@
 {
     "name": "chunk 6 , 5",
     "chunkMesh": {
-        "instanceID": -393016
+        "instanceID": -172382
     },
     "material": {
-        "instanceID": -393018
+        "instanceID": -172384
     },
     "position": {
         "x": 384.0,
@@ -12,16 +12,30 @@
         "z": 320.0
     },
     "objectNames": [
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)",
         "Zombie_Hobo(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -393030
+            "instanceID": -172396
+        },
+        {
+            "instanceID": -172408
+        },
+        {
+            "instanceID": -172420
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": -393034
+            "instanceID": -172400
+        },
+        {
+            "instanceID": -172412
+        },
+        {
+            "instanceID": -172424
         }
     ],
     "objectVertices": [],
@@ -29,12 +43,24 @@
     "objectUvs": [],
     "objectTextures": [
         {
-            "instanceID": 23898
+            "instanceID": 23834
+        },
+        {
+            "instanceID": 23834
+        },
+        {
+            "instanceID": 23834
         }
     ],
     "objectMaterials": [
         {
-            "instanceID": -393038
+            "instanceID": -172404
+        },
+        {
+            "instanceID": -172416
+        },
+        {
+            "instanceID": -172428
         }
     ],
     "objectPos": [
@@ -42,6 +68,16 @@
             "x": 434.4997863769531,
             "y": 47.07972717285156,
             "z": 320.0
+        },
+        {
+            "x": 440.5,
+            "y": 45.913063049316409,
+            "z": 329.5
+        },
+        {
+            "x": 444.5,
+            "y": 45.913063049316409,
+            "z": 331.5
         }
     ],
     "spawnerScriptableObject": {

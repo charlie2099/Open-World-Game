@@ -12,22 +12,21 @@ namespace Chilli.Terrain
     {
         [SerializeField] private int maxChunkLoadDistance = 400;
         [SerializeField] private float checkRate = 2.0f;
-        private Transform player;
+        private Transform _player;
 
         private void Start()
         {
-            player = transform;
+            _player = transform;
             InvokeRepeating(nameof(CheckChunkDistance), 0.0f, checkRate);
         }
 
         private void CheckChunkDistance()
         {
-            if (player != null)
+            if (_player != null)
             {
                 // Player yPos is set to zero so that no matter high/low the player is in the world, it's always the same distance
                 // it's calculating i.e. more chunks won't unload if the player is really high up
-                var playerPos = player.position;
-                playerPos.y = 0;
+                var playerPos = _player.position; playerPos.y = 0;
 
                 foreach (var chunk in TerrainGenerator.instance.GetChunks().ToArray())
                 {

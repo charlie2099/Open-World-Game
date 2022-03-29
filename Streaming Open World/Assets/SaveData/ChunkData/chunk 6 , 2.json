@@ -1,10 +1,10 @@
 {
     "name": "chunk 6 , 2",
     "chunkMesh": {
-        "instanceID": -418250
+        "instanceID": -172242
     },
     "material": {
-        "instanceID": -418252
+        "instanceID": -172244
     },
     "position": {
         "x": 384.0,
@@ -18,39 +18,49 @@
     ],
     "objects": [
         {
-            "instanceID": -418264
+            "instanceID": -172256
         },
         {
-            "instanceID": -418280
+            "instanceID": -172272
         },
         {
-            "instanceID": -418296
+            "instanceID": -172288
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 23844
+            "instanceID": -172260
         },
         {
-            "instanceID": 23844
+            "instanceID": -172276
         },
         {
-            "instanceID": 23844
+            "instanceID": -172292
         }
     ],
     "objectVertices": [],
     "objectTriangles": [],
     "objectUvs": [],
-    "objectTextures": [],
+    "objectTextures": [
+        {
+            "instanceID": 23834
+        },
+        {
+            "instanceID": 23834
+        },
+        {
+            "instanceID": 23834
+        }
+    ],
     "objectMaterials": [
         {
-            "instanceID": -418272
+            "instanceID": -172264
         },
         {
-            "instanceID": -418288
+            "instanceID": -172280
         },
         {
-            "instanceID": -418304
+            "instanceID": -172296
         }
     ],
     "objectPos": [
@@ -75,13 +85,13 @@
     },
     "treeLODMeshes": [
         {
-            "instanceID": 23840
+            "instanceID": 23770
         },
         {
-            "instanceID": 23842
+            "instanceID": 23772
         },
         {
-            "instanceID": 23844
+            "instanceID": 23774
         }
     ]
 }

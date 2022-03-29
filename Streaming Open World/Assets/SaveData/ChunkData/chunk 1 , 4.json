@@ -1,10 +1,10 @@
 {
     "name": "chunk 1 , 4",
     "chunkMesh": {
-        "instanceID": -415002
+        "instanceID": -168646
     },
     "material": {
-        "instanceID": -415004
+        "instanceID": -168648
     },
     "position": {
         "x": 64.0,
@@ -35,192 +35,253 @@
     ],
     "objects": [
         {
-            "instanceID": -415016
+            "instanceID": -168660
         },
         {
-            "instanceID": -415028
+            "instanceID": -168672
         },
         {
-            "instanceID": -415040
+            "instanceID": -168684
         },
         {
-            "instanceID": -415052
+            "instanceID": -168696
         },
         {
-            "instanceID": -415068
+            "instanceID": -168712
         },
         {
-            "instanceID": -415074
+            "instanceID": -168718
         },
         {
-            "instanceID": -415086
+            "instanceID": -168730
         },
         {
-            "instanceID": -415098
+            "instanceID": -168742
         },
         {
-            "instanceID": -415110
+            "instanceID": -168754
         },
         {
-            "instanceID": -415122
+            "instanceID": -168766
         },
         {
-            "instanceID": -415134
+            "instanceID": -168778
         },
         {
-            "instanceID": -415146
+            "instanceID": -168790
         },
         {
-            "instanceID": -415158
+            "instanceID": -168802
         },
         {
-            "instanceID": -415170
+            "instanceID": -168814
         },
         {
-            "instanceID": -415182
+            "instanceID": -168826
         },
         {
-            "instanceID": -415194
+            "instanceID": -168838
         },
         {
-            "instanceID": -415206
+            "instanceID": -168850
         },
         {
-            "instanceID": -415218
+            "instanceID": -168862
         },
         {
-            "instanceID": -415230
+            "instanceID": -168874
         },
         {
-            "instanceID": -415242
+            "instanceID": -168886
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": -415020
+            "instanceID": -168664
         },
         {
-            "instanceID": -415032
+            "instanceID": -168676
         },
         {
-            "instanceID": -415044
+            "instanceID": -168688
         },
         {
-            "instanceID": 23844
+            "instanceID": -168700
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": -415078
+            "instanceID": -168722
         },
         {
-            "instanceID": -415090
+            "instanceID": -168734
         },
         {
-            "instanceID": -415102
+            "instanceID": -168746
         },
         {
-            "instanceID": -415114
+            "instanceID": -168758
         },
         {
-            "instanceID": -415126
+            "instanceID": -168770
         },
         {
-            "instanceID": -415138
+            "instanceID": -168782
         },
         {
-            "instanceID": -415150
+            "instanceID": -168794
         },
         {
-            "instanceID": -415162
+            "instanceID": -168806
         },
         {
-            "instanceID": -415174
+            "instanceID": -168818
         },
         {
-            "instanceID": -415186
+            "instanceID": -168830
         },
         {
-            "instanceID": -415198
+            "instanceID": -168842
         },
         {
-            "instanceID": -415210
+            "instanceID": -168854
         },
         {
-            "instanceID": -415222
+            "instanceID": -168866
         },
         {
-            "instanceID": -415234
+            "instanceID": -168878
         },
         {
-            "instanceID": -415246
+            "instanceID": -168890
         }
     ],
     "objectVertices": [],
     "objectTriangles": [],
     "objectUvs": [],
-    "objectTextures": [],
-    "objectMaterials": [
+    "objectTextures": [
         {
-            "instanceID": -415024
+            "instanceID": 23834
         },
         {
-            "instanceID": -415036
+            "instanceID": 23834
         },
         {
-            "instanceID": -415048
+            "instanceID": 23834
         },
         {
-            "instanceID": -415060
+            "instanceID": 23834
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": -415082
+            "instanceID": 23834
         },
         {
-            "instanceID": -415094
+            "instanceID": 23834
         },
         {
-            "instanceID": -415106
+            "instanceID": 23834
         },
         {
-            "instanceID": -415118
+            "instanceID": 23834
         },
         {
-            "instanceID": -415130
+            "instanceID": 23834
         },
         {
-            "instanceID": -415142
+            "instanceID": 23834
         },
         {
-            "instanceID": -415154
+            "instanceID": 23834
         },
         {
-            "instanceID": -415166
+            "instanceID": 23834
         },
         {
-            "instanceID": -415178
+            "instanceID": 23834
         },
         {
-            "instanceID": -415190
+            "instanceID": 23834
         },
         {
-            "instanceID": -415202
+            "instanceID": 23834
         },
         {
-            "instanceID": -415214
+            "instanceID": 23834
         },
         {
-            "instanceID": -415226
+            "instanceID": 23834
         },
         {
-            "instanceID": -415238
+            "instanceID": 23834
         },
         {
-            "instanceID": -415250
+            "instanceID": 23834
+        }
+    ],
+    "objectMaterials": [
+        {
+            "instanceID": -168668
+        },
+        {
+            "instanceID": -168680
+        },
+        {
+            "instanceID": -168692
+        },
+        {
+            "instanceID": -168704
+        },
+        {
+            "instanceID": 0
+        },
+        {
+            "instanceID": -168726
+        },
+        {
+            "instanceID": -168738
+        },
+        {
+            "instanceID": -168750
+        },
+        {
+            "instanceID": -168762
+        },
+        {
+            "instanceID": -168774
+        },
+        {
+            "instanceID": -168786
+        },
+        {
+            "instanceID": -168798
+        },
+        {
+            "instanceID": -168810
+        },
+        {
+            "instanceID": -168822
+        },
+        {
+            "instanceID": -168834
+        },
+        {
+            "instanceID": -168846
+        },
+        {
+            "instanceID": -168858
+        },
+        {
+            "instanceID": -168870
+        },
+        {
+            "instanceID": -168882
+        },
+        {
+            "instanceID": -168894
         }
     ],
     "objectPos": [
@@ -326,17 +387,17 @@
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 23838
+        "instanceID": 23766
     },
     "treeLODMeshes": [
         {
-            "instanceID": 23840
+            "instanceID": 23770
         },
         {
-            "instanceID": 23842
+            "instanceID": 23772
         },
         {
-            "instanceID": 23844
+            "instanceID": 23774
         }
     ]
 }

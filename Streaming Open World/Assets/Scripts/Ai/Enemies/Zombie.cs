@@ -27,7 +27,10 @@ namespace Chilli.Ai.Zombies
         private void Awake() // cache references
         {
             _isDying = false;
-            _playerRef = GameObject.FindWithTag("Player").transform;
+            if (GameObject.FindWithTag("Player").transform != null)
+            {
+                _playerRef = GameObject.FindWithTag("Player").transform;
+            }
             _animator = GetComponent<Animator>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
         }
