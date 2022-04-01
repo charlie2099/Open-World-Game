@@ -1,10 +1,10 @@
 {
     "name": "chunk 8 , 2",
     "chunkMesh": {
-        "instanceID": -36312
+        "instanceID": -305328
     },
     "material": {
-        "instanceID": -36314
+        "instanceID": -305330
     },
     "position": {
         "x": 512.0,
@@ -14,53 +14,63 @@
     "objectNames": [
         "Tree2(Clone)",
         "EnemySpawner(Clone)",
-        "Tree2(Clone)"
+        "Tree2(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -36326
+            "instanceID": -305342
         },
         {
-            "instanceID": -36342
+            "instanceID": -305358
         },
         {
-            "instanceID": -36348
+            "instanceID": -305364
+        },
+        {
+            "instanceID": -305380
+        },
+        {
+            "instanceID": -305392
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": -36330
+            "instanceID": 23776
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": -36352
+            "instanceID": 23776
+        },
+        {
+            "instanceID": -305384
+        },
+        {
+            "instanceID": -305396
         }
     ],
     "objectVertices": [],
     "objectTriangles": [],
     "objectUvs": [],
-    "objectTextures": [
-        {
-            "instanceID": 23602
-        },
-        {
-            "instanceID": 0
-        },
-        {
-            "instanceID": 23602
-        }
-    ],
+    "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -36334
+            "instanceID": -305350
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": -36356
+            "instanceID": -305372
+        },
+        {
+            "instanceID": -305388
+        },
+        {
+            "instanceID": -305400
         }
     ],
     "objectPos": [
@@ -78,20 +88,30 @@
             "x": 516.5966796875,
             "y": 58.03921890258789,
             "z": 170.97650146484376
+        },
+        {
+            "x": 572.9033203125,
+            "y": 42.53996276855469,
+            "z": 145.05599975585938
+        },
+        {
+            "x": 569.7245483398438,
+            "y": 42.53996276855469,
+            "z": 137.62464904785157
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 23534
+        "instanceID": 23768
     },
     "treeLODMeshes": [
         {
-            "instanceID": 23538
+            "instanceID": 23772
         },
         {
-            "instanceID": 23540
+            "instanceID": 23774
         },
         {
-            "instanceID": 23542
+            "instanceID": 23776
         }
     ]
 }

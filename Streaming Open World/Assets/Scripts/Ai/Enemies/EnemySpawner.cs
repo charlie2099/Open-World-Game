@@ -1,66 +1,41 @@
+using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Chilli.Ai
 {
     public class EnemySpawner : MonoBehaviour
     {
-        //public GameObject enemyPrefab;
         public PrefabCatalogueSO prefabCatalogueSo;
+        public float spawnArea = 5.0f;
         [SerializeField] private float spawnRate = 5.0f;
-        private LayerMask mask;
-        private float radius;
+        private LayerMask _mask;
 
         private void Start()
         {
-            mask = LayerMask.GetMask("Default");
-
+            _mask = LayerMask.GetMask("Default");
             InvokeRepeating(nameof(SpawnEnemy), 0, spawnRate);
         }
 
         private void SpawnEnemy()
         {
-            /*GameObject enemy = Instantiate(prefabCatalogueSo.prefab[0], transform.position, Quaternion.identity);
-            enemy.transform.parent = transform.parent;
-                    
-            if (transform.parent != null)
-            {
-                transform.parent.GetComponent<Chunk>().chunkObjects.Add(enemy);
-            }*/
-            
-            
-            
-            
-            
             // Shoots down a ray from a 100 units above the enemy spawner. If it hits the layerMaskCollider, a 
             // zombie is spawned.
             var raycastStartHeight = 100;
             RaycastHit hit;
             Ray ray = new Ray (transform.position + Vector3.up * raycastStartHeight, Vector3.down);
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) 
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, _mask)) 
             {        
                 if (hit.collider != null)
                 {
                     GameObject enemy = Instantiate(prefabCatalogueSo.prefab[0]);
                     enemy.GetComponent<NavMeshAgent>().enabled = false;
-                    //enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                    
-                    // Sets the vertical offset to the object's collider bounds' extends
-                    // To ensure part of the zombie isn't clipping through the chunk upon spawning and then falling
-                    // through the map?
-                    // Doesn't work properly due to the terrain mesh
-                    if (enemy.GetComponentInChildren<Collider>() != null)
-                    {
-                        radius = enemy.GetComponentInChildren<Collider>().bounds.extents.y;
-                    } 
-                    else
-                    {
-                        radius = 1f;
-                    }
-                    
-                    var xPos = Random.Range(transform.position.x - 10, transform.position.x + 10);
-                    var zPos = Random.Range(transform.position.z - 10, transform.position.z + 10);
-                    enemy.transform.position = new Vector3(xPos, hit.point.y + radius, zPos);
+
+                    Vector2 randomOnCircle = Random.insideUnitCircle * spawnArea;
+                    Vector3 randomPosition = new Vector3(transform.position.x + randomOnCircle.x, hit.point.y, transform.position.z + randomOnCircle.y);
+                    enemy.transform.position = randomPosition;
                     enemy.transform.parent = transform.parent;
                     enemy.GetComponent<NavMeshAgent>().enabled = true;
                     
@@ -70,6 +45,16 @@ namespace Chilli.Ai
                     }
                 }
             }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Handles.color = new Color(0.0f,0.0f,1.0f, 0.05f);
+            Handles.DrawSolidDisc(transform.position, transform.up, spawnArea);
+
+            spawnArea = Handles.ScaleValueHandle(
+                spawnArea, transform.position + transform.forward * spawnArea, 
+                transform.rotation, 1, Handles.ConeHandleCap, 1);
         }
     }
 }

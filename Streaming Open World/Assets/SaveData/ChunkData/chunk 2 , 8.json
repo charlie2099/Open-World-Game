@@ -1,10 +1,10 @@
 {
     "name": "chunk 2 , 8",
     "chunkMesh": {
-        "instanceID": -32890
+        "instanceID": -301942
     },
     "material": {
-        "instanceID": -32892
+        "instanceID": -301944
     },
     "position": {
         "x": 128.0,
@@ -12,29 +12,45 @@
         "z": 512.0
     },
     "objectNames": [
-        "EnemySpawner(Clone)"
+        "EnemySpawner(Clone)",
+        "Zombie_Hobo(Clone)",
+        "Zombie_Hobo(Clone)"
     ],
     "objects": [
         {
-            "instanceID": -32904
+            "instanceID": -301956
+        },
+        {
+            "instanceID": -301962
+        },
+        {
+            "instanceID": -301974
         }
     ],
     "objectMeshes": [
         {
             "instanceID": 0
+        },
+        {
+            "instanceID": -301966
+        },
+        {
+            "instanceID": -301978
         }
     ],
     "objectVertices": [],
     "objectTriangles": [],
     "objectUvs": [],
-    "objectTextures": [
-        {
-            "instanceID": 0
-        }
-    ],
+    "objectTextures": [],
     "objectMaterials": [
         {
             "instanceID": 0
+        },
+        {
+            "instanceID": -301970
+        },
+        {
+            "instanceID": -301982
         }
     ],
     "objectPos": [
@@ -42,10 +58,20 @@
             "x": 150.52432250976563,
             "y": 40.7843132019043,
             "z": 572.9761352539063
+        },
+        {
+            "x": 144.0142059326172,
+            "y": 41.75817108154297,
+            "z": 581.1105346679688
+        },
+        {
+            "x": 144.39637756347657,
+            "y": 41.75817108154297,
+            "z": 565.5029296875
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 23534
+        "instanceID": 23768
     },
     "treeLODMeshes": [
         {
