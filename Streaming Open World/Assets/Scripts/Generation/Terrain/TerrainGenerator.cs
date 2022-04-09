@@ -53,9 +53,12 @@ namespace Chilli.Terrain
             // Destroy any existing terrain in scene on play
             foreach (var gObj in FindObjectsOfType<GameObject>())
             {
-                if (gObj.CompareTag("MainTerrain"))
+                if(gObj != null)
                 {
-                    DestroyImmediate(gObj);
+                    if (gObj.CompareTag("MainTerrain"))
+                    {
+                        DestroyImmediate(gObj);
+                    }
                 }
             }
             _generatedChunks.Clear();

@@ -1,10 +1,10 @@
 {
     "name": "chunk 1 , 4",
     "chunkMesh": {
-        "instanceID": -10262
+        "instanceID": -10392
     },
     "material": {
-        "instanceID": -10264
+        "instanceID": -10394
     },
     "position": {
         "x": 64.0,
@@ -37,39 +37,6 @@
     ],
     "objects": [
         {
-            "instanceID": -10276
-        },
-        {
-            "instanceID": -10288
-        },
-        {
-            "instanceID": -10300
-        },
-        {
-            "instanceID": -10312
-        },
-        {
-            "instanceID": -10328
-        },
-        {
-            "instanceID": -10334
-        },
-        {
-            "instanceID": -10346
-        },
-        {
-            "instanceID": -10358
-        },
-        {
-            "instanceID": -10370
-        },
-        {
-            "instanceID": -10382
-        },
-        {
-            "instanceID": -10394
-        },
-        {
             "instanceID": -10406
         },
         {
@@ -82,61 +49,61 @@
             "instanceID": -10442
         },
         {
-            "instanceID": -10454
+            "instanceID": -10458
         },
         {
-            "instanceID": -10466
+            "instanceID": -10464
         },
         {
-            "instanceID": -10478
+            "instanceID": -10476
         },
         {
-            "instanceID": -10490
+            "instanceID": -10488
         },
         {
-            "instanceID": -10502
+            "instanceID": -10500
         },
         {
-            "instanceID": -10514
+            "instanceID": -10512
         },
         {
-            "instanceID": -10526
+            "instanceID": -10524
+        },
+        {
+            "instanceID": -10536
+        },
+        {
+            "instanceID": -10548
+        },
+        {
+            "instanceID": -10560
+        },
+        {
+            "instanceID": -10572
+        },
+        {
+            "instanceID": -10584
+        },
+        {
+            "instanceID": -10596
+        },
+        {
+            "instanceID": -10608
+        },
+        {
+            "instanceID": -10620
+        },
+        {
+            "instanceID": -10632
+        },
+        {
+            "instanceID": -10644
+        },
+        {
+            "instanceID": -10656
         }
     ],
     "objectMeshes": [
-        {
-            "instanceID": -10280
-        },
-        {
-            "instanceID": -10292
-        },
-        {
-            "instanceID": -10304
-        },
-        {
-            "instanceID": 29682
-        },
-        {
-            "instanceID": 0
-        },
-        {
-            "instanceID": -10338
-        },
-        {
-            "instanceID": -10350
-        },
-        {
-            "instanceID": -10362
-        },
-        {
-            "instanceID": -10374
-        },
-        {
-            "instanceID": -10386
-        },
-        {
-            "instanceID": -10398
-        },
         {
             "instanceID": -10410
         },
@@ -147,28 +114,61 @@
             "instanceID": -10434
         },
         {
-            "instanceID": -10446
+            "instanceID": 29898
         },
         {
-            "instanceID": -10458
+            "instanceID": 0
         },
         {
-            "instanceID": -10470
+            "instanceID": -10468
         },
         {
-            "instanceID": -10482
+            "instanceID": -10480
         },
         {
-            "instanceID": -10494
+            "instanceID": -10492
         },
         {
-            "instanceID": -10506
+            "instanceID": -10504
         },
         {
-            "instanceID": -10518
+            "instanceID": -10516
         },
         {
-            "instanceID": -10530
+            "instanceID": -10528
+        },
+        {
+            "instanceID": -10540
+        },
+        {
+            "instanceID": -10552
+        },
+        {
+            "instanceID": -10564
+        },
+        {
+            "instanceID": -10576
+        },
+        {
+            "instanceID": -10588
+        },
+        {
+            "instanceID": -10600
+        },
+        {
+            "instanceID": -10612
+        },
+        {
+            "instanceID": -10624
+        },
+        {
+            "instanceID": -10636
+        },
+        {
+            "instanceID": -10648
+        },
+        {
+            "instanceID": -10660
         }
     ],
     "objectVertices": [],
@@ -176,39 +176,6 @@
     "objectUvs": [],
     "objectTextures": [],
     "objectMaterials": [
-        {
-            "instanceID": -10284
-        },
-        {
-            "instanceID": -10296
-        },
-        {
-            "instanceID": -10308
-        },
-        {
-            "instanceID": -10320
-        },
-        {
-            "instanceID": 0
-        },
-        {
-            "instanceID": -10342
-        },
-        {
-            "instanceID": -10354
-        },
-        {
-            "instanceID": -10366
-        },
-        {
-            "instanceID": -10378
-        },
-        {
-            "instanceID": -10390
-        },
-        {
-            "instanceID": -10402
-        },
         {
             "instanceID": -10414
         },
@@ -222,25 +189,58 @@
             "instanceID": -10450
         },
         {
-            "instanceID": -10462
+            "instanceID": 0
         },
         {
-            "instanceID": -10474
+            "instanceID": -10472
         },
         {
-            "instanceID": -10486
+            "instanceID": -10484
         },
         {
-            "instanceID": -10498
+            "instanceID": -10496
         },
         {
-            "instanceID": -10510
+            "instanceID": -10508
         },
         {
-            "instanceID": -10522
+            "instanceID": -10520
         },
         {
-            "instanceID": -10534
+            "instanceID": -10532
+        },
+        {
+            "instanceID": -10544
+        },
+        {
+            "instanceID": -10556
+        },
+        {
+            "instanceID": -10568
+        },
+        {
+            "instanceID": -10580
+        },
+        {
+            "instanceID": -10592
+        },
+        {
+            "instanceID": -10604
+        },
+        {
+            "instanceID": -10616
+        },
+        {
+            "instanceID": -10628
+        },
+        {
+            "instanceID": -10640
+        },
+        {
+            "instanceID": -10652
+        },
+        {
+            "instanceID": -10664
         }
     ],
     "objectPos": [
@@ -356,17 +356,17 @@
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 29686
+        "instanceID": 29902
     },
     "treeLODMeshes": [
         {
-            "instanceID": 29678
+            "instanceID": 29894
         },
         {
-            "instanceID": 29680
+            "instanceID": 29896
         },
         {
-            "instanceID": 29682
+            "instanceID": 29898
         }
     ]
 }

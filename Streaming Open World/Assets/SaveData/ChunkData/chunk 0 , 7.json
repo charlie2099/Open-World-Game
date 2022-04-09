@@ -1,10 +1,10 @@
 {
     "name": "chunk 0 , 7",
     "chunkMesh": {
-        "instanceID": -10022
+        "instanceID": -10152
     },
     "material": {
-        "instanceID": -10024
+        "instanceID": -10154
     },
     "position": {
         "x": 0.0,
@@ -16,12 +16,12 @@
     ],
     "objects": [
         {
-            "instanceID": -10036
+            "instanceID": -10166
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 29682
+            "instanceID": 29898
         }
     ],
     "objectVertices": [],
@@ -30,7 +30,7 @@
     "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -10044
+            "instanceID": -10174
         }
     ],
     "objectPos": [
@@ -45,13 +45,13 @@
     },
     "treeLODMeshes": [
         {
-            "instanceID": 29678
+            "instanceID": 29894
         },
         {
-            "instanceID": 29680
+            "instanceID": 29896
         },
         {
-            "instanceID": 29682
+            "instanceID": 29898
         }
     ]
 }
