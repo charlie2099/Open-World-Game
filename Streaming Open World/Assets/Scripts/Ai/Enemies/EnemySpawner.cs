@@ -47,6 +47,7 @@ namespace Chilli.Ai
             }
         }
 
+    #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             Handles.color = new Color(0.0f,0.0f,1.0f, 0.05f);
@@ -56,5 +57,6 @@ namespace Chilli.Ai
                 spawnArea, transform.position + transform.forward * spawnArea, 
                 transform.rotation, 1, Handles.ConeHandleCap, 1);
         }
+    #endif
     }
 }
