@@ -1,10 +1,10 @@
 {
     "name": "chunk 8 , 2",
     "chunkMesh": {
-        "instanceID": -6924
+        "instanceID": -14862
     },
     "material": {
-        "instanceID": -6926
+        "instanceID": -14864
     },
     "position": {
         "x": 512.0,
@@ -20,36 +20,36 @@
     ],
     "objects": [
         {
-            "instanceID": -6938
+            "instanceID": -14876
         },
         {
-            "instanceID": -6954
+            "instanceID": -14892
         },
         {
-            "instanceID": -6960
+            "instanceID": -14898
         },
         {
-            "instanceID": -6976
+            "instanceID": -14914
         },
         {
-            "instanceID": -6988
+            "instanceID": -14926
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 29678
+            "instanceID": 29682
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": 29678
+            "instanceID": 29682
         },
         {
-            "instanceID": -6980
+            "instanceID": -14918
         },
         {
-            "instanceID": -6992
+            "instanceID": -14930
         }
     ],
     "objectVertices": [],
@@ -58,19 +58,19 @@
     "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -6946
+            "instanceID": -14884
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": -6968
+            "instanceID": -14906
         },
         {
-            "instanceID": -6984
+            "instanceID": -14922
         },
         {
-            "instanceID": -6996
+            "instanceID": -14934
         }
     ],
     "objectPos": [
@@ -101,17 +101,17 @@
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 29684
+        "instanceID": 29686
     },
     "treeLODMeshes": [
         {
-            "instanceID": 29674
-        },
-        {
-            "instanceID": 29676
-        },
-        {
             "instanceID": 29678
+        },
+        {
+            "instanceID": 29680
+        },
+        {
+            "instanceID": 29682
         }
     ]
 }

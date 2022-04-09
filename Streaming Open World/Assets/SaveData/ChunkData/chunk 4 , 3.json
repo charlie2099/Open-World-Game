@@ -1,10 +1,10 @@
 {
     "name": "chunk 4 , 3",
     "chunkMesh": {
-        "instanceID": -4854
+        "instanceID": -12792
     },
     "material": {
-        "instanceID": -4856
+        "instanceID": -12794
     },
     "position": {
         "x": 256.0,
@@ -17,15 +17,15 @@
     ],
     "objects": [
         {
-            "instanceID": -4868
+            "instanceID": -12806
         },
         {
-            "instanceID": -4884
+            "instanceID": -12822
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 29678
+            "instanceID": 29682
         },
         {
             "instanceID": 0
@@ -37,7 +37,7 @@
     "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -4876
+            "instanceID": -12814
         },
         {
             "instanceID": 0
@@ -56,17 +56,17 @@
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 29684
+        "instanceID": 29686
     },
     "treeLODMeshes": [
         {
-            "instanceID": 29674
-        },
-        {
-            "instanceID": 29676
-        },
-        {
             "instanceID": 29678
+        },
+        {
+            "instanceID": 29680
+        },
+        {
+            "instanceID": 29682
         }
     ]
 }
