@@ -1,10 +1,10 @@
 {
     "name": "chunk 3 , 9",
     "chunkMesh": {
-        "instanceID": -12728
+        "instanceID": -21450
     },
     "material": {
-        "instanceID": -12730
+        "instanceID": -21452
     },
     "position": {
         "x": 192.0,
@@ -20,36 +20,36 @@
     ],
     "objects": [
         {
-            "instanceID": -12742
+            "instanceID": -21464
         },
         {
-            "instanceID": -12758
+            "instanceID": -21480
         },
         {
-            "instanceID": -12764
+            "instanceID": -21486
         },
         {
-            "instanceID": -12780
+            "instanceID": -21502
         },
         {
-            "instanceID": -12792
+            "instanceID": -21514
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 29898
+            "instanceID": 29892
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": 29898
+            "instanceID": 29892
         },
         {
-            "instanceID": -12784
+            "instanceID": -21506
         },
         {
-            "instanceID": -12796
+            "instanceID": -21518
         }
     ],
     "objectVertices": [],
@@ -58,19 +58,19 @@
     "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -12750
+            "instanceID": -21472
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": -12772
+            "instanceID": -21494
         },
         {
-            "instanceID": -12788
+            "instanceID": -21510
         },
         {
-            "instanceID": -12800
+            "instanceID": -21522
         }
     ],
     "objectPos": [
@@ -101,17 +101,17 @@
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 29902
+        "instanceID": 29896
     },
     "treeLODMeshes": [
         {
-            "instanceID": 29894
+            "instanceID": 29888
         },
         {
-            "instanceID": 29896
+            "instanceID": 29890
         },
         {
-            "instanceID": 29898
+            "instanceID": 29892
         }
     ]
 }
