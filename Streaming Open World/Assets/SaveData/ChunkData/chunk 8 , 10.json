@@ -1,10 +1,10 @@
 {
     "name": "chunk 8 , 10",
     "chunkMesh": {
-        "instanceID": -23952
+        "instanceID": -13752
     },
     "material": {
-        "instanceID": -23954
+        "instanceID": -13754
     },
     "position": {
         "x": 512.0,
@@ -21,42 +21,42 @@
     ],
     "objects": [
         {
-            "instanceID": -23966
+            "instanceID": -13766
         },
         {
-            "instanceID": -23982
+            "instanceID": -13782
         },
         {
-            "instanceID": -23988
+            "instanceID": -13788
         },
         {
-            "instanceID": -24004
+            "instanceID": -13804
         },
         {
-            "instanceID": -24020
+            "instanceID": -13820
         },
         {
-            "instanceID": -24032
+            "instanceID": -13832
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 29892
+            "instanceID": 29888
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": 29892
+            "instanceID": 29888
         },
         {
-            "instanceID": 29892
+            "instanceID": 29888
         },
         {
-            "instanceID": -24024
+            "instanceID": -13824
         },
         {
-            "instanceID": -24036
+            "instanceID": -13836
         }
     ],
     "objectVertices": [],
@@ -65,22 +65,22 @@
     "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -23974
+            "instanceID": -13774
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": -23996
+            "instanceID": -13796
         },
         {
-            "instanceID": -24012
+            "instanceID": -13812
         },
         {
-            "instanceID": -24028
+            "instanceID": -13828
         },
         {
-            "instanceID": -24040
+            "instanceID": -13840
         }
     ],
     "objectPos": [
@@ -116,17 +116,17 @@
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 29896
+        "instanceID": 29894
     },
     "treeLODMeshes": [
         {
+            "instanceID": 29884
+        },
+        {
+            "instanceID": 29886
+        },
+        {
             "instanceID": 29888
-        },
-        {
-            "instanceID": 29890
-        },
-        {
-            "instanceID": 29892
         }
     ]
 }
