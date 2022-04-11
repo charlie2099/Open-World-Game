@@ -1,10 +1,10 @@
 {
     "name": "chunk 2 , 2",
     "chunkMesh": {
-        "instanceID": -9468
+        "instanceID": -13950
     },
     "material": {
-        "instanceID": -9470
+        "instanceID": -13952
     },
     "position": {
         "x": 128.0,
@@ -57,258 +57,258 @@
     ],
     "objects": [
         {
-            "instanceID": -9482
+            "instanceID": -13964
         },
         {
-            "instanceID": -9498
+            "instanceID": -13980
         },
         {
-            "instanceID": -9510
+            "instanceID": -13992
         },
         {
-            "instanceID": -9522
+            "instanceID": -14004
         },
         {
-            "instanceID": -9534
+            "instanceID": -14016
         },
         {
-            "instanceID": -9546
+            "instanceID": -14028
         },
         {
-            "instanceID": -9558
+            "instanceID": -14040
         },
         {
-            "instanceID": -9570
+            "instanceID": -14052
         },
         {
-            "instanceID": -9582
+            "instanceID": -14064
         },
         {
-            "instanceID": -9594
+            "instanceID": -14076
         },
         {
-            "instanceID": -9606
+            "instanceID": -14088
         },
         {
-            "instanceID": -9618
+            "instanceID": -14100
         },
         {
-            "instanceID": -9630
+            "instanceID": -14112
         },
         {
-            "instanceID": -9642
+            "instanceID": -14124
         },
         {
-            "instanceID": -9654
+            "instanceID": -14136
         },
         {
-            "instanceID": -9666
+            "instanceID": -14148
         },
         {
-            "instanceID": -9678
+            "instanceID": -14160
         },
         {
-            "instanceID": -9690
+            "instanceID": -14172
         },
         {
-            "instanceID": -9702
+            "instanceID": -14184
         },
         {
-            "instanceID": -9714
+            "instanceID": -14196
         },
         {
-            "instanceID": -9726
+            "instanceID": -14208
         },
         {
-            "instanceID": -9738
+            "instanceID": -14220
         },
         {
-            "instanceID": -9750
+            "instanceID": -14232
         },
         {
-            "instanceID": -9762
+            "instanceID": -14244
         },
         {
-            "instanceID": -9774
+            "instanceID": -14256
         },
         {
-            "instanceID": -9786
+            "instanceID": -14268
         },
         {
-            "instanceID": -9798
+            "instanceID": -14280
         },
         {
-            "instanceID": -9810
+            "instanceID": -14292
         },
         {
-            "instanceID": -9822
+            "instanceID": -14304
         },
         {
-            "instanceID": -9834
+            "instanceID": -14316
         },
         {
-            "instanceID": -9846
+            "instanceID": -14328
         },
         {
-            "instanceID": -9858
+            "instanceID": -14340
         },
         {
-            "instanceID": -9870
+            "instanceID": -14352
         },
         {
-            "instanceID": -9882
+            "instanceID": -14364
         },
         {
-            "instanceID": -9894
+            "instanceID": -14376
         },
         {
-            "instanceID": -9906
+            "instanceID": -14388
         },
         {
-            "instanceID": -9918
+            "instanceID": -14400
         },
         {
-            "instanceID": -9930
+            "instanceID": -14412
         },
         {
-            "instanceID": -9942
+            "instanceID": -14424
         },
         {
-            "instanceID": -9954
+            "instanceID": -14436
         },
         {
-            "instanceID": -9966
+            "instanceID": -14448
         },
         {
-            "instanceID": -9978
+            "instanceID": -14460
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": 29888
+            "instanceID": 23752
         },
         {
-            "instanceID": -9502
+            "instanceID": -13984
         },
         {
-            "instanceID": -9514
+            "instanceID": -13996
         },
         {
-            "instanceID": -9526
+            "instanceID": -14008
         },
         {
-            "instanceID": -9538
+            "instanceID": -14020
         },
         {
-            "instanceID": -9550
+            "instanceID": -14032
         },
         {
-            "instanceID": -9562
+            "instanceID": -14044
         },
         {
-            "instanceID": -9574
+            "instanceID": -14056
         },
         {
-            "instanceID": -9586
+            "instanceID": -14068
         },
         {
-            "instanceID": -9598
+            "instanceID": -14080
         },
         {
-            "instanceID": -9610
+            "instanceID": -14092
         },
         {
-            "instanceID": -9622
+            "instanceID": -14104
         },
         {
-            "instanceID": -9634
+            "instanceID": -14116
         },
         {
-            "instanceID": -9646
+            "instanceID": -14128
         },
         {
-            "instanceID": -9658
+            "instanceID": -14140
         },
         {
-            "instanceID": -9670
+            "instanceID": -14152
         },
         {
-            "instanceID": -9682
+            "instanceID": -14164
         },
         {
-            "instanceID": -9694
+            "instanceID": -14176
         },
         {
-            "instanceID": -9706
+            "instanceID": -14188
         },
         {
-            "instanceID": -9718
+            "instanceID": -14200
         },
         {
-            "instanceID": -9730
+            "instanceID": -14212
         },
         {
-            "instanceID": -9742
+            "instanceID": -14224
         },
         {
-            "instanceID": -9754
+            "instanceID": -14236
         },
         {
-            "instanceID": -9766
+            "instanceID": -14248
         },
         {
-            "instanceID": -9778
+            "instanceID": -14260
         },
         {
-            "instanceID": -9790
+            "instanceID": -14272
         },
         {
-            "instanceID": -9802
+            "instanceID": -14284
         },
         {
-            "instanceID": -9814
+            "instanceID": -14296
         },
         {
-            "instanceID": -9826
+            "instanceID": -14308
         },
         {
-            "instanceID": -9838
+            "instanceID": -14320
         },
         {
-            "instanceID": -9850
+            "instanceID": -14332
         },
         {
-            "instanceID": -9862
+            "instanceID": -14344
         },
         {
-            "instanceID": -9874
+            "instanceID": -14356
         },
         {
-            "instanceID": -9886
+            "instanceID": -14368
         },
         {
-            "instanceID": -9898
+            "instanceID": -14380
         },
         {
-            "instanceID": -9910
+            "instanceID": -14392
         },
         {
-            "instanceID": -9922
+            "instanceID": -14404
         },
         {
-            "instanceID": -9934
+            "instanceID": -14416
         },
         {
-            "instanceID": -9946
+            "instanceID": -14428
         },
         {
-            "instanceID": -9958
+            "instanceID": -14440
         },
         {
-            "instanceID": -9970
+            "instanceID": -14452
         },
         {
-            "instanceID": -9982
+            "instanceID": -14464
         }
     ],
     "objectVertices": [],
@@ -317,130 +317,130 @@
     "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -9490
+            "instanceID": -13972
         },
         {
-            "instanceID": -9506
+            "instanceID": -13988
         },
         {
-            "instanceID": -9518
+            "instanceID": -14000
         },
         {
-            "instanceID": -9530
+            "instanceID": -14012
         },
         {
-            "instanceID": -9542
+            "instanceID": -14024
         },
         {
-            "instanceID": -9554
+            "instanceID": -14036
         },
         {
-            "instanceID": -9566
+            "instanceID": -14048
         },
         {
-            "instanceID": -9578
+            "instanceID": -14060
         },
         {
-            "instanceID": -9590
+            "instanceID": -14072
         },
         {
-            "instanceID": -9602
+            "instanceID": -14084
         },
         {
-            "instanceID": -9614
+            "instanceID": -14096
         },
         {
-            "instanceID": -9626
+            "instanceID": -14108
         },
         {
-            "instanceID": -9638
+            "instanceID": -14120
         },
         {
-            "instanceID": -9650
+            "instanceID": -14132
         },
         {
-            "instanceID": -9662
+            "instanceID": -14144
         },
         {
-            "instanceID": -9674
+            "instanceID": -14156
         },
         {
-            "instanceID": -9686
+            "instanceID": -14168
         },
         {
-            "instanceID": -9698
+            "instanceID": -14180
         },
         {
-            "instanceID": -9710
+            "instanceID": -14192
         },
         {
-            "instanceID": -9722
+            "instanceID": -14204
         },
         {
-            "instanceID": -9734
+            "instanceID": -14216
         },
         {
-            "instanceID": -9746
+            "instanceID": -14228
         },
         {
-            "instanceID": -9758
+            "instanceID": -14240
         },
         {
-            "instanceID": -9770
+            "instanceID": -14252
         },
         {
-            "instanceID": -9782
+            "instanceID": -14264
         },
         {
-            "instanceID": -9794
+            "instanceID": -14276
         },
         {
-            "instanceID": -9806
+            "instanceID": -14288
         },
         {
-            "instanceID": -9818
+            "instanceID": -14300
         },
         {
-            "instanceID": -9830
+            "instanceID": -14312
         },
         {
-            "instanceID": -9842
+            "instanceID": -14324
         },
         {
-            "instanceID": -9854
+            "instanceID": -14336
         },
         {
-            "instanceID": -9866
+            "instanceID": -14348
         },
         {
-            "instanceID": -9878
+            "instanceID": -14360
         },
         {
-            "instanceID": -9890
+            "instanceID": -14372
         },
         {
-            "instanceID": -9902
+            "instanceID": -14384
         },
         {
-            "instanceID": -9914
+            "instanceID": -14396
         },
         {
-            "instanceID": -9926
+            "instanceID": -14408
         },
         {
-            "instanceID": -9938
+            "instanceID": -14420
         },
         {
-            "instanceID": -9950
+            "instanceID": -14432
         },
         {
-            "instanceID": -9962
+            "instanceID": -14444
         },
         {
-            "instanceID": -9974
+            "instanceID": -14456
         },
         {
-            "instanceID": -9986
+            "instanceID": -14468
         }
     ],
     "objectPos": [
@@ -660,13 +660,13 @@
     },
     "treeLODMeshes": [
         {
-            "instanceID": 29884
+            "instanceID": 23748
         },
         {
-            "instanceID": 29886
+            "instanceID": 23750
         },
         {
-            "instanceID": 29888
+            "instanceID": 23752
         }
     ]
 }

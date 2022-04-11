@@ -6,7 +6,6 @@ using Chilli.Ai;
 using Chilli.Ai.Zombies;
 using Chilli.Terrain;
 using Chilli.Quests;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 

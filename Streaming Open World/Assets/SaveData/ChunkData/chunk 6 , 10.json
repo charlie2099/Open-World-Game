@@ -1,10 +1,10 @@
 {
     "name": "chunk 6 , 10",
     "chunkMesh": {
-        "instanceID": -12850
+        "instanceID": -17332
     },
     "material": {
-        "instanceID": -12852
+        "instanceID": -17334
     },
     "position": {
         "x": 384.0,
@@ -28,84 +28,84 @@
     ],
     "objects": [
         {
-            "instanceID": -12864
+            "instanceID": -17346
         },
         {
-            "instanceID": -12876
+            "instanceID": -17358
         },
         {
-            "instanceID": -12892
+            "instanceID": -17374
         },
         {
-            "instanceID": -12898
+            "instanceID": -17380
         },
         {
-            "instanceID": -12914
+            "instanceID": -17396
         },
         {
-            "instanceID": -12930
+            "instanceID": -17412
         },
         {
-            "instanceID": -12942
+            "instanceID": -17424
         },
         {
-            "instanceID": -12954
+            "instanceID": -17436
         },
         {
-            "instanceID": -12966
+            "instanceID": -17448
         },
         {
-            "instanceID": -12978
+            "instanceID": -17460
         },
         {
-            "instanceID": -12990
+            "instanceID": -17472
         },
         {
-            "instanceID": -13002
+            "instanceID": -17484
         },
         {
-            "instanceID": -13014
+            "instanceID": -17496
         }
     ],
     "objectMeshes": [
         {
-            "instanceID": -12868
+            "instanceID": -17350
         },
         {
-            "instanceID": 29888
+            "instanceID": 23752
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": 29888
+            "instanceID": 23752
         },
         {
-            "instanceID": 29888
+            "instanceID": 23752
         },
         {
-            "instanceID": -12934
+            "instanceID": -17416
         },
         {
-            "instanceID": -12946
+            "instanceID": -17428
         },
         {
-            "instanceID": -12958
+            "instanceID": -17440
         },
         {
-            "instanceID": -12970
+            "instanceID": -17452
         },
         {
-            "instanceID": -12982
+            "instanceID": -17464
         },
         {
-            "instanceID": -12994
+            "instanceID": -17476
         },
         {
-            "instanceID": -13006
+            "instanceID": -17488
         },
         {
-            "instanceID": -13018
+            "instanceID": -17500
         }
     ],
     "objectVertices": [],
@@ -114,43 +114,43 @@
     "objectTextures": [],
     "objectMaterials": [
         {
-            "instanceID": -12872
+            "instanceID": -17354
         },
         {
-            "instanceID": -12884
+            "instanceID": -17366
         },
         {
             "instanceID": 0
         },
         {
-            "instanceID": -12906
+            "instanceID": -17388
         },
         {
-            "instanceID": -12922
+            "instanceID": -17404
         },
         {
-            "instanceID": -12938
+            "instanceID": -17420
         },
         {
-            "instanceID": -12950
+            "instanceID": -17432
         },
         {
-            "instanceID": -12962
+            "instanceID": -17444
         },
         {
-            "instanceID": -12974
+            "instanceID": -17456
         },
         {
-            "instanceID": -12986
+            "instanceID": -17468
         },
         {
-            "instanceID": -12998
+            "instanceID": -17480
         },
         {
-            "instanceID": -13010
+            "instanceID": -17492
         },
         {
-            "instanceID": -13022
+            "instanceID": -17504
         }
     ],
     "objectPos": [
@@ -221,17 +221,17 @@
         }
     ],
     "spawnerScriptableObject": {
-        "instanceID": 29894
+        "instanceID": 23744
     },
     "treeLODMeshes": [
         {
-            "instanceID": 29884
+            "instanceID": 23748
         },
         {
-            "instanceID": 29886
+            "instanceID": 23750
         },
         {
-            "instanceID": 29888
+            "instanceID": 23752
         }
     ]
 }
